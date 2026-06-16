@@ -1,0 +1,2 @@
+[24] I. Goodfellow, Y. Bengio, and A. Courville. "Deep Learning." MIT Press, 2016.
+Link: https://www.deeplearningbook.org

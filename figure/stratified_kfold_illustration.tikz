@@ -1,0 +1,29 @@
+% Ilustrasi Stratified 5-Fold Cross-Validation
+
+\begin{tikzpicture}[scale=1]
+    \def\cellwidth{1.0}
+    \def\cellheight{0.6}
+    
+    % Baris pertama (header dengan Fold 1-5)
+    \foreach \i in {1,2,3,4,5} {
+        \node[font=\small\bfseries] at (\i*\cellwidth - 0.5, 3.2) {Fold \i};
+    }
+    
+    % 5 baris data
+    \foreach \row in {0,1,2,3,4} {
+        \foreach \col in {1,2,3,4,5} {
+            \pgfmathparse{\col == \row + 1 ? 1 : 0}
+            \ifnum\pgfmathresult=1
+                % Validation fold (gray)
+                \draw[fill=gray!50] (\col*\cellwidth - 1, 2.8 - \row*\cellheight) rectangle (\col*\cellwidth - 1 + \cellwidth, 2.8 - \row*\cellheight - \cellheight);
+                \node[font=\small\bfseries] at (\col*\cellwidth - 0.5, 2.55 - \row*\cellheight) {Val};
+            \else
+                % Training fold (white)
+                \draw[fill=white] (\col*\cellwidth - 1, 2.8 - \row*\cellheight) rectangle (\col*\cellwidth - 1 + \cellwidth, 2.8 - \row*\cellheight - \cellheight);
+                \node[font=\small] at (\col*\cellwidth - 0.5, 2.55 - \row*\cellheight) {Train};
+            \fi
+            \draw[black, line width=0.5pt] (\col*\cellwidth - 1, 2.8 - \row*\cellheight) rectangle (\col*\cellwidth - 1 + \cellwidth, 2.8 - \row*\cellheight - \cellheight);
+        }
+    }
+    
+\end{tikzpicture}

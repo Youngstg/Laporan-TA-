@@ -1,5 +1,5 @@
 \clearpage
-\phantomsection% 
+\phantomsection%
 \addcontentsline{toc}{chapter}{ABSTRACT}
 \thispagestyle{fancy}
 
@@ -8,14 +8,14 @@
 	\normalsize \normalfont {\thetitleEN}\\
 	\normalsize \normalfont {\theauthor}\\
 	\bigskip
-	
+
 	\normalsize \normalfont \justifying \singlespacing
-	Halaman ABSTRACT berisi uraian tentang latar belakang, tujuan, metodologi penelitian, hasil / kesimpulan. Ditulis dalam BAHASA INGGRIS tidak lebih dari 250 kata, dengan jarak antar baris satu spasi. Secara khusus, kata dan kalimat pada halaman ini tidak perlu ditulis dengan huruf miring meskipun menggunakan Bahasa Inggris, kecuali terdapat huruf asing lain yang ditulis dengan huruf miring (misalnya huruf Latin atau Greek, dll). Pada akhir abstract ditulis kata “Keywords” yang dicetak tebal, diikuti tanda titik dua dan kata kunci yang tidak lebih dari 5 kata. Keywords terdiri dari kata-kata yang khusus menunjukkan dan berkaitan dengan bahan yang diteliti, metode/instrumen yang digunakan, topik penelitian. Keywords diketik pada jarak dua spasi dari baris akhir isi abstrak.\par
-    
+	Indonesian Sign Language (SIBI) is the primary communication system for the Deaf community in Indonesia; however, the lack of automated video-based recognition systems remains a significant barrier to communication accessibility. This study analyzes the performance of the Video Masked Autoencoder (VideoMAE) model in classifying ten basic SIBI gesture classes using a dataset of 924 video clips collected directly at the State Special School (SLBN) PKK of Lampung Province. Evaluation was conducted using a Stratified 5-Fold Cross Validation scheme. Twelve VideoMAE experimental configurations (E1--E12) were systematically designed to investigate the effects of backbone architecture (ViT-Small, ViT-Base), pre-training dataset (Kinetics-400, SSV2), training strategy (two-stage fine-tune vs. scratch), frame sampling strategy (uniform vs. dense), number of epochs, and augmentation techniques (mixup, CutMix, reprob). ViViT-B/16x2 and I3D were also evaluated as comparative models. Results demonstrate that pre-trained weights are an absolute prerequisite: models trained from random initialization achieved only 11--12\% accuracy, whereas two-stage pre-training with SSV2 weights improved accuracy to 63.85\%. In the controlled sampling comparison, uniform sampling outperformed dense sampling (63.85\% vs.\ 56.07\%). The most significant finding, however, is that mixup, CutMix, and reprob augmentations proved counterproductive on small-scale sign language datasets because they disrupt the spatio-temporal context of gestures; disabling them raised accuracy to 93.94\%. The best overall configuration was VideoMAE ViT-Base with Kinetics-400 weights and dense sampling without augmentation (E12), achieving a mean accuracy of 97.18\%, indicating that sampling effectiveness depends on its interaction with the broader model configuration, and marginally surpassing I3D (96.86\%) and ViViT (94.81\%).\par
+
     \vspace{20pt}
-	\raggedright\textbf{Keywords: keywords1, keywords2}
-	
+	\raggedright\textbf{Keywords: VideoMAE, SIBI Sign Language, Video Classification, Vision Transformer, Fine-tuning}
+
 	\vfill
-	
+
 \end{center}
 \clearpage

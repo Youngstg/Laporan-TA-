@@ -31,7 +31,13 @@
 			{geometry} 
 
 \input{config/config.sty} % Import konfigurasi laporan
-\bibliography{references.bib} % Import list Daftar Pustaka
+\addbibresource{references.bib} % Import list Daftar Pustaka untuk biblatex
+
+% Menambah margin antara kotak (\fbox) dan gambar di dalamnya secara global
+\setlength{\fboxsep}{12pt}
+
+% Merapikan tabel dengan menambah padding vertikal pada semua tabel di dokumen
+\renewcommand{\arraystretch}{1.3}
 
 \begin{document}
 
@@ -40,30 +46,27 @@
     %----------------------------------------------------------------%
     
     % Judul Tugas Akhir, dalam Bahasa Indonesia	
-    \title{Judul Tugas Akhir Dengan Metode ABC (Studi Kasus: XYZ)}
+    \title{Analisis Model VideoMAE untuk Klasifikasi Gerakan Bahasa Isyarat SIBI Berbasis Video}
     % Judul Tugas Akhir dalam Bahasa Inggris
-    \titleEN{Thesis Title With ABC Method (Case Study: XYZ)}
+    \titleEN{Analysis of VideoMAE Model for Video-Based SIBI Sign Language Gesture Classification}
     % JUDUL AKAN DITULIS DALAM HURUF KAPITAL; Font size 16 pt; Bold; Tidak melebihi 4 baris
     
     % Informasi Mahasiswa
-	\author{Nama Mahasiswa}		% Nama Mahasiswa
-	\nim{123123123}				% NIM Mahasiswa
+	\author{Lucky Immanuel Sitanggang}		% Nama Mahasiswa
+	\nim{122140179}				% NIM Mahasiswa
 	
 	%Informasi Dosen Pembimbing
 	\dosbingA%
-		{Dosen Pembimbing I}%			% Nama Dosen Pembimbing 1
-		{NIP. 19900000 2000 00 0 000}	% NIP Dosen Pembimbing 1
-	\dosbingB%
-		{Dosen Pembimbing II}%			% Nama Dosen Pembimbing 2
-		{NIP. 19900000 2000 00 0 000}	% NIP Dosen Pembimbing 2
+		{I Wayan Wiprayoga Wisesa, S.Kom., M.Kom.}%			% Nama Dosen Pembimbing 1
+		{NIP. 19890322 201903 1 009}	% NIP Dosen Pembimbing 1
 		
 	%Informasi Dosen Penguji
 	\pengujiA%
-		{Dosen Penguji I}%				% Nama Dosen Penguji 1
-		{NIP. 19900000 2000 00 0 000}	% NIP Dosen Penguji 1
+		{Radhinka Bagaskara, S.Si.Kom., M.Si., M.Sc.}%				% Nama Dosen Penguji 1
+		{NIP. 19941127 202012 1 018}	% NIP Dosen Penguji 1
 	\pengujiB%
-		{Dosen Penguji II}%				% Nama Dosen Penguji 2
-		{NIP. 19900000 2000 00 0 000}	% NIP Dosen Penguji 2
+		{Hartanto Tantriawan, S.Kom., M.Kom.}%				% Nama Dosen Penguji 2
+		{NIP. 19920522 201903 1 012}	% NIP Dosen Penguji 2
 
 	\sloppy % mencegah text overflow. (Jose)
     \pagenumbering{roman}
@@ -95,7 +98,7 @@
 	\input{chapters/forewords} 		% Kata Pengantar
 	\input{chapters/summary} 		% Ringkasan
 	\input{chapters/abstract-id} 	% Abstrak (Indonesia)
-	\input{chapters/abstract-en} 	% Abstrak (Inggris)    
+	\input{chapters/abstract-en} 	% Abstrak (Inggris)
     %----------------------------------------------------------------%
     % Halaman Daftar
     %----------------------------------------------------------------%    
@@ -172,6 +175,8 @@
     \addcontentsline{toc}{chapter}{LAMPIRAN}
     \chapter*{Lampiran}
     \renewcommand\thesection{\Alph{section}}
+    \counterwithin{table}{section}
+    \counterwithin{figure}{section}
     \input{chapters/appendix}
     %----------------------------------------------------------------%
 \end{document}

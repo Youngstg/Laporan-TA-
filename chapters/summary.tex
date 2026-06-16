@@ -1,5 +1,5 @@
 \clearpage
-\phantomsection% 
+\phantomsection%
 \addcontentsline{toc}{chapter}{RINGKASAN}
 \thispagestyle{fancy}
 
@@ -8,13 +8,24 @@
 	\normalsize \normalfont {\thetitle}\\
 	\normalsize \normalfont {\theauthor}\\
 	\bigskip
-	
+
 	\normalsize \normalfont \justifying
-	\normalsize \normalfont \justifying
-	\textit{Halaman Ringkasan berisi uraian singkat tentang latar belakang masalah, rumusan masalah, tujuan, metodologi penelitian, hasil dan analisis data, serta kesimpulan dan saran. Isi ringkasan tidak lebih dari 1000 kata (sekitar maksimal 2 halaman).}\par
-	\lipsum[1-2] % Menampilkan paragraf 1 sampai 2 dari lorem ipsum
+
+	Bahasa Isyarat Indonesia (SIBI) merupakan sistem komunikasi resmi yang digunakan oleh komunitas Tuli di Indonesia. Keterbatasan jumlah penerjemah isyarat yang terlatih menyebabkan hambatan komunikasi yang signifikan di berbagai layanan publik, pendidikan, dan kesehatan. Teknologi pengenalan bahasa isyarat berbasis video berpotensi menjadi jembatan komunikasi yang efektif, namun pengembangannya menghadapi tantangan berupa ketersediaan dataset berlabel yang terbatas dan tingginya variasi antar penutur. Model VideoMAE (\textit{Video Masked Autoencoder}) merupakan model \textit{video transformer} berbasis \textit{self-supervised masked autoencoding pre-training} yang menunjukkan performa tinggi pada berbagai tugas klasifikasi aksi video berskala besar, namun kemampuannya dalam mengklasifikasikan gerakan bahasa isyarat pada dataset berskala kecil belum banyak diteliti secara sistematis.
+
+	Penelitian ini bertujuan menganalisis secara sistematis faktor-faktor yang memengaruhi kinerja VideoMAE dalam mengklasifikasikan gerakan visual SIBI, meliputi pilihan \textit{backbone} dan dataset \textit{pre-train}, strategi pelatihan, strategi \textit{sampling} frame, durasi pelatihan, dan penggunaan augmentasi. Selain itu, penelitian ini membandingkan kinerja VideoMAE dengan model ViViT-B/16x2 dan I3D sebagai referensi lintas arsitektur.
+
+	Dataset dikumpulkan langsung di Sekolah Luar Biasa Negeri (SLBN) PKK Provinsi Lampung, mencakup 924 klip video untuk 10 kelas kata dasar SIBI yang direkam menggunakan kamera iPhone 11 beresolusi 1080p pada 30 FPS. Distribusi antar kelas relatif seimbang dengan 88 hingga 99 klip per kelas. Seluruh video menjalani pra-pemrosesan berupa standardisasi resolusi ke $224\times224$ piksel, standardisasi laju cuplik ke 30 FPS, pengambilan 16 frame per klip, dan normalisasi piksel menggunakan statistik ImageNet. Dataset dibagi menggunakan skema \textit{Stratified 5-Fold Cross Validation} dengan rasio 80:20 untuk \textit{train} dan \textit{validation}.
+
+	Sebanyak 12 konfigurasi eksperimen VideoMAE (E1--E12) dirancang secara bertahap dalam enam kelompok analisis, yaitu perbandingan \textit{backbone} dan dataset \textit{pre-train}, strategi pelatihan \textit{pre-train} versus \textit{scratch}, strategi \textit{sampling} frame, jumlah \textit{epoch}, pengaruh augmentasi, dan perbandingan lintas arsitektur. Model ViViT-B/16x2 dan I3D diikutsertakan sebagai pembanding pada kelompok eksperimen keenam. Seluruh eksperimen pelatihan dijalankan pada platform komputasi awan RunPod menggunakan GPU NVIDIA GeForce RTX 4090 (24 GB VRAM), sementara pengukuran waktu inferensi dilakukan pada GPU NVIDIA GeForce RTX 3050 Laptop (4 GB VRAM) menggunakan PyTorch.
+
+	Hasil eksperimen menunjukkan bahwa relevansi domain dataset \textit{pre-train} lebih berpengaruh dibandingkan kapasitas \textit{backbone}, dengan konfigurasi ViT-Small + SSV2 menghasilkan akurasi terbaik pada kelompok pertama sebesar 35.18\%. Strategi \textit{two-stage pre-train} kemudian meningkatkan akurasi secara dramatis menjadi 63.85\%, sedangkan kedua varian \textit{scratch} hanya menghasilkan akurasi mendekati tebakan acak (11--12\%), membuktikan bahwa bobot pra-latih merupakan prasyarat mutlak bagi keberhasilan VideoMAE pada dataset berskala kecil. Pada analisis strategi \textit{sampling} yang terkontrol, \textit{uniform sampling} mengungguli \textit{dense sampling} (63.85\% vs.\ 56.07\%) karena memastikan seluruh fase gestur dari awal hingga akhir terwakili dalam klip masukan. Namun, hasil terbaik keseluruhan tetap dicapai oleh konfigurasi E12 yang menggunakan \textit{dense sampling}, menunjukkan bahwa efektivitas strategi \textit{sampling} bergantung pada interaksinya dengan bobot pra-latih, ukuran \textit{backbone}, dan kebijakan augmentasi. Peningkatan jumlah \textit{epoch} dari 10 hingga 100 menghasilkan perbaikan bertahap tanpa tanda-tanda \textit{overfitting}.
+
+	Temuan paling signifikan dalam penelitian ini adalah pengaruh augmentasi terhadap performa model. Penonaktifan augmentasi \textit{mixup}, \textit{CutMix}, dan \textit{reprob} menghasilkan lompatan terbesar sepanjang penelitian, yaitu akurasi melonjak dari 63.85\% menjadi 93.94\%, peningkatan sebesar 30.09 poin persentase. Augmentasi yang mencampur konten spasio-temporal antar klip terbukti merusak kontinuitas gerakan yang menjadi pembeda utama antar isyarat SIBI. Pada perbandingan lintas arsitektur, VideoMAE ViT-Base + K400 tanpa augmentasi tampil sebagai model terbaik dengan akurasi 97.18\%, sedikit melampaui I3D (96.86\%) dan ViViT (94.81\%).
+
+	Secara keseluruhan, penelitian ini mengidentifikasi enam faktor kunci yang memengaruhi kinerja VideoMAE pada dataset SIBI secara berurutan berdasarkan besarnya pengaruh, yaitu ketersediaan bobot pra-latih yang relevan, menjaga keutuhan konteks spasio-temporal dengan tidak menerapkan augmentasi yang merusak sekuens gerakan, strategi pelatihan dua tahap, pemilihan arsitektur dan ukuran \textit{backbone}, kesesuaian strategi \textit{sampling} dengan konfigurasi model dan karakter temporal gestur, dan durasi pelatihan yang memadai. Untuk pengembangan selanjutnya, disarankan memperluas dataset SIBI ke cakupan yang lebih luas, menginvestigasi augmentasi alternatif yang tidak merusak integritas spasio-temporal, menguji model pada kondisi dunia nyata yang tidak terkontrol, dan mengembangkan sistem pengenalan bahasa isyarat berbasis \textit{real-time} menggunakan arsitektur terbaik yang ditemukan dalam penelitian ini.
 
 	\vfill
-	
+
 \end{center}
 \clearpage

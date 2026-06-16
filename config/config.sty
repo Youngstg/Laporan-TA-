@@ -13,17 +13,27 @@
 
 % Import package penting
 \usepackage[utf8]{inputenc}
+% Tambahkan ini di preambule
+\usepackage{float}
 \usepackage{subcaption} % Paket untuk mengatur gambar berdampingan
 \usepackage{graphicx}
+\setlength{\fboxsep}{1pt} % minimal padding antara gambar dan frame
+\setlength{\fboxrule}{0.4pt} % ketebalan border default untuk \fbox
 \usepackage{titling}
 \usepackage{blindtext} % Untuk lorem ipsum
 \usepackage{sectsty} % Untuk header & judul
 \usepackage{chngcntr} % Untuk penambahan nomor caption
 \usepackage{etoolbox} % Untuk CRUD variabel (?)
-\usepackage{array} % % Untuk tabel di math mode
+\usepackage{array}
+\setlength{\extrarowheight}{3pt}
+\renewcommand{\arraystretch}{1.2}
 \usepackage{float} % Untuk tabular
 \usepackage{longtable} % Untuk tabel yang potong halaman
-\usepackage{amsmath} % Untuk equation
+\usepackage{tabularx}
+\usepackage{xltabular} % Untuk tabel dengan lebar fleksibel
+\usepackage{pdflscape} % Untuk orientasi halaman landscape pada tabel/gambar tertentu
+\usepackage{amsmath}
+\allowdisplaybreaks % Untuk equation
 \usepackage{enumitem} % Untuk list enumerate yg lebih rapi
 \usepackage{nameref} % Untuk dapat menggunakan nameref, referensi dengan nama section/caption
 \usepackage[bookmarks]{hyperref}
@@ -60,12 +70,13 @@
 
 % Judul bahasa Indonesia
 \usepackage[bahasa]{babel}
+\usepackage[style=english]{csquotes} % Disarankan oleh biblatex untuk dukungan kutipan
 
 % Format tanggal
 \usepackage[style=ddmmyyyy,datesep=-]{datetime2}
 
 % Format citation
-\usepackage[backend=bibtex,citestyle=ieee]{biblatex} % Untuk bisa jalan di Texstudio, harus backend=bibtex
+\usepackage[backend=bibtex,citestyle=ieee,sorting=none]{biblatex} % Untuk bisa jalan di Texstudio, harus backend=bibtex
 % Seriusan, JANGAN GANTI BACKENDNYA (RDB)
 
 % Remove "In:" before journal titles
@@ -89,11 +100,24 @@
 %\usepackage{parskip}
 \usepackage{ragged2e}		% Alignment
 \usepackage{multirow}		% Untuk bisa merge cell di tabel
+\usepackage{makecell}		% Untuk bisa baris ganda di header tabel
 \usepackage{tikz}			% Untuk menggambar kotak pas foto
+\usepgflibrary{arrows.meta}    % pgflibraryarrows.meta.code.tex (Stealth, dll)
+\usetikzlibrary{positioning,calc,decorations.pathreplacing,shapes.geometric,arrows.meta} % Untuk ilustrasi TikZ di Bab 3
+% Warna untuk ilustrasi TikZ Bab 3 (hitam-putih/grayscale)
+\definecolor{frame1color}{gray}{0.85}
+\definecolor{frame2color}{gray}{0.60}
+\definecolor{embedcolor}{gray}{0.75}
+\definecolor{poscolor}{gray}{0.80}
+\definecolor{tokencolor}{gray}{0.90}
+\definecolor{attncolor}{gray}{0.50}
+\definecolor{ffncolor}{gray}{0.92}
+\definecolor{outcolor}{gray}{0.65}
 \usepackage{setspace}		% Spacing paragraph
 \usepackage{fancyhdr}		% Agar nomor halaman di pojok kanan atas
 \usepackage{caption} 		% Caption gambar & tabel
 \usepackage{comment}
+\usepackage{diagbox}     % Untuk sel header tabel dengan garis diagonal
 
 \captionsetup[figure]{font=footnotesize} % Mengatur caption gambar ke 10pt (footnotesize)
 \captionsetup[figure]{labelsep=space} % Mengubah ":" menjadi spasi setelah nomor gambar
@@ -136,6 +160,8 @@
 	{\normalfont\normalsize\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}%
 	{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}%
+	{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
 
 %\makeatletter
 %\def\@makechapterhead#1{%
@@ -159,6 +185,9 @@
 
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{colortbl}
+\definecolor{highlightgreen}{RGB}{198,239,206}
+\definecolor{highlightpink}{RGB}{255,199,206}
 \usepackage{geometry}
 
 
@@ -224,7 +253,7 @@
 \newcommand{\listequationsname}{DAFTAR RUMUS}
 \newlistof{myequations}{equ}{\listequationsname}
 \newcommand{\myequations}[1]{
-	\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1}
+	\addcontentsline{equ}{myequations}{\protect\numberline{\theequation} #1}
 }
 
 % Mengatur format daftar rumus
@@ -238,21 +267,21 @@
 % Setting penulisan rumus yang baru (Ardoni)
 \newenvironment{equationcaptioned}[3][]{%
   \refstepcounter{equation}
+  \ifstrempty{#1}{}{\label{#1}}
   \myequations{#3}
   \begin{center} % TODO: Rumus harusnya rata kiri
     \vspace{1em}
     % Removed the fcolorbox and kept only the minipage
-    \begin{minipage}{0.9\linewidth}
+    
 		\begin{spacing}{0.7} % ⬅️ Spasi 1.0 hanya di rumus
-			\begin{equation*}
+			\begin{align*}
 				#2
-				\ifstrempty{#1}{}{\label{#1}}
-			\end{equation*}
+			\end{align*}
 		\end{spacing}
 		\begin{flushright}
 			(\footnotesize\theequation)
 		\end{flushright}
-    \end{minipage}
+    
   \end{center}
   \vspace{0.5em}
 }{}
@@ -274,29 +303,37 @@
 \usepackage{xcolor}
 \usepackage{geometry}
 
+% Definisi warna untuk blok kode (lebih soft/profesional)
+\definecolor{codebg}{RGB}{248,248,248}       % Abu-abu sangat muda untuk background
+\definecolor{codeborder}{RGB}{190,190,190}   % Abu-abu untuk garis bingkai
+\definecolor{codegreen}{RGB}{56,128,56}      % Hijau gelap untuk komentar
+\definecolor{codegray}{RGB}{120,120,120}     % Abu-abu untuk nomor baris
+\definecolor{codeblue}{RGB}{0,80,160}        % Biru tua untuk keyword
+\definecolor{codepurple}{RGB}{128,0,128}     % Ungu untuk string
+
 % Pengaturan untuk penulisan blok kode (listings) (Ardoni)
 \lstset{
-    language=Python,                  	% Bahasa pemrograman
-    basicstyle=\ttfamily\scriptsize,	% Gaya font kode (diperkecil)
-    numbers=left,                      	% Menampilkan nomor baris di sisi kiri
-    numberstyle=\tiny\color{black},		% Warna nomor baris
-    showstringspaces=false,            	% Tidak menampilkan icon spasi dalam string
-    frame=single,                      	% Membuat frame di sekitar kode
-    rulecolor=\color{black},           	% Warna garis bingkai
-    breaklines=true,                   	% Membungkus kode jika lebih panjang dari satu baris
-    breakatwhitespace=true,           	% Membungkus di spasi
-    backgroundcolor=\color{white},    	% Warna latar belakang
-    commentstyle=\color{green}, 		% Warna untuk teks comment
-    keywordstyle=\color{blue}, 			% Warna untuk teks fungsi
-    stringstyle=\color{red},			% Warna untuk teks string
-    keepspaces=true,                   	% Menjaga spasi di dalam kode
-    xleftmargin=10pt,                 	% Margin kiri
-    xrightmargin=10pt,                 	% Margin kanan
-    aboveskip=0pt,                    	% Jarak di atas kode
-    belowskip=0pt,                    	% Jarak di bawah kode
+    language=Python,                        % Bahasa pemrograman
+    basicstyle=\ttfamily\footnotesize,      % Sedikit lebih besar dari scriptsize agar mudah dibaca
+    numbers=left,                           % Nomor baris di sisi kiri
+    numberstyle=\tiny\color{codegray},      % Nomor baris abu-abu (tidak mengganggu)
+    showstringspaces=false,                 % Tidak menampilkan icon spasi dalam string
+    frame=single,                           % Bingkai di sekitar kode
+    rulecolor=\color{codeborder},           % Warna garis bingkai (abu-abu muda)
+    breaklines=true,                        % Bungkus jika melebihi lebar baris
+    breakatwhitespace=true,                 % Bungkus di spasi
+    backgroundcolor=\color{codebg},         % Background abu-abu sangat muda
+    commentstyle=\color{codegreen}\itshape, % Komentar: hijau gelap + miring
+    keywordstyle=\color{codeblue}\bfseries, % Keyword: biru tua + tebal
+    stringstyle=\color{codepurple},         % String: ungu (kontras tapi tidak mencolok)
+    keepspaces=true,                        % Jaga spasi di dalam kode
+    xleftmargin=15pt,                       % Margin kiri (sedikit lebih lebar untuk nomor baris)
+    xrightmargin=10pt,                      % Margin kanan
+    aboveskip=0pt,                          % Jarak di atas kode
+    belowskip=0pt,                          % Jarak di bawah kode
     lineskip=-1pt,
-    extendedchars=true                 	% Mengizinkan karakter non-ASCII
-    escapeinside={\%*}{*)}            	% Escape karakter LaTeX dalam listings
+    extendedchars=true,                     % Izinkan karakter non-ASCII
+    escapeinside={\%*}{*)}                  % Escape karakter LaTeX dalam listings
 }
 
 % Daftar Kode

@@ -1,0 +1,1 @@
+[10] M. H. Nugraha and E. Rakun. "Solving Complex Background Problem Using RetinaNet for Sign System for Indonesian Language (SIBI) Gesture-to-Text Translator." IEEE ICACSIS, 2022, pp. 44-52.

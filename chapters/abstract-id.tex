@@ -1,5 +1,5 @@
 \clearpage
-\phantomsection% 
+\phantomsection%
 \addcontentsline{toc}{chapter}{ABSTRAK}
 \thispagestyle{fancy}
 
@@ -8,14 +8,14 @@
 	\normalsize \normalfont {\thetitle}\\
 	\normalsize \normalfont {\theauthor}\\
 	\bigskip
-	
+
 	\normalsize \normalfont \justifying \singlespacing
-	Halaman ABSTRAK berisi uraian tentang latar belakang, tujuan, metodologi penelitian, hasil / kesimpulan. Ditulis dalam BAHASA INDONESIA tidak lebih dari 250 kata, dengan jarak antar baris satu spasi. Pada akhir abstrak ditulis kata “Kata Kunci” yang dicetak tebal, diikuti tanda titik dua dan kata kunci yang tidak lebih dari 5 kata. Kata kunci terdiri dari kata-kata yang khusus menunjukkan dan berkaitan dengan bahan yang diteliti, metode/instrumen yang digunakan, topik penelitian. Kata kunci diketik pada jarak dua spasi dari baris akhir isi abstrak.\par
+	Bahasa Isyarat Indonesia (SIBI) merupakan sistem komunikasi utama bagi komunitas Tuli di Indonesia, namun keterbatasan sistem pengenalan otomatis berbasis video masih menjadi hambatan signifikan dalam aksesibilitas komunikasi. Penelitian ini menganalisis kinerja model \textit{Video Masked Autoencoder} (VideoMAE) dalam mengklasifikasikan gerakan visual sepuluh kata dasar SIBI menggunakan dataset yang dikumpulkan langsung di Sekolah Luar Biasa Negeri (SLBN) PKK Provinsi Lampung yang terdiri dari 924 klip video. Evaluasi dilakukan menggunakan skema \textit{Stratified 5-Fold Cross Validation}. Sebanyak 12 konfigurasi eksperimen VideoMAE dirancang secara sistematis untuk menginvestigasi pengaruh pilihan \textit{backbone} (ViT-Small, ViT-Base), dataset \textit{pre-train} (Kinetics-400, SSV2), strategi pelatihan (\textit{two-stage fine-tune} vs. \textit{scratch}), strategi \textit{sampling} frame (\textit{uniform} vs. \textit{dense}), jumlah \textit{epoch}, dan augmentasi (\textit{mixup}, \textit{CutMix}, \textit{reprob}). Sebagai pembanding, model ViViT-B/16x2 dan I3D turut dievaluasi. Hasil menunjukkan bahwa bobot pra-latih merupakan prasyarat mutlak: model yang dilatih dari bobot acak hanya mencapai akurasi 11--12\%, sedangkan konfigurasi \textit{two-stage pre-train} dengan bobot SSV2 meningkatkan akurasi menjadi 63.85\%. Pada perbandingan strategi \textit{sampling} yang terkontrol, \textit{uniform sampling} mengungguli \textit{dense sampling} (63.85\% vs.\ 56.07\%), tetapi temuan paling signifikan adalah bahwa augmentasi \textit{mixup}, \textit{CutMix}, dan \textit{reprob} terbukti kontraproduktif pada dataset isyarat berskala kecil karena merusak konteks spasio-temporal gerakan, sehingga penonaktifannya meningkatkan akurasi menjadi 93.94\%. Konfigurasi terbaik secara keseluruhan adalah VideoMAE ViT-Base dengan bobot Kinetics-400 dan \textit{dense sampling} tanpa augmentasi (E12) yang mencapai akurasi rata-rata 97.18\%, menunjukkan bahwa efektivitas strategi \textit{sampling} bergantung pada interaksinya dengan konfigurasi model, dan sedikit melampaui I3D (96.86\%) dan ViViT (94.81\%).\par
 
     \vspace{20pt}
-	\raggedright \textbf{Kata Kunci: kunci1, kunci2}
-	
+	\raggedright \textbf{Kata Kunci: VideoMAE, Bahasa Isyarat SIBI, Klasifikasi Video, \textit{Vision Transformer}, \textit{Fine-tuning}}
+
 	\vfill
-	
+
 \end{center}
 \clearpage
