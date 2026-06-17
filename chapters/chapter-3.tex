@@ -1,10 +1,11 @@
-﻿﻿\newpage
+﻿\newpage
 \chapter{METODE PENELITIAN} \label{BabIII}
 \section{Alur Penelitian} \label{III.Alur}
 Alur penelitian pada tugas akhir ini disajikan dalam bentuk flowchart untuk memvisualisasikan tahapan secara sistematis, mulai dari perencanaan, pengumpulan data, pra-pemrosesan, pelatihan model, hingga evaluasi. Fokus penelitian ini adalah pengenalan gerakan Sistem Isyarat Bahasa Indonesia (SIBI) berbasis citra video dengan menggunakan arsitektur Video Masked Autoencoder (VideoMAE) sebagai model utama dalam proses ekstraksi dan klasifikasi gerakan visual.\par
 \begin{figure}[htbp]
 \centering
-\fbox{\resizebox{\linewidth}{!}{%
+\fbox{%
+\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[scale=0.7,
   node distance = 5mm and 5mm,
   startstop/.style = {rectangle, rounded corners=10pt,
@@ -41,7 +42,8 @@ Alur penelitian pada tugas akhir ini disajikan dalam bentuk flowchart untuk memv
   \draw[arr] (n6) -- (n7);
   \draw[arr] (n7) -- (end);
 \end{tikzpicture}%
-}}
+}%
+}
 \caption{Alur Penelitian}
 \label{fig:3.alur}
 \end{figure}
@@ -75,7 +77,8 @@ Skema ini menggambarkan tahapan sistematis dari proses perekaman hingga penyimpa
 yang siap digunakan pada tahap pra-pemrosesan.\par
 \begin{figure}[H]
 \centering
-\fbox{\resizebox{\linewidth}{!}{%
+\fbox{%
+\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[scale=0.7,
   node distance = 5mm and 5mm,
   startstop/.style = {rectangle, rounded corners=10pt,
@@ -113,7 +116,8 @@ yang siap digunakan pada tahap pra-pemrosesan.\par
   \draw[arr] (dec.north) -- ++(0,7mm) --
     node[above,font=\scriptsize]{Tidak} ($(n2.north)+(0,7mm)$) -- (n2.north);
 \end{tikzpicture}%
-}}
+}%
+}
 \caption{Skema Pengumpulan Data}
 \label{fig:3.skemadatapengumpulan}
 \end{figure}
@@ -151,7 +155,8 @@ Tahap pra-pemrosesan data menyiapkan klip video mentah agar sesuai dengan format
 
 \begin{figure}[H]
 \centering
-\fbox{\resizebox{\linewidth}{!}{%
+\fbox{%
+\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[scale=0.7,
   node distance = 5mm and 5mm,
   startstop/.style = {rectangle, rounded corners=10pt,
@@ -183,7 +188,8 @@ Tahap pra-pemrosesan data menyiapkan klip video mentah agar sesuai dengan format
   \draw[arr] (n5) -- (n6);
   \draw[arr] (n6) -- (end);
 \end{tikzpicture}%
-}}
+}%
+}
 \caption{Flowchart tahapan pra-pemrosesan video}
 \label{fig:3.alur_pra}
 \end{figure}
@@ -205,7 +211,8 @@ Tahap pelatihan dan optimisasi model mengikuti alur yang ditunjukkan pada Gambar
 
 \begin{figure}[H]
 \centering
-\fbox{\resizebox{0.55\linewidth}{!}{%
+\fbox{%
+\resizebox{0.55\linewidth}{!}{%
 \begin{tikzpicture}[scale=0.7,
   node distance = 5mm,
   startstop/.style = {rectangle, rounded corners=10pt,
@@ -246,7 +253,8 @@ Tahap pelatihan dan optimisasi model mengikuti alur yang ditunjukkan pada Gambar
   \draw[arr] (lastfold.west) -- node[above,font=\scriptsize]{Tidak} ++(-18mm,0)
     |- (initfold.west);
 \end{tikzpicture}%
-}}
+}%
+}
 \caption{Flowchart tahapan pelatihan dan optimisasi model}
 \label{fig:3.alur_pelatihan}
 \end{figure}
@@ -300,9 +308,10 @@ Pada penelitian ini, istilah \textit{two-stage fine-tuning} merujuk pada skema p
 \centering
 \caption{Gambaran umum rancangan seluruh eksperimen}
 \label{tab:3.rancangan_eksperimen}
+\footnotesize
 \begin{tabularx}{\linewidth}{|c|p{3.2cm}|X|}
 \hline
-Kode & Kelompok Eksperimen & Variasi Utama \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Kode}} & \multicolumn{1}{c|}{\textbf{Kelompok Eksperimen}} & \multicolumn{1}{c|}{\textbf{Variasi Utama}} \\
 \hline
 E1  & \textit{Backbone} \& \textit{Pre-train} & ViT-Small + K400, \textit{fine-tune} 1-tahap \\
 \hline
@@ -361,7 +370,7 @@ Penelitian ini menggunakan beberapa perangkat yang mendukung proses perekaman da
 \footnotesize
 \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{0.6cm}|p{2.5cm}|>{\raggedright\arraybackslash}X|}
   \hline
-  No & Alat & Spesifikasi \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{No}} & \multicolumn{1}{c|}{\textbf{Alat}} & \multicolumn{1}{c|}{\textbf{Spesifikasi}} \\
   \hline
   1 & Laptop Acer Nitro AN515-57 &
   1. Sistem Operasi Windows 11 Home Single Language (64-bit). \newline 2. GPU NVIDIA GeForce RTX 3050 (4 GB VRAM). \newline 3. RAM 16 GB DDR4. \\
@@ -383,7 +392,8 @@ Penelitian ini menggunakan beberapa perangkat yang mendukung proses perekaman da
 
 \subsection{Bahan} \label{III.Bahan}
 Bahan utama penelitian ini adalah dataset visual hasil perekaman langsung di SLBN PKK Provinsi Lampung. Setiap klip memuat 10 gerakan kata Sistem Isyarat Bahasa Indonesia (SIBI) yang dilakukan secara berulang oleh responden dengan latar belakang polos dan pencahayaan merata.\par
-1. Data Visual: Video berformat MP4 dengan resolusi Full HD (1080p) dan kecepatan 30 fps yang menyorot gestur tangan, konfigurasi jari, serta postur tubuh bagian atas. Seluruh klip distandardisasi ke 30 fps dan disampling menjadi 16 frame untuk disesuaikan dengan pipeline VideoMAE. \newline 2. Data Label (Teks Bahasa Indonesia): Label kata dalam Bahasa Indonesia yang menjadi padanan dari setiap gerakan SIBI. Label ini digunakan sebagai target selama pelatihan dan pengujian model klasifikasi visual.
+1. Data Visual: Video berformat MP4 dengan resolusi Full HD (1080p) dan kecepatan 30 fps yang menyorot gestur tangan, konfigurasi jari, serta postur tubuh bagian atas. Seluruh klip distandardisasi ke 30 fps dan disampling menjadi 16 frame untuk disesuaikan dengan pipeline VideoMAE, 2. Data Label (Teks Bahasa Indonesia): Label kata dalam Bahasa Indonesia yang menjadi padanan dari setiap gerakan SIBI. Label ini digunakan sebagai target selama pelatihan dan pengujian model klasifikasi visual. \par
+
 
 
 % ============================================================
@@ -406,7 +416,8 @@ Alur pemrosesan dari video mentah hingga prediksi kelas ditunjukkan pada Gambar~
 
 \begin{figure}[h!]
 \centering
-\fbox{\resizebox{0.85\linewidth}{!}{%
+\fbox{%
+\resizebox{0.85\linewidth}{!}{%
 \begin{tikzpicture}[scale=0.7,
   node distance = 5mm and 6mm,
   box/.style = {
@@ -439,7 +450,8 @@ Alur pemrosesan dari video mentah hingga prediksi kelas ditunjukkan pada Gambar~
   \node[lbl, below=1mm of pool] {$\mathbb{R}^{384}$};
   \node[lbl, below=1mm of cls]  {$\hat{y}\in\mathbb{R}^{K}$};
 \end{tikzpicture}%
-}}
+}%
+}
 \caption{Pipeline pemrosesan VideoMAE dari video masukan hingga prediksi kelas.
          Dimensi tensor ditampilkan di atas/bawah setiap tahap.}
 \label{fig:pipeline}
@@ -457,10 +469,10 @@ $T=16$ frame berukuran $H\times W = 224\times 224$ piksel, tiga kanal
 warna (RGB). Dimensi tensor klip adalah:
  
 \vspace{0.5cm}
-\begin{equation}
+\begin{equation*}
   \mathbf{X} \in \mathbb{R}^{T \times H \times W \times C}
   = \mathbb{R}^{16 \times 224 \times 224 \times 3}
-\end{equation}
+\end{equation*}
 \myequations{Dimensi tensor klip video masukan}
 \vspace{0.5cm}
  
@@ -468,981 +480,26 @@ warna (RGB). Dimensi tensor klip adalah:
 Jumlah total nilai piksel dalam satu klip dihitung sebagai berikut:
  
 \vspace{0.5cm}
-\begin{align}
-  \text{Total piksel}
-  &= T \times H \times W \times C \notag \\
-  &= 16 \times 224 \times 224 \times 3 \notag \\
-  &= 16 \times 150{.}528 \notag \\
-  &= 2{.}408{.}448 \text{ nilai}
-\end{align}
-\myequations{Jumlah total nilai piksel dalam satu klip video}
 \vspace{0.5cm}
- 
-\noindent
-Sebelum masuk ke model, setiap nilai piksel $x_c$ pada kanal $c$
-dinormalisasi menggunakan rata-rata dan standar deviasi ImageNet:
- 
-\vspace{0.5cm}
-\begin{align}
-  \tilde{x}_{c} &= \frac{x_{c} - \mu_{c}}{\sigma_{c}},
-  \quad c \in \{R,G,B\}, \notag \\
-  &\boldsymbol{\mu}=(0.485,\,0.456,\,0.406),
-  \quad \boldsymbol{\sigma}=(0.229,\,0.224,\,0.225)
-\end{align}
-\myequations{Normalisasi nilai piksel per kanal}
-\vspace{0.5cm}
- 
-\noindent
-Sebagai contoh, misalkan sebuah piksel pada kanal merah memiliki nilai
-$x_R = 200$ (skala 0--255). Nilai ini terlebih dahulu diubah ke rentang
-$[0,1]$ dengan cara dibagi 255, sehingga $x_R = 200/255 \approx 0.784$.
-Normalisasi kemudian dilakukan sebagai berikut:
- 
-\vspace{0.5cm}
+\noindent Untuk $h_1 = 0.921$:
 \begin{align*}
-  \tilde{x}_R
-  &= \frac{x_R - \mu_R}{\sigma_R}
-   = \frac{0.784 - 0.485}{0.229}
-   = \frac{0.299}{0.229}
-   \approx 1.306
+  0.044715 \times (0.921)^3 &= 0.044715 \times 0.782 = 0.035 \\
+  \sqrt{2/\pi} \times (0.921 + 0.035) &= 0.7979 \times 0.956 = 0.763 \\
+  \tanh(0.763) &= 0.644 \\
+  \mathrm{GELU}(0.921) &= 0.5 \times 0.921 \times (1 + 0.644) \\
+  &= 0.5 \times 0.921 \times 1.644 \\
+  &= \mathbf{0.757}
 \end{align*}
+
 \vspace{0.5cm}
- 
-\noindent
-Dengan cara yang sama untuk kanal lain, misalkan $x_G = 150$
-($\approx 0.588$) dan $x_B = 100$ ($\approx 0.392$):
- 
-\vspace{0.5cm}
+\noindent Untuk $h_2 = -0.429$:
 \begin{align*}
-  \tilde{x}_G
-  &= \frac{0.588 - 0.456}{0.224}
-   = \frac{0.132}{0.224}
-   \approx 0.589 \\[4pt]
-  \tilde{x}_B
-  &= \frac{0.392 - 0.406}{0.225}
-   = \frac{-0.014}{0.225}
-   \approx -0.062
-\end{align*}
-\vspace{0.5cm}
- 
-\noindent
-Hasil normalisasi $(\tilde{x}_R, \tilde{x}_G, \tilde{x}_B)
-= (1.306,\; 0.589,\; -0.062)$ menunjukkan bahwa nilai yang lebih terang
-dari rata-rata menghasilkan angka positif, sedangkan nilai yang lebih
-gelap menghasilkan angka negatif. Rentang yang seragam ini membantu
-proses optimasi model berjalan lebih stabil.
-
-% ============================================================
-\subsection{Tubelet Embedding}
-% ============================================================
-
-\subsubsection{Pembagian Menjadi Spatio-Temporal Cube}
- 
-Klip $\mathbf{X}$ dipecah menjadi $N$ cube berukuran
-$t \times p \times p$ dengan $t=2$, $p=16$.
-Jumlah cube yang dihasilkan dihitung sebagai berikut:
- 
-\vspace{0.5cm}
-\begin{align}
-  N &= \frac{T}{t}\times\frac{H}{p}\times\frac{W}{p} \notag \\
-    &= \frac{16}{2}\times\frac{224}{16}\times\frac{224}{16} \notag \\
-    &= 8 \times 14 \times 14 \notag \\
-    &= 1{.}568 \text{ cube (token)}
-\end{align}
-\myequations{Jumlah token spasio-temporal pada klip video}
-\vspace{0.5cm}
- 
-\noindent
-Artinya, dari satu klip video dengan 16 frame berukuran $224\times224$,
-dihasilkan 1.568 token yang masing-masing merepresentasikan satu
-potongan spasial-temporal berukuran $2\times16\times16$ piksel.
-Setiap cube mencakup 2 frame berurutan sehingga informasi gerak
-antara dua frame tersebut ikut terekam dalam satu token.
-Gambar~\ref{fig:cube_example} mengilustrasikan satu contoh cube yang terdiri atas dua frame grayscale berukuran $3\times3$ piksel.\par
-
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}[
-  cell/.style={
-    minimum width=12mm, minimum height=12mm,
-    draw=black!50, line width=0.5pt,
-    align=center, font=\small
-  }
-]
-
-% ================= FRAME 1 =================
-%\node[font=\small\bfseries] at (1.8,2) {Frame 1 (grayscale)};
-
-% baris 1
-\node[cell, fill=black!85, text=white] at (0,0) {10};
-\node[cell, fill=black!60, text=white] at (1.2,0) {50};
-\node[cell, fill=black!40, text=white] at (2.4,0) {96};
-
-% baris 2
-\node[cell, fill=black!30] at (0,-1.2) {125};
-\node[cell, fill=black!20] at (1.2,-1.2) {160};
-\node[cell, fill=black!15] at (2.4,-1.2) {180};
-
-% baris 3
-\node[cell, fill=black!10] at (0,-2.4) {200};
-\node[cell, fill=black!5]  at (1.2,-2.4) {215};
-\node[cell, fill=white]    at (2.4,-2.4) {230};
-
-% border frame 1
-\draw[dashed, rounded corners=5pt]
-(-0.6,0.8) rectangle (3,-3);
-
-\node[font=\scriptsize, gray] at (1.2,1.1) {\textit{cube ke-}i};
-\node[font=\small, gray] at (1.2,-3.4) {$3\times3$, 1 kanal};
-
-% ================= FRAME 2 =================
-%\node[font=\small\bfseries] at (6,2) {Frame 2 (grayscale)};
-
-\foreach \val/\r/\c in {
-  20/0/0, 40/0/1, 60/0/2,
-  80/1/0,100/1/1,120/1/2,
- 140/2/0,160/2/1,180/2/2}
-{
-  \node[cell, fill=white] at (\c*1.2+4.5, -\r*1.2) {\val};
-}
-
-% border frame 2
-\draw[dashed, rounded corners=5pt]
-(3.9,0.8) rectangle (7.5,-3);
-
-\node[font=\scriptsize, gray] at (5.7,1.1) {\textit{frame ke-}(i+1)};
-\node[font=\small, gray] at (5.7,-3.4) {$3\times3$, 1 kanal};
-
-% ================= ARROW =================
-\draw[<->, thick, gray]
-(3.2,-1.2) -- node[above, font=\scriptsize]{2 frame} (3.9,-1.2);
-
-\end{tikzpicture}
-
-\caption{Contoh \textit{spatio-temporal cube} berisi 2 frame berukuran $3\times3$ piksel (disederhanakan dari $2\times16\times16$).}
-\label{fig:cube_example}
-\end{figure}
-
-
-\subsubsection{Flatten Tubelet}
- 
-Setiap cube ke-$i$ berbentuk $\mathbb{R}^{t\times p\times p\times C}$
-diluruskan menjadi vektor satu dimensi dengan membaca piksel secara
-berurutan: kanal $\to$ kolom $\to$ baris $\to$ frame.
-Untuk contoh $3\times3$ grayscale ($C=1$):
- 
-\vspace{0.5cm}
-\begin{equation}
-  \mathbf{x}_i^{\text{flat}} \in
-  \mathbb{R}^{t\cdot p\cdot p\cdot C}
-  = \mathbb{R}^{2\times3\times3\times1}
-  = \mathbb{R}^{18}
-\end{equation}
-\myequations{Dimensi vektor hasil flattening cube}
-\vspace{0.5cm}
- 
-\noindent
-Menggunakan nilai piksel dari Gambar~\ref{fig:cube_example},
-proses \textit{flatten} menghasilkan vektor berikut.
-Frame~1 dibaca terlebih dahulu baris per baris dari kiri ke kanan,
-kemudian Frame~2 dengan urutan yang sama:
- 
-\vspace{0.5cm}
-\begin{equation}
-  \mathbf{x}_i^{\text{flat}}
-  = \scalebox{0.80}{\ensuremath{%
-      [\underbrace{10,\;50,\;96,\;125,\;160,\;180,\;200,\;215,\;230}_{%
-         \text{Frame 1: baris 0, 1, 2}},\;
-       \underbrace{20,\;40,\;60,\;80,\;100,\;120,\;140,\;160,\;180}_{%
-         \text{Frame 2: baris 0, 1, 2}}]}}
-\end{equation}
-\myequations{Representasi vektor flattening cube}
-\vspace{0.5cm}
- 
-\noindent
-Tidak ada operasi matematika dalam proses \textit{flatten} ini, nilai
-piksel tidak berubah, hanya posisi dalam memori yang diluruskan dari
-susunan 3D menjadi satu baris lurus sepanjang 18 elemen.
-Pada data sesungguhnya dengan patch $16\times16$ dan RGB ($C=3$),
-panjang vektor menjadi:
- 
-\vspace{0.5cm}
-\begin{align*}
-  |\mathbf{x}_i^{\text{flat}}|
-  &= 2 \times 16 \times 16 \times 3 \notag \\
-  &= 1{.}536 \text{ elemen}
-\end{align*}
-\vspace{0.5cm}
- 
-\begin{figure}[h!]
-\centering
-\resizebox{0.80\linewidth}{!}{%
-\begin{tikzpicture}[
-  cell/.style={minimum width=10mm, minimum height=9mm,
-    draw=black!40, line width=0.4pt, align=center, font=\tiny},
-  fcell/.style={minimum width=10mm, minimum height=9mm,
-    draw=black!40, line width=0.4pt, align=center, font=\tiny},
-  arr/.style={-{Stealth[length=4pt]}, line width=0.7pt, gray!60}
-]
-  \node[font=\small\bfseries] at (1.6, 1.6) {Cube $i$};
-  \foreach \val/\bg/\r/\c in {
-    10/frame1color/0/0, 50/frame1color/0/1, 96/frame1color/0/2,
-   125/frame1color/1/0,160/frame1color/1/1,180/frame1color/1/2,
-   200/frame1color/2/0,215/frame1color/2/1,230/frame1color/2/2}
-  { \node[cell, fill=\bg] at (\c*1.05+0.55, -\r*1.0+0.65) {\val}; }
-  \foreach \val/\bg/\r/\c in {
-    20/frame2color/0/0, 40/frame2color/0/1, 60/frame2color/0/2,
-    80/frame2color/1/0,100/frame2color/1/1,120/frame2color/1/2,
-   140/frame2color/2/0,160/frame2color/2/1,180/frame2color/2/2}
-  { \node[cell, fill=\bg] at (\c*1.05+0.55+0.3, -\r*1.0+0.65-0.3) {\val}; }
-  \node[font=\tiny, frame1color!80!black] at (0.1, 0.65) {F1};
-  \node[font=\tiny, frame2color!80!black] at (0.4, 0.35) {F2};
-  \draw[arr, line width=1pt] (3.7, 0.2) --
-    node[above, font=\small]{flatten} (5.0, 0.2);
-  \node[font=\small\bfseries] at (8.5, 1.6) {Vektor flat $\mathbf{x}_i^{\text{flat}}$};
-  \foreach \val/\bg/\idx in {
-    10/frame1color/0, 50/frame1color/1,  96/frame1color/2,
-   125/frame1color/3,160/frame1color/4, 180/frame1color/5,
-   200/frame1color/6,215/frame1color/7, 230/frame1color/8,
-    20/frame2color/9, 40/frame2color/10, 60/frame2color/11,
-    80/frame2color/12,100/frame2color/13,120/frame2color/14,
-   140/frame2color/15,160/frame2color/16,180/frame2color/17}
-  {
-    \pgfmathsetmacro{\col}{mod(\idx,9)}
-    \pgfmathsetmacro{\row}{int(\idx/9)}
-    \node[fcell, fill=\bg] at (\col*1.05+5.55, -\row*1.05+0.65) {\val};
-  }
-  \draw[decorate, decoration={brace,amplitude=5pt}]
-    (5.05, -1.45) -- (14.45, -1.45)
-    node[midway, below=6pt, font=\scriptsize]
-    {18 elemen ($= 2\times3\times3\times1$, contoh 3$\times$3 grayscale)};
-  \foreach \idx in {0,...,17} {
-    \pgfmathsetmacro{\col}{mod(\idx,9)}
-    \pgfmathsetmacro{\row}{int(\idx/9)}
-    \node[font=\tiny, gray!60]
-      at (\col*1.05+5.55, -\row*1.05+1.1)
-      {$x_{\pgfmathprintnumber[fixed]{\idx}}$};
-  }
-\end{tikzpicture}%
-}
-\caption{Proses \textit{flatten} cube ke-$i$. Frame~1
-         (\colorbox{frame1color}{\strut F1}) dibaca terlebih dahulu,
-         diikuti Frame~2 (\colorbox{frame2color}{\strut F2}),
-         menghasilkan vektor $\mathbf{x}_i^{\text{flat}} \in \mathbb{R}^{18}$.}
-\label{fig:flatten}
-\end{figure}
- 
- 
-\subsubsection{Proyeksi Linear (Patch Embedding)}
- 
-Vektor $\mathbf{x}_i^{\text{flat}} \in \mathbb{R}^{1536}$ diproyeksikan
-ke dimensi embedding $d=384$ melalui perkalian matriks bobot
-$\mathbf{W}_E$:
- 
-\vspace{0.5cm}
-\begin{equation}
-  \mathbf{e}_i = \mathbf{W}_E\,\mathbf{x}_i^{\text{flat}} + \mathbf{b}_E
-\end{equation}
-\myequations{Proyeksi linear patch embedding}
-\vspace{0.5cm}
-
-\noindent
-dengan $\mathbf{W}_E \in \mathbb{R}^{384\times1536}$ dan $\mathbf{b}_E \in \mathbb{R}^{384}$.
-\vspace{0.5cm}
- 
-\noindent
-Untuk memahami cara kerjanya, berikut ditampilkan contoh perhitungan
-menggunakan vektor flat $\mathbf{x}^{\text{flat}} \in \mathbb{R}^{18}$
-dari contoh 3$\times$3 di atas, dengan matriks $\mathbf{W}_E$
-berukuran $4\times18$ (disederhanakan menjadi 4 dimensi output):
- 
-\vspace{0.5cm}
-\begin{equation*}
-  \mathbf{x}^{\text{flat}}
-  = \scalebox{0.82}{\ensuremath{%
-      [10,\;50,\;96,\;125,\;160,\;180,\;200,\;215,\;230,\;
-       20,\;40,\;60,\;80,\;100,\;120,\;140,\;160,\;180]}}
-\end{equation*}
-\vspace{0.5cm}
- 
-\noindent
-Misalkan baris pertama matriks $\mathbf{W}_E$ adalah:
- 
-\vspace{0.5cm}
-\begin{multline*}
-  \mathbf{w}_{E,1}
-  = [0.02,\;{-0.01},\;0.03,\;{-0.02},\;0.01,\;{-0.03},\;
-     0.02,\;0.01,\;{-0.02}, \\
-     0.03,\;{-0.01},\;0.02,\;{-0.01},\;0.03,\;{-0.02},\;
-     0.01,\;0.02,\;{-0.01}]
-\end{multline*}
-\vspace{0.5cm}
- 
-\noindent
-Elemen pertama dari $\mathbf{e}_i$ diperoleh dari perkalian titik
-(\textit{dot product}) antara $\mathbf{w}_{E,1}$ dan
-$\mathbf{x}^{\text{flat}}$:
- 
-\vspace{0.5cm}
-\begin{align*}
-  e_{i,1}
-  &= \mathbf{w}_{E,1} \cdot \mathbf{x}^{\text{flat}} + b_{E,1}
-  \notag \\
-  &= (0.02\times10) + (-0.01\times50) + (0.03\times96) \notag \\
-  &\qquad + (-0.02\times125) + (0.01\times160) + (-0.03\times180)
-  \notag \\
-  &\quad + (0.02\times200) + (0.01\times215) + (-0.02\times230) \notag \\
-  &\qquad + (0.03\times20) + (-0.01\times40) + (0.02\times60)
-  \notag \\
-  &\quad + (-0.01\times80) + (0.03\times100) + (-0.02\times120) \notag \\
-  &\qquad + (0.01\times140) + (0.02\times160) + (-0.01\times180) + 0
-  \notag \\[4pt]
-  &= 0.20 + (-0.50) + 2.88 + (-2.50) + 1.60 + (-5.40)
-  \notag \\
-  &\quad + 4.00 + 2.15 + (-4.60) + 0.60 + (-0.40) + 1.20
-  \notag \\
-  &\quad + (-0.80) + 3.00 + (-2.40) + 1.40 + 3.20 + (-1.80)
-  \notag \\[4pt]
-  &= (0.20 - 0.50 + 2.88 - 2.50 + 1.60 - 5.40)
-  \notag \\
-  &\quad + (4.00 + 2.15 - 4.60 + 0.60 - 0.40 + 1.20)
-  \notag \\
-  &\quad + (-0.80 + 3.00 - 2.40 + 1.40 + 3.20 - 1.80)
-  \notag \\[4pt]
-  &= (-3.72) + (2.95) + (2.60)
-  \notag \\[4pt]
-  &= \mathbf{1.83}
-\end{align*}
-\vspace{0.5cm}
- 
-\noindent
-Proses yang sama dilakukan untuk seluruh 384 baris matriks
-$\mathbf{W}_E$ sehingga menghasilkan vektor embedding lengkap
-$\mathbf{e}_i \in \mathbb{R}^{384}$.
-Jumlah parameter pada lapisan ini adalah:
- 
-\vspace{0.5cm}
-\begin{align*}
-  |\mathbf{W}_E| + |\mathbf{b}_E|
-  &= (384 \times 1536) + 384 \notag \\
-  &= 589.824 + 384 \notag \\
-  &= 590{.}208 \text{ parameter}
-\end{align*}
-\vspace{0.5cm}
- 
-\begin{figure}[h!]
-\centering
-\resizebox{0.75\linewidth}{!}{%
-\begin{tikzpicture}[scale=0.7,
-  arr/.style={-{Stealth[length=4pt]}, line width=0.7pt, gray!60},
-  box/.style={rectangle, rounded corners=3pt,
-              draw=black!40, line width=0.5pt,
-              minimum width=18mm, align=center, font=\small}
-]
-  \foreach \v/\bg/\i in {
-    10/frame1color/0,50/frame1color/1,96/frame1color/2,
-    {$\vdots$}/{white}/3,180/frame1color/4,
-    20/frame2color/5,{$\vdots$}/{white}/6,180/frame2color/7}
-  { \node[minimum width=12mm, minimum height=7mm,
-          draw=black!30, fill=\bg, align=center, font=\tiny]
-      at (0, -\i*0.72+2.5) {\v}; }
-  \node[font=\scriptsize, gray] at (0, -7*0.72+2.5-0.6) {$\mathbb{R}^{1536}$};
-  \node[font=\small\bfseries] at (0, 3.1) {$\mathbf{x}_i^{\text{flat}}$};
-  \foreach \r in {0,...,4} {
-    \foreach \c in {0,...,7} {
-      \node[minimum width=5.5mm, minimum height=5.5mm,
-            draw=black!20, fill=embedcolor!50, align=center, font=\tiny]
-        at (\c*0.56+2.4, -\r*0.56+1.4) {$w$}; } }
-  \node[font=\scriptsize, gray] at (4.36, -3.0+1.4-0.55) {$\mathbb{R}^{384\times1536}$};
-  \node[font=\small\bfseries] at (4.36, 2.0) {$\mathbf{W}_E$};
-  \node[font=\large] at (1.5, 0.5) {$\times$};
-  \node[font=\large] at (6.8, 0.5) {$=$};
-  \foreach \v/\i in {1.83/0,{-0.47}/1,0.92/2,
-                     {$\vdots$}/3,1.15/4,{$\vdots$}/5,
-                     {-0.33}/6,0.74/7}
-  { \node[minimum width=14mm, minimum height=7mm,
-          draw=black!30, fill=embedcolor!70, align=center, font=\tiny]
-      at (7.9, -\i*0.72+2.5) {\v}; }
-  \node[font=\scriptsize, gray] at (7.9, -7*0.72+2.5-0.6) {$\mathbb{R}^{384}$};
-  \node[font=\small\bfseries] at (7.9, 3.1) {$\mathbf{e}_i$};
-\end{tikzpicture}}
-\caption{Proyeksi linear (\textit{patch embedding}): vektor flat
-         $\mathbf{x}_i^{\text{flat}}\in\mathbb{R}^{1536}$ dikalikan
-         $\mathbf{W}_E\in\mathbb{R}^{384\times1536}$ menghasilkan
-         $\mathbf{e}_i\in\mathbb{R}^{384}$.}
-\label{fig:patch_embed}
-\end{figure}
- 
- 
-\subsubsection{Positional Embedding}
- 
-Karena Transformer tidak memiliki kesadaran posisi secara bawaan,
-vektor posisi $\mathbf{p}_i \in \mathbb{R}^{384}$ yang dapat dilatih
-ditambahkan ke setiap token embedding:
- 
-\vspace{0.5cm}
-\begin{equation}
-  \mathbf{z}_i^{(0)} = \mathbf{e}_i + \mathbf{p}_i,
-  \qquad i = 1,2,\ldots,N
-\end{equation}
-\myequations{Penambahan positional embedding pada token}
-\vspace{0.5cm}
- 
-\noindent
-Penambahan ini dilakukan secara elemen-per-elemen.
-Sebagai contoh, misalkan 4 elemen pertama dari $\mathbf{e}_i$ dan
-$\mathbf{p}_i$ adalah:
- 
-\vspace{0.5cm}
-\begin{align*}
-  \mathbf{e}_i^{(1:4)}   &= [\;1.83,\; -0.47,\; 0.92,\; 1.15\;] \\[4pt]
-  \mathbf{p}_i^{(1:4)}   &= [\;0.10,\;\;\; 0.05,\; {-0.08},\; 0.12\;]
-\end{align*}
-\vspace{0.5cm}
- 
-\noindent
-Maka 4 elemen pertama token awal $\mathbf{z}_i^{(0)}$ adalah:
- 
-\vspace{0.5cm}
-\begin{align*}
-  z_{i,1}^{(0)} &= 1.83 + 0.10 = \mathbf{1.93} \\[3pt]
-  z_{i,2}^{(0)} &= -0.47 + 0.05 = \mathbf{-0.42} \\[3pt]
-  z_{i,3}^{(0)} &= 0.92 + (-0.08) = \mathbf{0.84} \\[3pt]
-  z_{i,4}^{(0)} &= 1.15 + 0.12 = \mathbf{1.27}
-\end{align*}
-\vspace{0.5cm}
- 
-\noindent
-Proses yang sama diterapkan pada seluruh 384 elemen, sehingga
-$\mathbf{z}_i^{(0)} \in \mathbb{R}^{384}$.
-Keseluruhan $N=1568$ token awal membentuk matriks:
- 
-\vspace{0.5cm}
-\begin{equation}
-  \mathbf{Z}^{(0)}
-  = \bigl[\mathbf{z}_1^{(0)},\ldots,\mathbf{z}_{1568}^{(0)}\bigr]
-  \in \mathbb{R}^{1568\times384}
-\end{equation}
-\myequations{Matriks token awal encoder}
-\vspace{0.5cm}
- 
-\begin{figure}[h!]
-\centering
-\resizebox{0.65\linewidth}{!}{%
-\begin{tikzpicture}[scale=0.7,
-  arr/.style={-{Stealth[length=4pt]}, line width=0.7pt, gray!60},
-  vec/.style={minimum width=14mm, minimum height=7mm,
-              draw=black!30, align=center, font=\tiny}
-]
-  \node[font=\small\bfseries] at (0,2.2) {$\mathbf{e}_i$};
-  \foreach \v/\bg/\i in {
-    1.83/embedcolor/0,{-0.47}/embedcolor/1,
-    0.92/embedcolor/2,{$\vdots$}/white/3,1.15/embedcolor/4}
-  { \node[vec, fill=\bg!70] at (0,-\i*0.75+1.5) {\v}; }
-  \node[font=\scriptsize,gray] at (0,-4*0.75+1.5-0.5) {$\mathbb{R}^{384}$};
-  \node[font=\Large] at (1.5, 0.375) {$+$};
-  \node[font=\small\bfseries] at (3,2.2) {$\mathbf{p}_i$};
-  \foreach \v/\bg/\i in {
-    0.10/poscolor/0,0.05/poscolor/1,
-    {-0.08}/poscolor/2,{$\vdots$}/white/3,0.12/poscolor/4}
-  { \node[vec, fill=\bg!70] at (3,-\i*0.75+1.5) {\v}; }
-  \node[font=\scriptsize,gray] at (3,-4*0.75+1.5-0.5) {$\mathbb{R}^{384}$};
-  \node[font=\Large] at (4.5, 0.375) {$=$};
-  \node[font=\small\bfseries] at (6,2.2) {$\mathbf{z}_i^{(0)}$};
-  \foreach \v/\bg/\i in {
-    1.93/tokencolor/0,{-0.42}/tokencolor/1,
-    0.84/tokencolor/2,{$\vdots$}/white/3,1.27/tokencolor/4}
-  { \node[vec, fill=\bg!70] at (6,-\i*0.75+1.5) {\v}; }
-  \node[font=\scriptsize,gray] at (6,-4*0.75+1.5-0.5) {$\mathbb{R}^{384}$};
-  \node[font=\scriptsize, align=center, gray] at (3, -3.5)
-    {$\mathbf{p}_i$ menyandikan posisi temporal-spasial\\
-     token ke-$i$: indeks waktu, baris, dan kolom};
-\end{tikzpicture}}
-\caption{Penambahan \textit{positional embedding} $\mathbf{p}_i$ secara
-         \textit{additive} ke token embedding $\mathbf{e}_i$
-         menghasilkan token awal $\mathbf{z}_i^{(0)} \in \mathbb{R}^{384}$.}
-\label{fig:pos_embed}
-\end{figure}
- 
- 
-% ============================================================
-\subsection{Encoder ViT-S}
-% ============================================================
- 
-Encoder terdiri atas $L=12$ \textit{Transformer block} identik.
-Konfigurasi ViT-S dirangkum pada Tabel~\ref{tab:vits_config}.
- 
-\begin{table}[h!]
-\centering
-\caption{Konfigurasi Hiperparameter ViT-S}
-\label{tab:vits_config}
-\begin{tabular}{lcc}
-\hline
-Hiperparameter & Notasi & Nilai \\
-\hline
-Dimensi embedding        & $d$      & 384  \\
-Jumlah block             & $L$      & 12   \\
-Jumlah head              & $h$      & 6    \\
-Dimensi per head         & $d_h$    & 64   \\
-Rasio ekspansi FFN       & $r$      & 4    \\
-Dimensi FFN              & $d_{ff}$ & 1536 \\
-Aktivasi                 & -        & GELU \\
-Normalisasi              & -        & LayerNorm \\
-\hline
-\end{tabular}
-\end{table}
- 
-\begin{figure}[h!]
-\centering
-\resizebox{0.60\linewidth}{!}{%
-\begin{tikzpicture}[scale=0.7,
-  node distance=6mm and 10mm,
-  blk/.style={rectangle, rounded corners=4pt,
-              minimum width=44mm, minimum height=10mm,
-              draw=black!40, line width=0.5pt,
-              align=center, font=\small},
-  add/.style={circle, draw=black!50, minimum size=7mm,
-              font=\small, line width=0.5pt},
-  arr/.style={-{Stealth[length=4pt]}, line width=0.6pt}
-]
-  \node[blk, fill=frame1color!40]  (in)   {$\mathbf{Z}^{(\ell-1)} \in \mathbb{R}^{N\times384}$};
-  \node[blk, fill=gray!15, below=of in]  (ln1)  {Layer Norm};
-  \node[blk, fill=attncolor!50, below=of ln1] (mhsa) {Multi-Head Self-Attention\\$h=6,\;d_h=64$};
-  \node[add, below=of mhsa]        (add1) {$+$};
-  \node[blk, fill=gray!15, below=of add1] (ln2)  {Layer Norm};
-  \node[blk, fill=ffncolor!60, below=of ln2] (ffn)  {Feed-Forward Network\\$d_{ff}=1536$, GELU};
-  \node[add, below=of ffn]         (add2) {$+$};
-  \node[blk, fill=outcolor!50, below=of add2]  (out)  {$\mathbf{Z}^{(\ell)} \in \mathbb{R}^{N\times384}$};
-  \draw[arr] (in)--(ln1); \draw[arr] (ln1)--(mhsa);
-  \draw[arr] (mhsa)--(add1); \draw[arr] (add1)--(ln2);
-  \draw[arr] (ln2)--(ffn); \draw[arr] (ffn)--(add2);
-  \draw[arr] (add2)--(out);
-  \draw[arr, dashed, gray!70]
-    (in.east) -- ++(1.2,0) |- node[right, font=\scriptsize, gray]{residual} (add1.east);
-  \draw[arr, dashed, gray!70]
-    (add1.west) -- ++(-1.2,0) |- node[left, font=\scriptsize, gray]{residual} (add2.west);
-  \node[font=\small, gray, right=15mm of out] {$\times\; L=12$};
-\end{tikzpicture}}
-\caption{Satu \textit{Transformer block} pada encoder ViT-S.
-         Block ini diulang $L=12$ kali secara berurutan.}
-\label{fig:transformer_block}
-\end{figure}
- 
- 
-\subsubsection{Perhitungan Layer Normalization}
- 
-Sebelum masuk ke operasi \textit{attention}, setiap token dinormalisasi
-menggunakan Layer Normalization. Normalisasi ini menstabilkan distribusi
-nilai di dalam vektor token sehingga proses optimasi berjalan lebih
-konsisten.
- 
-\vspace{0.5cm}
-\begin{align}
-  \mathrm{LN}(\mathbf{z})
-  &= \boldsymbol{\gamma} \odot
-    \frac{\mathbf{z}-\mu_z}{\sqrt{\sigma_z^2+\epsilon}}
-    + \boldsymbol{\beta} \notag \\
-  \mu_z &= \frac{1}{d}\sum_k z_k,\qquad
-  \sigma_z^2 = \frac{1}{d}\sum_k(z_k-\mu_z)^2
-\end{align}
-\myequations{Layer normalization pada token}
-\vspace{0.5cm}
- 
-\noindent
-Berikut adalah perhitungan lengkap menggunakan token
-$\mathbf{z}^{(0)} = [1.93,\;-0.42,\;0.84,\;1.27]$
-(disingkat 4 dimensi untuk kemudahan ilustrasi):
- 
-\vspace{0.5cm}
-\noindent Langkah 1: Hitung rata-rata elemen token:
- 
-\vspace{0.5cm}
-\begin{align*}
-  \mu_z
-  &= \frac{1}{4}(z_1 + z_2 + z_3 + z_4) \notag \\
-  &= \frac{1}{4}(1.93 + (-0.42) + 0.84 + 1.27) \notag \\
-  &= \frac{3.62}{4} \notag \\
-  &= 0.905
-\end{align*}
-\vspace{0.5cm}
- 
-\noindent Langkah 2: Hitung variansi elemen token:
- 
-\vspace{0.5cm}
-\begin{align*}
-  \sigma_z^2
-  &= \frac{1}{4}\bigl[(1.93-0.905)^2 + (-0.42-0.905)^2
-     + (0.84-0.905)^2 + (1.27-0.905)^2\bigr] \notag \\
-  &= \frac{1}{4}\bigl[(1.025)^2 + (-1.325)^2 + (-0.065)^2 + (0.365)^2\bigr] \notag \\
-  &= \frac{1}{4}(1.051 + 1.756 + 0.004 + 0.133) \notag \\
-  &= \frac{2.944}{4} \notag \\
-  &= 0.736
-\end{align*}
-\vspace{0.5cm}
- 
-\noindent Langkah 3: Normalisasi setiap elemen:
- 
-\vspace{0.5cm}
-\begin{align*}
-  \hat{z}_1 &= \frac{1.93 - 0.905}{\sqrt{0.736 + 10^{-6}}}
-             = \frac{1.025}{0.858} = \mathbf{1.195} \\[4pt]
-  \hat{z}_2 &= \frac{-0.42 - 0.905}{0.858}
-             = \frac{-1.325}{0.858} = \mathbf{-1.544} \\[4pt]
-  \hat{z}_3 &= \frac{0.84 - 0.905}{0.858}
-             = \frac{-0.065}{0.858} = \mathbf{-0.076} \\[4pt]
-  \hat{z}_4 &= \frac{1.27 - 0.905}{0.858}
-             = \frac{0.365}{0.858} = \mathbf{0.425}
-\end{align*}
-\vspace{0.5cm}
- 
-\noindent Langkah 4: Terapkan parameter scale dan shift:
- 
-\vspace{0.5cm}
-\noindent
-Misalkan $\boldsymbol{\gamma} = [1.0, 1.0, 1.0, 1.0]$ dan
-$\boldsymbol{\beta} = [0.0, 0.0, 0.0, 0.0]$ (nilai awal tipikal):
- 
-\vspace{0.5cm}
-\begin{align*}
-  \mathrm{LN}(\mathbf{z})
-  = \boldsymbol{\gamma} \odot \hat{\mathbf{z}} + \boldsymbol{\beta}
-  = [\mathbf{1.195},\; \mathbf{-1.544},\; \mathbf{-0.076},\; \mathbf{0.425}]
-\end{align*}
-\vspace{0.5cm}
- 
-\noindent
-Perhatikan bahwa rata-rata hasil normalisasi mendekati nol:
-$(1.195 - 1.544 - 0.076 + 0.425)/4 = 0/4 = 0.000$,
-dan standar deviasinya mendekati satu, yang merupakan tujuan
-dari Layer Normalization.
- 
- 
-\subsubsection{Perhitungan Multi-Head Self-Attention (MHSA)}
- 
-\vspace{0.5cm}
-\begin{align}
-  \mathbf{Q} &= \mathbf{Z}\mathbf{W}^Q,\quad
-  \mathbf{K} = \mathbf{Z}\mathbf{W}^K,\quad
-  \mathbf{V} = \mathbf{Z}\mathbf{W}^V \notag \\
-  &\text{dengan}\quad \mathbf{W}^Q,\mathbf{W}^K,\mathbf{W}^V \in \mathbb{R}^{384\times384}
-\end{align}
-\myequations{Transformasi Query, Key, dan Value}
-\vspace{0.5cm}
- 
-\noindent
-Kemudian dibagi ke $h=6$ kepala, masing-masing berdimensi $d_h = 384/6 = 64$.
- 
-\begin{figure}[h!]
-\centering
-\resizebox{0.80\linewidth}{!}{%
-\begin{tikzpicture}[
-  arr/.style={-{Stealth[length=4pt]}, line width=0.6pt, gray!70},
-  tok/.style={minimum width=12mm, minimum height=8mm,
-              draw=black!30, align=center, font=\tiny, rounded corners=2pt},
-  head/.style={minimum width=14mm, minimum height=7mm,
-               draw=black!30, align=center, font=\tiny, rounded corners=2pt}
-]
-  \node[font=\small\bfseries] at (0, 3.5) {Token input ($N$ token)};
-  \foreach \lbl/\bg/\i in {
-    {$\mathbf{z}_1$}/tokencolor/0,
-    {$\mathbf{z}_2$}/tokencolor/1,
-    {$\vdots$}/white/2,
-    {$\mathbf{z}_N$}/tokencolor/3}
-  { \node[tok, fill=\bg!60] at (0, -\i*1.0+2.5) {\lbl}; }
-  \draw[arr] (0.7, 0.75) -- (2.0, 1.8) node[midway, above, font=\tiny]{$\mathbf{W}^Q$};
-  \draw[arr] (0.7, 0.75) -- (2.0, 0.75) node[midway, above, font=\tiny]{$\mathbf{W}^K$};
-  \draw[arr] (0.7, 0.75) -- (2.0,-0.3) node[midway, below, font=\tiny]{$\mathbf{W}^V$};
-  \node[tok, fill=attncolor!50, minimum width=18mm] at (3.0, 1.8)
-    {$\mathbf{Q}\in\mathbb{R}^{N\times384}$};
-  \node[tok, fill=attncolor!30, minimum width=18mm] at (3.0, 0.75)
-    {$\mathbf{K}\in\mathbb{R}^{N\times384}$};
-  \node[tok, fill=attncolor!20, minimum width=18mm] at (3.0,-0.3)
-    {$\mathbf{V}\in\mathbb{R}^{N\times384}$};
-  \node[font=\scriptsize, gray] at (5.2, 2.5) {dibagi $h=6$ kepala ($d_h=64$)};
-  \foreach \m/\y in {1/2.0, 2/1.2, 3/0.4, 4/-0.4}
-  { \node[head, fill=attncolor!40] at (5.8, \y)
-      {head$_{\m}$\\$\mathbb{R}^{N\times64}$};
-    \draw[arr] (4.0, 1.0) -- (5.1, \y); }
-  \node[font=\tiny, gray] at (5.8, -1.0) {$\vdots$ (6 total)};
-  \draw[arr] (6.55, 0.8) -- (7.5, 0.8);
-  \node[tok, fill=embedcolor!60, minimum width=22mm] at (8.8, 0.8)
-    {concat $\to$ $\times\mathbf{W}^O$\\$\mathbb{R}^{N\times384}$};
-  \node[font=\scriptsize, gray] at (8.8, 0.0)
-    {$\mathbf{W}^O\in\mathbb{R}^{384\times384}$};
-\end{tikzpicture}%
-}
-\caption{Alur \textit{Multi-Head Self-Attention}: $\mathbf{Q}$, $\mathbf{K}$,
-         $\mathbf{V}$ dibagi ke $h=6$ kepala berdimensi $d_h=64$,
-         hasilnya digabung dan diproyeksikan kembali ke $\mathbb{R}^{384}$.}
-\label{fig:mhsa}
-\end{figure}
- 
-\vspace{0.5cm}
-\noindent Perhitungan Scaled Dot-Product Attention\par
-\vspace{0.3cm}
- 
-\noindent
-Untuk satu kepala, misalkan terdapat 4 token ($N=4$) dengan dimensi
-per kepala $d_h=2$ (disederhanakan). Vektor Query dan Key dari
-keempat token adalah:
- 
-\vspace{0.5cm}
-\begin{align*}
-  \mathbf{Q}^{(m)}
-  &= \begin{bmatrix}
-       0.5 & 0.3 \\
-       0.7 & -0.2 \\
-       0.2 & 0.8 \\
-       0.6 & 0.1
-     \end{bmatrix}, \notag \\[6pt]
-  \mathbf{K}^{(m)}
-  &= \begin{bmatrix}
-       0.4 & 0.2 \\
-       0.9 & 0.1 \\
-       -0.3 & 0.8 \\
-       0.6 & 0.5
-     \end{bmatrix}
-\end{align*}
-\vspace{0.5cm}
- 
-\noindent Langkah 1: Hitung matriks skor mentah
-$\mathbf{Q}^{(m)}\bigl(\mathbf{K}^{(m)}\bigr)^\top$:
- 
-\vspace{0.5cm}
-\begin{align}
-  \mathbf{S} &= \mathbf{Q}^{(m)}\bigl(\mathbf{K}^{(m)}\bigr)^\top \notag \\[4pt]
-  &= \scalebox{0.70}{\ensuremath{\begin{bmatrix}
-       (0.5)(0.4)+(0.3)(0.2) & (0.5)(0.9)+(0.3)(0.1)
-         & (0.5)(-0.3)+(0.3)(0.8) & (0.5)(0.6)+(0.3)(0.5) \\
-       (0.7)(0.4)+(-0.2)(0.2) & (0.7)(0.9)+(-0.2)(0.1)
-         & (0.7)(-0.3)+(-0.2)(0.8) & (0.7)(0.6)+(-0.2)(0.5) \\
-       (0.2)(0.4)+(0.8)(0.2) & (0.2)(0.9)+(0.8)(0.1)
-         & (0.2)(-0.3)+(0.8)(0.8) & (0.2)(0.6)+(0.8)(0.5) \\
-       (0.6)(0.4)+(0.1)(0.2) & (0.6)(0.9)+(0.1)(0.1)
-         & (0.6)(-0.3)+(0.1)(0.8) & (0.6)(0.6)+(0.1)(0.5)
-     \end{bmatrix}}} \notag \\[6pt]
-  &= \begin{bmatrix}
-       0.26 & 0.48 & 0.09 & 0.45 \\
-       0.24 & 0.61 & -0.37 & 0.32 \\
-       0.24 & 0.26 & 0.58 & 0.52 \\
-       0.26 & 0.55 & -0.10 & 0.41
-     \end{bmatrix}
-\end{align}
-\myequations{Perhitungan matriks skor mentah attention}
-\vspace{0.5cm}
- 
-\noindent Langkah 2: Bagi dengan $\sqrt{d_h} = \sqrt{2} \approx 1.414$:
- 
-\vspace{0.5cm}
-\begin{align*}
-  \frac{\mathbf{S}}{\sqrt{d_h}}
-  &= \frac{1}{1.414}
-     \begin{bmatrix}
-       0.26 & 0.48 & 0.09 & 0.45 \\
-       0.24 & 0.61 & -0.37 & 0.32 \\
-       0.24 & 0.26 & 0.58 & 0.52 \\
-       0.26 & 0.55 & -0.10 & 0.41
-     \end{bmatrix} \notag \\[6pt]
-  &= \begin{bmatrix}
-      0.184 & 0.339 & 0.064 & 0.318 \\
-      0.170 & 0.431 & -0.262 & 0.226 \\
-      0.170 & 0.184 & 0.410 & 0.368 \\
-      0.184 & 0.389 & -0.071 & 0.290
-    \end{bmatrix}
-\end{align*}
-\vspace{0.5cm}
- 
-\noindent Langkah 3: Terapkan Softmax per baris untuk mendapatkan
-bobot atensi $\mathbf{A}^{(m)}$:
- 
-\vspace{0.5cm}
-\noindent
-Untuk baris pertama $[0.184,\; 0.339,\; 0.064,\; 0.318]$:
- 
-\vspace{0.5cm}
-\begin{align}
-  e^{0.184} &= 1.202, \quad
-  e^{0.339}  = 1.404, \quad
-  e^{0.064}  = 1.066, \quad
-  e^{0.318}  = 1.374 \notag \\
-  \Sigma &= 1.202 + 1.404 + 1.066 + 1.374 = 5.046 \notag \\[4pt]
-  \mathbf{A}^{(m)}_{1,\cdot}
-  &= \left[\frac{1.202}{5.046},\;\frac{1.404}{5.046},\;
-           \frac{1.066}{5.046},\;\frac{1.374}{5.046}\right]
-   = [\mathbf{0.238},\; \mathbf{0.278},\; \mathbf{0.211},\; \mathbf{0.272}]
-\end{align}
-\myequations{Perhitungan bobot attention dengan softmax}
-\vspace{0.5cm}
- 
-\noindent
-Dengan cara yang sama untuk seluruh baris, diperoleh matriks atensi:
- 
-\vspace{0.5cm}
-\begin{equation*}
-  \mathbf{A}^{(m)} =
-  \begin{bmatrix}
-    0.238 & 0.278 & 0.211 & 0.272 \\
-    0.238 & 0.385 & 0.153 & 0.253 \\
-    0.228 & 0.231 & 0.299 & 0.281 \\
-    0.239 & 0.295 & 0.186 & 0.268 \\
-  \end{bmatrix}
-\end{equation*}
-\vspace{0.5cm}
- 
-\noindent
-Interpretasinya: token ke-1 (baris pertama) memberikan perhatian
-terbesar kepada token ke-2 (bobot 0.278), diikuti token ke-4 (0.272),
-token ke-1 itu sendiri (0.238), dan token ke-3 mendapat perhatian
-paling kecil (0.211).
- 
-\vspace{0.5cm}
-\noindent Langkah 4: Hitung output sebagai jumlah tertimbang dari Value:
- 
-\vspace{0.5cm}
-\noindent
-Misalkan matriks Value adalah:
- 
-\vspace{0.5cm}
-\begin{align*}
-  \mathbf{V}^{(m)}
-  = \begin{bmatrix}
-      0.3 & 0.7 \\ 0.8 & -0.2 \\ -0.4 & 0.5 \\ 0.6 & 0.3
-    \end{bmatrix}
-\end{align*}
-\vspace{0.5cm}
- 
-\noindent
-Output untuk token ke-1:
- 
-\vspace{0.5cm}
-\begin{align*}
-  \mathrm{head}_{m,1}
-  &= \mathbf{A}^{(m)}_{1,\cdot} \cdot \mathbf{V}^{(m)} \notag \\[4pt]
-  \text{dim 1}
-  &= 0.238(0.3) + 0.278(0.8) + 0.211(-0.4) + 0.272(0.6) \notag \\
-  &= 0.071 + 0.222 - 0.084 + 0.163
-   = \mathbf{0.372} \notag \\[4pt]
-  \text{dim 2}
-  &= 0.238(0.7) + 0.278(-0.2) + 0.211(0.5) + 0.272(0.3) \notag \\
-  &= 0.167 - 0.056 + 0.106 + 0.082
-   = \mathbf{0.299}
-\end{align*}
-\vspace{0.5cm}
- 
-\noindent
-Sehingga $\mathrm{head}_{m,1} = [0.372,\; 0.299]$.
-Proses ini diulang untuk semua $N=1568$ token dan semua $h=6$ kepala.
-Setelah seluruh kepala selesai, hasilnya digabung (\textit{concatenate})
-dan dikalikan dengan $\mathbf{W}^O$ untuk menghasilkan output MHSA
-berukuran $\mathbb{R}^{N \times 384}$.
- 
-\vspace{0.5cm}
-\noindent Perhitungan Residual Connection Pertama\par
-\vspace{0.3cm}
- 
-\noindent
-Output MHSA ditambahkan dengan token masukan (sebelum LayerNorm)
-melalui \textit{residual connection}. Misalkan untuk token ke-1
-(4 dimensi contoh):
- 
-\vspace{0.5cm}
-\begin{align*}
-  \mathbf{Z}'_1
-  &= \mathbf{z}_1^{(\ell-1)} + \mathrm{MHSA}_1 \notag \\
-  &= [1.93,\; -0.42,\; 0.84,\; 1.27]
-   + [0.42,\; -0.18,\; 0.31,\; 0.25] \notag \\
-  &= [1.93+0.42,\; -0.42+(-0.18),\; 0.84+0.31,\; 1.27+0.25] \notag \\
-  &= [\mathbf{2.35},\; \mathbf{-0.60},\; \mathbf{1.15},\; \mathbf{1.52}]
-\end{align*}
-\vspace{0.5cm}
- 
- 
-\subsubsection{Perhitungan Feed-Forward Network (FFN)}
- 
-\vspace{0.5cm}
-\begin{equation}
-  \mathrm{FFN}(\mathbf{z})
-  = \mathbf{W}_2\,\mathrm{GELU}\!\bigl(\mathbf{W}_1\mathbf{z}+\mathbf{b}_1\bigr)
-    +\mathbf{b}_2
-\end{equation}
-\myequations{Fungsi Feed-Forward Network pada encoder}
-\vspace{0.5cm}
-
-\noindent
-dengan $\mathbf{W}_1\in\mathbb{R}^{1536\times 384}$ adalah matriks proyeksi ekspansi
-dan $\mathbf{W}_2\in\mathbb{R}^{384\times 1536}$ adalah matriks proyeksi kontraksi.
-\vspace{0.5cm}
- 
-\begin{equation}
-  \mathrm{GELU}(x)
-  = x\cdot\frac{1}{2}\!\left[1+\mathrm{erf}\!\left(\frac{x}{\sqrt{2}}\right)\right]
-\end{equation}
-\myequations{Fungsi aktivasi GELU}
-\vspace{0.5cm}
- 
-\noindent
-Berikut adalah perhitungan lengkap FFN menggunakan token $\mathbf{z}'$
-hasil residual di atas (disederhanakan menjadi input 4 dimensi,
-output 4 dimensi, ekspansi tengah 8 dimensi):
- 
-\vspace{0.5cm}
-\noindent Langkah 1: Proyeksi Linear Pertama
-($\mathbf{W}_1$, ekspansi $4\times$):
- 
-\vspace{0.5cm}
-\noindent
-Misalkan 2 baris pertama $\mathbf{W}_1$ (ukuran $8\times4$ contoh) adalah:
- 
-\vspace{0.5cm}
-\begin{align*}
-  h_1
-  &= \mathbf{w}_{1,1} \cdot \mathbf{z}' + b_{1,1} \notag \\
-  &= (0.3)(2.35) + (-0.1)(-0.60) \notag \\
-  &\quad + (0.4)(1.15) + (-0.2)(1.52) + 0 \notag \\
-  &= 0.705 + 0.060 + 0.460 + (-0.304) \notag \\
-  &= \mathbf{0.921} \\[4pt]
-  h_2
-  &= (-0.2)(2.35) + (0.5)(-0.60) \notag \\
-  &\quad + (-0.1)(1.15) + (0.3)(1.52) + 0 \notag \\
-  &= -0.470 + (-0.300) + (-0.115) + 0.456 \notag \\
-  &= \mathbf{-0.429}
-\end{align*}
-\vspace{0.5cm}
- 
-\noindent Langkah 2: Terapkan aktivasi GELU:
- 
-\vspace{0.5cm}
-\noindent
-GELU diaplikasikan elemen per elemen. Menggunakan aproksimasi:
-
-\begin{multline*}
-  \mathrm{GELU}(x) \approx \\
-  0.5x\!\left(1 + \tanh\!\left(\sqrt{\tfrac{2}{\pi}}\,
-  \bigl(x + 0{,}044715\,x^3\bigr)\right)\right)
-\end{multline*}
- 
-\vspace{0.5cm}
-\begin{align*}
-  \text{Untuk } h_1 = 0.921: \notag \\
-  0.044715 \times (0.921)^3
-  &= 0.044715 \times 0.782 = 0.035 \notag \\
-  \sqrt{2/\pi} \times (0.921 + 0.035)
-  &= 0.7979 \times 0.956 = 0.763 \notag \\
-  \tanh(0.763) &= 0.644 \notag \\
-  \mathrm{GELU}(0.921)
-  &= 0.5 \times 0.921 \times (1 + 0.644)
-   = 0.5 \times 0.921 \times 1.644
-   = \mathbf{0.757} \\[10pt]
-  \text{Untuk } h_2 = -0.429: \notag \\
-  0.044715 \times (-0.429)^3
-  &= 0.044715 \times (-0.079) = -0.004 \notag \\
-  \sqrt{2/\pi} \times (-0.429 + (-0.004))
-  &= 0.7979 \times (-0.433) = -0.346 \notag \\
-  \tanh(-0.346) &= -0.333 \notag \\
-  \mathrm{GELU}(-0.429)
-  &= 0.5 \times (-0.429) \times (1 + (-0.333))
-   = 0.5 \times (-0.429) \times 0.667
-   = \mathbf{-0.143}
+  0.044715 \times (-0.429)^3 &= 0.044715 \times (-0.079) = -0.004 \\
+  \sqrt{2/\pi} \times (-0.429 - 0.004) &= 0.7979 \times (-0.433) = -0.346 \\
+  \tanh(-0.346) &= -0.333 \\
+  \mathrm{GELU}(-0.429) &= 0.5 \times (-0.429) \times (1 - 0.333) \\
+  &= 0.5 \times (-0.429) \times 0.667 \\
+  &= \mathbf{-0.143}
 \end{align*}
 \vspace{0.5cm}
  
@@ -1494,10 +551,10 @@ sebanyak $L=12$ kali. Setelah block ke-12, diterapkan satu LayerNorm
 akhir:
  
 \vspace{0.5cm}
-\begin{equation}
+\begin{equation*}
   \mathbf{Z}^{(L)} = \mathrm{LN}\!\bigl(\mathbf{Z}^{(12)}\bigr)
   \in\mathbb{R}^{1568\times384}
-\end{equation}
+\end{equation*}
 \myequations{Layer normalization akhir encoder}
 \vspace{0.5cm}
  
@@ -1510,11 +567,11 @@ Representasi video diperoleh dengan merata-ratakan seluruh 1.568
 token output encoder. Operasi ini disebut \textit{mean pooling}:
  
 \vspace{0.5cm}
-\begin{equation}
+\begin{equation*}
   \hat{\mathbf{z}}
   = \frac{1}{N}\sum_{i=1}^{N}\mathbf{z}_i^{(L)}
   \in\mathbb{R}^{384}
-\end{equation}
+\end{equation*}
 \myequations{Mean pooling token output encoder}
 \vspace{0.5cm}
  
@@ -1561,9 +618,9 @@ berukuran 384 dimensi (pada data asli).
  
 Kemudian dipetakan ke ruang kelas sebesar $K$ melalui lapisan linear:
 
-\begin{equation}
+\begin{equation*}
   \hat{\mathbf{y}} = \mathbf{W}_C\hat{\mathbf{z}} + \mathbf{b}_C
-\end{equation}
+\end{equation*}
 \myequations{Pemetaan linear classification head}
 \vspace{0.5cm}
 
@@ -1632,10 +689,10 @@ Total probabilitas: $0.795 + 0.062 + 0.143 = 1.000$ (benar).
 Kelas yang diprediksi adalah:
  
 \vspace{0.5cm}
-\begin{align}
+\begin{align*}
   \hat{y}^* &= \arg\max_k\; P(\hat{y}=k\mid\mathbf{v}) \notag \\
   &= \arg\max(0.795,\; 0.062,\; 0.143) = \mathbf{1}
-\end{align}
+\end{align*}
 \myequations{Pemilihan kelas prediksi dengan argmax}
 \vspace{0.5cm}
  
@@ -1645,6 +702,7 @@ dengan keyakinan 79.5\%.
  
 \begin{figure}[h!]
 \centering
+\fbox{%
 \resizebox{0.65\linewidth}{!}{%
 \begin{tikzpicture}[
   arr/.style = {-{Stealth[length=4pt]}, line width=0.7pt, gray!60},
@@ -1670,7 +728,9 @@ dengan keyakinan 79.5\%.
   \draw[arr] (pool)   -- (linear);
   \draw[arr] (linear) -- (sfmax);
   \draw[arr] (1.2, 0.0) -- (pool.west);
-\end{tikzpicture}}
+\end{tikzpicture}%
+}%
+}
 \caption{Alur klasifikasi: seluruh $N=1568$ token di-\textit{mean pool}
          menjadi $\hat{\mathbf{z}}\in\mathbb{R}^{384}$, dipetakan ke
          probabilitas kelas melalui linear dan softmax.}
@@ -1685,11 +745,11 @@ dengan keyakinan 79.5\%.
 \subsubsection{Perhitungan \textit{Loss Function} (Cross-Entropy)}
  
 \vspace{0.5cm}
-\begin{equation}
+\begin{equation*}
   \mathcal{L}_{\mathrm{CE}}
   = -\frac{1}{B}\sum_{b=1}^{B}\sum_{k=1}^{K}
     y_{b,k}\,\log P(\hat{y}=k\mid\mathbf{v}_b)
-\end{equation}
+\end{equation*}
 \myequations{\textit{Loss function} cross-entropy}
 \vspace{0.5cm}
  
@@ -1748,7 +808,7 @@ model.
 \subsubsection{Perhitungan Optimasi AdamW}
  
 \vspace{0.5cm}
-\begin{equation}
+\begin{equation*}
 \begin{aligned}
   \mathbf{m}_t &= \beta_1\mathbf{m}_{t-1}+(1-\beta_1)\nabla_\theta\mathcal{L} \\
   \mathbf{v}_t &= \beta_2\mathbf{v}_{t-1}+(1-\beta_2)(\nabla_\theta\mathcal{L})^2 \\
@@ -1760,7 +820,7 @@ model.
                 +\lambda\theta_{t-1}
               \right)
 \end{aligned}
-\end{equation}
+\end{equation*}
 \myequations{Rumus pembaruan parameter AdamW}
 \vspace{0.5cm}
  

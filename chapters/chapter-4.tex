@@ -1,4 +1,4 @@
-﻿\newpage
+\newpage
 \chapter{HASIL DAN PEMBAHASAN} \label{BabIV}
 
 Bab ini menyajikan hasil dan analisis dari seluruh tahapan penelitian, mulai dari pengumpulan data, pra-pemrosesan, pembagian dataset, konfigurasi eksperimen, hingga evaluasi performa model VideoMAE dalam mengklasifikasikan gerakan visual Bahasa Isyarat SIBI.\par
@@ -15,10 +15,11 @@ Total dataset yang berhasil dikumpulkan adalah 924 klip video dalam format MP4. 
 \centering
 \caption{Distribusi jumlah klip video per kelas dataset SIBI}
 \label{tab:4.distribusi_kelas}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|c|l|c||c|l|c|}
+\begin{tabular}{|r|l|r||r|l|r|}
 \hline
-No & Kelas & Jumlah Klip & No & Kelas & Jumlah Klip \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{No} & \multicolumn{1}{c|}{Kelas} & \multicolumn{1}{c|}{Jumlah Klip} & \multicolumn{1}{c|}{No} & \multicolumn{1}{c|}{Kelas} & \multicolumn{1}{c|}{Jumlah Klip} \\
 \hline
 1  & Aku     & 90  & 6  & Kamu    & 93 \\
 \hline
@@ -33,6 +34,7 @@ No & Kelas & Jumlah Klip & No & Kelas & Jumlah Klip \\
 \multicolumn{5}{|c|}{Total} & 924 \\
 \hline
 \end{tabular}
+}
 \end{table}
 
 Distribusi antarkelas pada Tabel~\ref{tab:4.distribusi_kelas} menunjukkan jumlah sampel yang relatif seimbang, dengan rentang antara 88 klip (kelas \textit{Bawa}) hingga 99 klip (kelas \textit{Mau} dan \textit{Pulang}). Contoh frame representatif dari setiap kelas setelah proses pemburaman wajah dapat dilihat pada Lampiran~\ref{app:contoh_frame}. Keseimbangan ini penting untuk memastikan model tidak mengalami bias terhadap kelas tertentu selama pelatihan.\par
@@ -123,13 +125,25 @@ Gambar~\ref{fig:aug_contoh} menampilkan contoh satu \textit{frame} dari keempat 
 
 \begin{figure}[H]
   \centering
-  \begin{subfigure}[b]{0.22\textwidth}
+  \fbox{\begin{minipage}{0.97\linewidth}
+\centering
+\fbox{\begin{minipage}{0.97\linewidth}
+\centering
+\fbox{\begin{minipage}{0.97\linewidth}
+\centering
+\fbox{\begin{minipage}{0.97\linewidth}
+\centering
+\begin{subfigure}[b]{0.22\textwidth}
     \centering
     \includegraphics[width=\textwidth]{figure/aug_orig.jpg}
     \caption{Asli}
     \label{fig:aug_orig}
   \end{subfigure}
-  \hfill
+\end{minipage}}
+\end{minipage}}
+\end{minipage}}
+\end{minipage}}
+\hfill
   \begin{subfigure}[b]{0.22\textwidth}
     \centering
     \includegraphics[width=\textwidth]{figure/aug_inv.jpg}
@@ -168,10 +182,11 @@ Pada setiap fold, sekitar 80\% dari total data digunakan sebagai data latih ($\a
 \centering
 \caption{Pembagian data per fold pada skema \textit{Stratified 5-Fold Cross Validation}}
 \label{tab:4.fold_split}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|c|c|c|}
+\begin{tabular}{|r|r|r|}
 \hline
-Fold & Data Latih & Data Validasi \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{Fold} & \multicolumn{1}{c|}{Data Latih} & \multicolumn{1}{c|}{Data Validasi} \\
 \hline
 1 & 739 & 185 \\
 \hline
@@ -183,9 +198,10 @@ Fold & Data Latih & Data Validasi \\
 \hline
 5 & 740 & 184 \\
 \hline
-Total & \multicolumn{2}{c|}{924} \\
+Total & \multicolumn{2}{r|}{924} \\
 \hline
 \end{tabular}
+}
 \end{table}
 
 Pembagian fold dilaksanakan menggunakan \texttt{StratifiedKFold} dari \textit{library} scikit-learn dengan pendekatan \textit{split-first}, yaitu pembagian dilakukan terlebih dahulu pada klip asli sebelum augmentasi diterapkan. Pendekatan ini mencegah kebocoran data (\textit{data leakage}), yang memungkinkan klip asli dan versi augmentasinya masuk ke \textit{fold} yang berbeda sehingga model secara tidak langsung ``melihat'' data validasi selama pelatihan. Kode~\ref{lst:kfold} menunjukkan implementasi pembagian dataset.\par
@@ -251,10 +267,11 @@ Seluruh eksperimen pelatihan dijalankan pada platform komputasi awan RunPod meng
 \centering
 \caption{Konfigurasi umum yang berlaku pada seluruh eksperimen}
 \label{tab:4.umum_config}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{tabular}{|l|l|}
 \hline
-\multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{c|}{\textbf{Nilai}} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{c|}{\textbf{Nilai}} \\
 \hline
 Jumlah kelas              & 10 \\
 \hline
@@ -271,6 +288,7 @@ Skema validasi            & \textit{Stratified 5-Fold Cross Validation} \\
 \textit{Early stopping}   & Aktif \\
 \hline
 \end{tabular}
+}
 \end{table}
 
 Secara keseluruhan terdapat 12 eksperimen utama VideoMAE (E1--E12) serta dua model pembanding (ViViT dan I3D) yang dirancang secara bertahap untuk menjawab pertanyaan penelitian. Gambaran umum rancangan seluruh eksperimen telah disajikan pada Tabel~\ref{tab:3.rancangan_eksperimen} di Bab~\ref{BabIII}.\par
@@ -432,26 +450,28 @@ Pada bagian ini, empat konfigurasi model VideoMAE dibandingkan untuk menentukan 
 \centering
 \caption{Konfigurasi eksperimen perbandingan \textit{backbone} dan dataset \textit{pre-train}}
 \label{tab:4.s1_config}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|l|r|r|r|r|}
+\begin{tabular}{|l|l|l|l|l|}
 \hline
-\multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{c|}{\textbf{E1}} & \multicolumn{1}{c|}{\textbf{E2}} & \multicolumn{1}{c|}{\textbf{E3}} & \multicolumn{1}{c|}{\textbf{E4}} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{c|}{\textbf{E1}} & \multicolumn{1}{c|}{\textbf{E2}} & \multicolumn{1}{c|}{\textbf{E3}} & \multicolumn{1}{c|}{\textbf{E4}} \\
 \hline
 \textit{Backbone} & ViT-Small & ViT-Base & ViT-Small & ViT-Base \\
 \hline
 Dataset \textit{Pre-train} & Kinetics-400 & Kinetics-400 & SSV2 & SSV2 \\
 \hline
-Strategi Pelatihan & \multicolumn{4}{c|}{\textit{Fine-tune} 1-tahap} \\
+Strategi Pelatihan & \multicolumn{4}{l|}{\textit{Fine-tune} 1-tahap} \\
 \hline
-\textit{Epoch} & \multicolumn{4}{c|}{50} \\
+\textit{Epoch} & \multicolumn{1}{r|}{50} & \multicolumn{1}{r|}{50} & \multicolumn{1}{r|}{50} & \multicolumn{1}{r|}{50} \\
 \hline
-\textit{Batch Size} & \multicolumn{4}{c|}{16} \\
+\textit{Batch Size} & \multicolumn{1}{r|}{16} & \multicolumn{1}{r|}{16} & \multicolumn{1}{r|}{16} & \multicolumn{1}{r|}{16} \\
 \hline
-\textit{Learning Rate} & \multicolumn{4}{c|}{$10^{-3}$} \\
+\textit{Learning Rate} & \multicolumn{1}{r|}{$10^{-3}$} & \multicolumn{1}{r|}{$10^{-3}$} & \multicolumn{1}{r|}{$10^{-3}$} & \multicolumn{1}{r|}{$10^{-3}$} \\
 \hline
-\textit{Hyperparameter} Lain & \multicolumn{4}{c|}{Sama dengan Tabel~\ref{tab:4.umum_config}} \\
+\textit{Hyperparameter} Lain & \multicolumn{4}{l|}{Sama dengan Tabel~\ref{tab:4.umum_config}} \\
 \hline
 \end{tabular}
+}
 \end{table}
 
 Tabel~\ref{tab:4.s1_fold} menampilkan nilai \textit{Best Val Acc@1} pada setiap fold untuk keempat konfigurasi eksperimen, sedangkan Tabel~\ref{tab:4.s1_rekap} merangkum rata-rata akurasi fold beserta metrik evaluasi gabungan lainnya.\par
@@ -460,10 +480,11 @@ Tabel~\ref{tab:4.s1_fold} menampilkan nilai \textit{Best Val Acc@1} pada setiap 
 \centering
 \caption{Nilai \textit{Best Val Acc@1} (\%) per fold dan ringkasan hasil eksperimen E1--E4}
 \label{tab:4.s1_fold}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|c|r|r|r|r|r|r|r|}
+\begin{tabular}{|l|r|r|r|r|r|r|r|}
 \hline
-Kode & \multicolumn{1}{c|}{Fold 1} & \multicolumn{1}{c|}{Fold 2} & \multicolumn{1}{c|}{Fold 3} & \multicolumn{1}{c|}{Fold 4} & \multicolumn{1}{c|}{Fold 5} & \multicolumn{1}{c|}{\makecell[c]{Rata-\\rata}} & \multicolumn{1}{c|}{Terbaik} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{Kode} & \multicolumn{1}{c|}{Fold 1} & \multicolumn{1}{c|}{Fold 2} & \multicolumn{1}{c|}{Fold 3} & \multicolumn{1}{c|}{Fold 4} & \multicolumn{1}{c|}{Fold 5} & \multicolumn{1}{c|}{\makecell[c]{Rata-\\rata}} & \multicolumn{1}{c|}{Terbaik} \\
 \hline
 \rowcolor{highlightpink}E1 & 24.32 & 25.54 & 23.78 & 28.65 & 23.24 & 25.11 & 28.65 \\
 \hline
@@ -474,16 +495,18 @@ E2 & 31.35 & 27.17 & 30.81 & 34.05 & 27.03 & 30.08 & 34.05 \\
 E4 & 38.38 & 32.61 & 24.86 & 34.59 & 35.14 & 33.12 & 38.38 \\
 \hline
 \end{tabular}
+}
 \end{table}
 
 \begin{table}[H]
 \centering
 \caption{Rekapitulasi rata-rata akurasi fold dan metrik evaluasi gabungan: E1--E4}
 \label{tab:4.s1_rekap}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|c|c|c|c|c|c|}
+\begin{tabular}{|l|l|l|r|r|r|}
 \hline
-Kode & \textit{Backbone} & \textit{Pre-train} & \makecell[c]{Rata-rata\\Acc (\%)} & \makecell[c]{\textit{Macro}\\F1 (\%)} & MAE \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Kode}} & \multicolumn{1}{c|}{\textit{\textbf{Backbone}}} & \multicolumn{1}{c|}{\textit{\textbf{Pre-train}}} & \multicolumn{1}{c|}{\makecell[c]{\textbf{Rata-rata}\\\textbf{Acc (\%)}}} & \multicolumn{1}{c|}{\makecell[c]{\textbf{\textit{Macro}}\\\textbf{F1 (\%)}}} & \multicolumn{1}{c|}{\textbf{MAE}} \\
 \hline
 E1 & ViT-Small & K400 & 25.11 & 16.16 & 2.3711 \\
 \hline
@@ -494,6 +517,7 @@ E3 & ViT-Small & SSV2 & 35.18 & 28.34 & 2.4100 \\
 E4 & ViT-Base  & SSV2 & 33.12 & 22.98 & 2.4631 \\
 \hline
 \end{tabular}
+}
 \end{table}
 
 Berdasarkan Tabel~\ref{tab:4.s1_fold} dan Tabel~\ref{tab:4.s1_rekap}, eksperimen E3 (ViT-Small + SSV2) menghasilkan performa terbaik dengan rata-rata akurasi 35.18\% dan nilai terbaik pada satu fold mencapai 42.39\%. Temuan yang menarik adalah bahwa ViT-Small secara konsisten mengungguli ViT-Base ketika menggunakan dataset \textit{pre-train} yang sama: E3 lebih baik dari E4 (35.18\% vs. 33.12\%), dan E1 lebih buruk dari E2 (25.11\% vs. 30.08\%) hanya ketika domain \textit{pre-train} kurang relevan (K400). Fenomena ini mengindikasikan bahwa pada ukuran dataset SIBI yang terbatas, model yang lebih kecil (ViT-Small) memiliki risiko \textit{overfitting} yang lebih rendah sehingga menghasilkan generalisasi yang lebih baik. Lebih lanjut, pengaruh dataset \textit{pre-train} tampak lebih dominan dibandingkan ukuran \textit{backbone}: selisih antara SSV2 dan K400 pada ViT-Small adalah 10.07 poin persentase (E3 vs. E1), sedangkan perbedaan antar backbone pada SSV2 hanya 2.06 poin persentase (E3 vs. E4). Nilai \textit{Macro} F1 E3 (28.34\%) juga tertinggi, mengindikasikan kemampuan diskriminasi antar kelas yang lebih merata dibandingkan konfigurasi lainnya.\par
@@ -502,7 +526,7 @@ Gambar~\ref{fig:4.lc_e3} menampilkan kurva pelatihan rata-rata (\textit{mean lea
 
 \begin{figure}[H]
 \centering
-\fbox{\includegraphics[width=0.95\textwidth]{figure/lc_vits_ssv2.png}}
+\includegraphics[width=0.95\textwidth]{figure/lc_vits_ssv2.png}
 \caption{Kurva pelatihan rata-rata eksperimen E3 (ViT-Small + SSV2)}
 \label{fig:4.lc_e3}
 \end{figure}
@@ -515,16 +539,14 @@ Tabel~\ref{tab:4.s1_perkelas} menyajikan laporan klasifikasi per kelas gabungan 
 \centering
 \caption{Laporan klasifikasi per kelas (gabungan semua fold): E1--E4}
 \label{tab:4.s1_perkelas}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|l|rrr|rrr|rrr|rrr|}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{|l|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|}
 \hline
-\multirow{2}{*}{Kelas} &
-  \multicolumn{3}{c|}{E1 (ViT-S + K400)} &
-  \multicolumn{3}{c|}{E2 (ViT-B + K400)} &
-  \multicolumn{3}{c|}{E3 (ViT-S + SSV2)} &
-  \multicolumn{3}{c|}{E4 (ViT-B + SSV2)} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Kelas}}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E1 (ViT-S + K400)}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E2 (ViT-B + K400)}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E3 (ViT-S + SSV2)}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E4 (ViT-B + SSV2)}} \\
 \cline{2-13}
- & \multicolumn{1}{c|}{P} & \multicolumn{1}{c|}{R} & \multicolumn{1}{c|}{F1} & \multicolumn{1}{c|}{P} & \multicolumn{1}{c|}{R} & \multicolumn{1}{c|}{F1} & \multicolumn{1}{c|}{P} & \multicolumn{1}{c|}{R} & \multicolumn{1}{c|}{F1} & \multicolumn{1}{c|}{P} & \multicolumn{1}{c|}{R} & \multicolumn{1}{c|}{F1} \\
+ & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} \\
 \hline
 Aku     & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.38 & 0.06 & 0.10 & 0.00 & 0.00 & 0.00 \\
 Bapak   & 0.27 & 0.28 & 0.27 & 0.20 & 0.77 & 0.32 & 0.30 & 0.57 & 0.39 & 0.27 & 0.58 & 0.37 \\
@@ -539,7 +561,9 @@ Suka    & 0.36 & 0.04 & 0.08 & 0.29 & 0.08 & 0.12 & 0.34 & 0.24 & 0.28 & 0.16 & 
 \hline
 \textit{Macro} Avg & 0.18 & 0.24 & 0.17 & 0.30 & 0.29 & 0.24 & 0.35 & 0.32 & 0.29 & 0.28 & 0.29 & 0.24 \\
 \hline
-\end{tabular}
+\end{tabular}%
+}
+}
 \end{table}
 
 Analisis per kelas pada Tabel~\ref{tab:4.s1_perkelas} mengungkapkan beberapa pola yang konsisten di seluruh konfigurasi. Kelas \textit{Bawa} secara konsisten memiliki \textit{recall} tertinggi di semua model (0.88--0.99), mengindikasikan bahwa gestur ``Bawa'' memiliki karakteristik visual yang paling mudah dikenali oleh model karena gerakan tangannya yang distingtif dan konsisten antar penutur. Sebaliknya, kelas \textit{Aku} hampir tidak dapat dikenali oleh tiga dari empat konfigurasi (F1 mendekati nol pada E1, E2, dan E4), kemungkinan disebabkan oleh kemiripan visual gestur ini dengan kelas lain atau tingginya variasi antar penutur. Eksperimen E3 menunjukkan keunggulan pada kelas \textit{Guru} (F1 0.43 vs. 0.00--0.14 pada konfigurasi lain) dan \textit{Suka} (F1 0.28 vs. 0.08--0.12), mengindikasikan bahwa representasi spasio-temporal dari SSV2 membantu model menangkap pola temporal yang lebih halus pada gestur-gestur tersebut. Kelas \textit{Kamu} tetap sulit dikenali di semua konfigurasi (F1 0.00--0.17), yang mungkin disebabkan oleh ambiguitas visual antara gestur ini dengan beberapa kelas lainnya. Pola asimetri presisi-\textit{recall} pada E2 untuk kelas \textit{Guru} (P=0.50, R=0.01) menunjukkan bahwa ViT-Base dengan K400 hanya mampu memprediksi kelas ini dalam kasus yang sangat jelas, sementara mayoritas sampel ``Guru'' salah diklasifikasikan sebagai kelas lain.\par
@@ -549,7 +573,7 @@ Gambar~\ref{fig:4.cm_e3} menampilkan \textit{confusion matrix} gabungan seluruh 
 
 \begin{figure}[H]
 \centering
-\fbox{\includegraphics[width=0.95\textwidth]{figure/cm_vits_ssv2_new_font.png}}
+\includegraphics[width=0.95\textwidth]{figure/cm_vits_ssv2_new_font.png}
 \caption{\textit{Confusion matrix} gabungan semua fold eksperimen E3 (ViT-Small + SSV2)}
 \label{fig:4.cm_e3}
 \end{figure}
@@ -570,28 +594,30 @@ Bagian ini mengevaluasi dampak bobot \textit{pre-train} VideoMAE terhadap perfor
 \centering
 \caption{Konfigurasi eksperimen perbandingan strategi pelatihan}
 \label{tab:4.s2_config}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|l|c|c|c|}
+\begin{tabular}{|l|l|l|l|}
 \hline
-\multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{c|}{\textbf{E5}} & \multicolumn{1}{c|}{\textbf{E6}} & \multicolumn{1}{c|}{\textbf{E7}} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{c|}{\textbf{E5}} & \multicolumn{1}{c|}{\textbf{E6}} & \multicolumn{1}{c|}{\textbf{E7}} \\
 \hline
-Strategi Pelatihan & \makecell[c]{\textit{Two-Stage}\\\textit{Pre-train}} & \makecell[c]{\textit{Two-Stage}\\\textit{Scratch}} & \makecell[c]{\textit{Single-Stage}\\\textit{Scratch}} \\
+Strategi Pelatihan & \makecell[l]{\textit{Two-Stage}\\\textit{Pre-train}} & \makecell[l]{\textit{Two-Stage}\\\textit{Scratch}} & \makecell[l]{\textit{Single-Stage}\\\textit{Scratch}} \\
 \hline
 Inisialisasi & Bobot SSV2 & Acak & Acak \\
 \hline
-\textit{Epoch Stage} 1 & 5 & 5 & {--} \\
+\textit{Epoch Stage} 1 & \multicolumn{1}{r|}{5} & \multicolumn{1}{r|}{5} & {--} \\
 \hline
-\textit{Epoch Stage} 2 & \multicolumn{3}{c|}{50} \\
+\textit{Epoch Stage} 2 & \multicolumn{1}{r|}{50} & \multicolumn{1}{r|}{50} & \multicolumn{1}{r|}{50} \\
 \hline
-\textit{Learning Rate Stage} 1 & $10^{-3}$ & $10^{-3}$ & {--} \\
+\textit{Learning Rate Stage} 1 & \multicolumn{1}{r|}{$10^{-3}$} & \multicolumn{1}{r|}{$10^{-3}$} & {--} \\
 \hline
-\textit{Learning Rate Stage} 2 & $10^{-5}$ & $10^{-5}$ & $10^{-3}$ \\
+\textit{Learning Rate Stage} 2 & \multicolumn{1}{r|}{$10^{-5}$} & \multicolumn{1}{r|}{$10^{-5}$} & \multicolumn{1}{r|}{$10^{-3}$} \\
 \hline
-\textit{Batch Size} & \multicolumn{3}{c|}{16} \\
+\textit{Batch Size} & \multicolumn{1}{r|}{16} & \multicolumn{1}{r|}{16} & \multicolumn{1}{r|}{16} \\
 \hline
-\textit{Hyperparameter} Lain & \multicolumn{3}{c|}{Sama dengan Tabel~\ref{tab:4.umum_config}} \\
+\textit{Hyperparameter} Lain & \multicolumn{3}{l|}{Sama dengan Tabel~\ref{tab:4.umum_config}} \\
 \hline
 \end{tabular}
+}
 \end{table}
 
 Pemilihan hiperparameter pada strategi \textit{two-stage pre-train} didasarkan pada peran masing-masing tahap yang berbeda secara fundamental. Pada \textit{stage} 1, seluruh lapisan \textit{backbone} (encoder Transformer) dibekukan (\textit{frozen}) sehingga hanya bobot \textit{classification head}, sebuah lapisan linear yang diinisialisasi secara acak, yang diperbarui. Karena \textit{head} belum memiliki representasi awal yang bermakna, \textit{learning rate} tinggi $10^{-3}$ diperlukan agar lapisan ini dapat konvergen dengan cepat. Dengan \textit{backbone} dalam kondisi beku, penggunaan LR tinggi tidak berisiko merusak representasi fitur yang telah dipelajari selama \textit{pre-training} SSV2. Durasi 5 epoch dipilih karena \textit{classification head} hanya terdiri dari satu lapisan linear dengan jumlah parameter yang kecil, sehingga nilai epoch yang lebih banyak tidak memberikan manfaat tambahan dan justru berisiko menyebabkan \textit{overfitting} pada fitur \textit{backbone} yang masih beku. Tujuan \textit{stage} 1 semata-mata adalah menginisialisasi \textit{head} dengan pemetaan kelas yang cukup baik sebagai titik awal \textit{stage} 2.
@@ -602,10 +628,11 @@ Pada \textit{stage} 2, seluruh lapisan dibebaskan (\textit{unfrozen}) dan model 
 \centering
 \caption{Nilai \textit{Best Val Acc@1} (\%) per fold dan ringkasan hasil eksperimen E5--E7}
 \label{tab:4.s2_fold}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|c|r|r|r|r|r|r|r|}
+\begin{tabular}{|l|r|r|r|r|r|r|r|}
 \hline
-Kode & \multicolumn{1}{c|}{Fold 1} & \multicolumn{1}{c|}{Fold 2} & \multicolumn{1}{c|}{Fold 3} & \multicolumn{1}{c|}{Fold 4} & \multicolumn{1}{c|}{Fold 5} & \multicolumn{1}{c|}{\makecell[c]{Rata-\\rata}} & \multicolumn{1}{c|}{Terbaik} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Kode}} & \multicolumn{1}{c|}{\textbf{Fold 1}} & \multicolumn{1}{c|}{\textbf{Fold 2}} & \multicolumn{1}{c|}{\textbf{Fold 3}} & \multicolumn{1}{c|}{\textbf{Fold 4}} & \multicolumn{1}{c|}{\textbf{Fold 5}} & \multicolumn{1}{c|}{\makecell[c]{\textbf{Rata-}\\\textbf{rata}}} & \multicolumn{1}{c|}{\textbf{Terbaik}} \\
 \hline
 \rowcolor{highlightgreen}E5 & 62.16 & 63.59 & 62.16 & 70.27 & 61.08 & 63.85 & 70.27 \\
 \hline
@@ -614,6 +641,7 @@ Kode & \multicolumn{1}{c|}{Fold 1} & \multicolumn{1}{c|}{Fold 2} & \multicolumn{
 E7 & 11.35 & 13.04 & 11.35 & 11.89 & 12.43 & 12.01 & 13.04 \\
 \hline
 \end{tabular}
+}
 \end{table}
 
 Tabel~\ref{tab:4.s2_fold} menunjukkan kesenjangan performa yang sangat besar antara strategi \textit{pre-train} (E5) dan kedua strategi \textit{scratch} (E6, E7). Eksperimen E5 mencapai rata-rata akurasi 63.85\%, meningkat 28.67 poin persentase dari \textit{baseline} E3, sementara E6 dan E7 hanya menghasilkan akurasi di kisaran 11--13\%, yang praktis tidak berbeda dari prediksi acak untuk 10 kelas (10\%). Konsistensi performa E5 di seluruh fold (61--70\%) berbanding terbalik dengan E6 dan E7 yang stagnan di angka rendah tanpa variasi berarti antar fold. Perbandingan E6 (\textit{two-stage scratch}) dan E7 (\textit{single-stage scratch}) yang hampir setara (11.36\% vs. 12.01\%) mengindikasikan bahwa skema pelatihan dua tahap tidak otomatis memberi manfaat jika \textit{backbone} belum memiliki representasi yang bermakna. Keunggulan E5 tidak hanya berasal dari bobot \textit{pre-train} SSV2, tetapi juga dari tahap \textit{linear probing} pada \textit{stage} 1 yang lebih dahulu menyesuaikan \textit{classification head} ke kelas-kelas SIBI sebelum \textit{fine-tuning} penuh dilakukan. Sebaliknya, pada E6, \textit{linear probing} diterapkan di atas \textit{backbone} acak yang dibekukan, sehingga \textit{head} hanya menerima fitur yang belum informatif dan tidak memperoleh titik awal yang kuat untuk \textit{stage} 2.\par
@@ -623,7 +651,7 @@ Gambar~\ref{fig:4.lc_e5} menampilkan kurva pelatihan rata-rata eksperimen E5 (\t
 
 \begin{figure}[H]
 \centering
-\fbox{\includegraphics[width=0.95\textwidth]{figure/lc_vits_ssv2_twostage.png}}
+\includegraphics[width=0.95\textwidth]{figure/lc_vits_ssv2_twostage.png}
 \caption{Kurva pelatihan rata-rata eksperimen E5 (\textit{Two-Stage Pre-train})}
 \label{fig:4.lc_e5}
 \end{figure}
@@ -634,7 +662,7 @@ Gambar~\ref{fig:4.lc_e6} dan Gambar~\ref{fig:4.lc_e7} menampilkan kurva pelatiha
 
 \begin{figure}[H]
 \centering
-\fbox{\includegraphics[width=0.95\textwidth]{figure/lc_vits_ssv2_twostage_scratch.png}}
+\includegraphics[width=0.95\textwidth]{figure/lc_vits_ssv2_twostage_scratch.png}
 \caption{Kurva pelatihan rata-rata eksperimen E6 (\textit{Two-Stage Scratch})}
 \label{fig:4.lc_e6}
 \end{figure}
@@ -643,7 +671,7 @@ Kurva pelatihan E6 pada Gambar~\ref{fig:4.lc_e6} memperlihatkan pola yang sama s
 
 \begin{figure}[H]
 \centering
-\fbox{\includegraphics[width=0.95\textwidth]{figure/lc_vits_ssv2_singlestage_scratch.png}}
+\includegraphics[width=0.95\textwidth]{figure/lc_vits_ssv2_singlestage_scratch.png}
 \caption{Kurva pelatihan rata-rata eksperimen E7 (\textit{Single-Stage Scratch})}
 \label{fig:4.lc_e7}
 \end{figure}
@@ -658,10 +686,11 @@ Tabel~\ref{tab:4.s2_perkelas} menyajikan laporan klasifikasi per kelas untuk eks
 \centering
 \caption{Laporan klasifikasi per kelas (gabungan semua fold) eksperimen E5}
 \label{tab:4.s2_perkelas}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{tabular}{|l|r|r|r|r|}
 \hline
-Kelas & \multicolumn{1}{c|}{Presisi} & \multicolumn{1}{c|}{\textit{Recall}} & \multicolumn{1}{c|}{F1-\textit{Score}} & \multicolumn{1}{c|}{\textit{Support}} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{Kelas} & \multicolumn{1}{c|}{Presisi} & \multicolumn{1}{c|}{\textit{Recall}} & \multicolumn{1}{c|}{F1-\textit{Score}} & \multicolumn{1}{c|}{\textit{Support}} \\
 \hline
 Aku     & 0.66 & 0.70 & 0.68 & 90 \\
 Bapak   & 0.81 & 0.52 & 0.64 & 90 \\
@@ -677,6 +706,7 @@ Suka    & 0.58 & 0.21 & 0.31 & 90 \\
 \textit{Macro} Avg & 0.65 & 0.61 & 0.60 & 924 \\
 \hline
 \end{tabular}
+}
 \end{table}
 
 Peningkatan performa yang sangat signifikan pada E5 dibandingkan E3 juga tercermin jelas pada level per kelas. Kelas \textit{Aku} yang sebelumnya hampir tidak dapat dikenali pada E3 (F1=0.10) kini memiliki F1-\textit{score} 0.68 pada E5, sedangkan kelas \textit{Guru} meningkat dari 0.43 menjadi 0.82. Kelas \textit{Bawa} mempertahankan \textit{recall} sempurna (1.00), mengonfirmasi bahwa gestur ini memang memiliki karakteristik visual yang paling kuat dan mudah dipelajari. Di sisi lain, kelas \textit{Suka} (F1=0.31) dan \textit{Pulang} (F1=0.49) masih menunjukkan performa yang relatif lebih rendah, mengindikasikan bahwa kedua gestur ini memiliki variasi antar penutur yang lebih tinggi atau kemiripan visual dengan kelas lain yang lebih sulit dibedakan. Kelas \textit{Sekolah} menunjukkan pola asimetri yang menarik, presisi tinggi (0.82) namun \textit{recall} rendah (0.35), yang berarti model sangat selektif dalam memprediksi kelas ini, hanya memprediksinya ketika sinyal visual sangat jelas, sehingga banyak sampel ``Sekolah'' yang tidak terdeteksi.\par
@@ -685,7 +715,7 @@ Gambar~\ref{fig:4.cm_e5} menampilkan \textit{confusion matrix} gabungan seluruh 
 
 \begin{figure}[H]
 \centering
-\fbox{\includegraphics[width=0.95\textwidth]{figure/cm_vits_ssv2_twostage_new_font.png}}
+\includegraphics[width=0.95\textwidth]{figure/cm_vits_ssv2_twostage_new_font.png}
 \caption{\textit{Confusion matrix} gabungan semua fold eksperimen E5 (\textit{Two-Stage Pre-train})}
 \label{fig:4.cm_e5}
 \end{figure}
@@ -704,38 +734,41 @@ Bagian ini menganalisis pengaruh durasi pelatihan pada \textit{stage} 2 terhadap
 \centering
 \caption{Konfigurasi eksperimen analisis jumlah \textit{epoch} \textit{stage} 2}
 \label{tab:4.s3_config}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|l|c|c|c|}
+\begin{tabular}{|l|l|l|l|}
 \hline
-\multicolumn{1}{|c|}{\textbf{Parameter}} & \makecell[c]{\hspace{0.8cm}\textbf{E8}\hspace{0.8cm}} & \makecell[c]{\hspace{0.8cm}\textbf{E5}\hspace{0.8cm}} & \makecell[c]{\hspace{0.8cm}\textbf{E9}\hspace{0.8cm}} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{c|}{\textbf{E8}} & \multicolumn{1}{c|}{\textbf{E5}} & \multicolumn{1}{c|}{\textbf{E9}} \\
 \hline
-Strategi Pelatihan & \multicolumn{3}{c|}{\textit{Two-Stage Pre-train}} \\
+Strategi Pelatihan & \multicolumn{3}{l|}{\textit{Two-Stage Pre-train}} \\
 \hline
-Inisialisasi & \multicolumn{3}{c|}{Bobot SSV2} \\
+Inisialisasi & \multicolumn{3}{l|}{Bobot SSV2} \\
 \hline
-\textit{Epoch Stage} 1 & \multicolumn{3}{c|}{5} \\
+\textit{Epoch Stage} 1 & \multicolumn{1}{r|}{5} & \multicolumn{1}{r|}{5} & \multicolumn{1}{r|}{5} \\
 \hline
-\textit{Epoch Stage} 2 & 10 & 50 & 100 \\
+\textit{Epoch Stage} 2 & \multicolumn{1}{r|}{10} & \multicolumn{1}{r|}{50} & \multicolumn{1}{r|}{100} \\
 \hline
-\textit{Learning Rate Stage} 1 & \multicolumn{3}{c|}{$10^{-3}$} \\
+\textit{Learning Rate Stage} 1 & \multicolumn{1}{r|}{$10^{-3}$} & \multicolumn{1}{r|}{$10^{-3}$} & \multicolumn{1}{r|}{$10^{-3}$} \\
 \hline
-\textit{Learning Rate Stage} 2 & \multicolumn{3}{c|}{$10^{-5}$} \\
+\textit{Learning Rate Stage} 2 & \multicolumn{1}{r|}{$10^{-5}$} & \multicolumn{1}{r|}{$10^{-5}$} & \multicolumn{1}{r|}{$10^{-5}$} \\
 \hline
-\textit{Batch Size} & \multicolumn{3}{c|}{16} \\
+\textit{Batch Size} & \multicolumn{1}{r|}{16} & \multicolumn{1}{r|}{16} & \multicolumn{1}{r|}{16} \\
 \hline
-\textit{Hyperparameter} Lain & \multicolumn{3}{c|}{Sama dengan Tabel~\ref{tab:4.umum_config}} \\
+\textit{Hyperparameter} Lain & \multicolumn{3}{l|}{Sama dengan Tabel~\ref{tab:4.umum_config}} \\
 \hline
 \end{tabular}
+}
 \end{table}
 
 \begin{table}[H]
 \centering
 \caption{Nilai \textit{Best Val Acc@1} (\%) per fold dan ringkasan hasil eksperimen E8, E5, dan E9}
 \label{tab:4.s3_fold}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|c|r|r|r|r|r|r|r|}
+\begin{tabular}{|l|r|r|r|r|r|r|r|}
 \hline
-Kode & \multicolumn{1}{c|}{Fold 1} & \multicolumn{1}{c|}{Fold 2} & \multicolumn{1}{c|}{Fold 3} & \multicolumn{1}{c|}{Fold 4} & \multicolumn{1}{c|}{Fold 5} & \multicolumn{1}{c|}{\makecell[c]{Rata-\\rata}} & \multicolumn{1}{c|}{Terbaik} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{Kode} & \multicolumn{1}{c|}{Fold 1} & \multicolumn{1}{c|}{Fold 2} & \multicolumn{1}{c|}{Fold 3} & \multicolumn{1}{c|}{Fold 4} & \multicolumn{1}{c|}{Fold 5} & \multicolumn{1}{c|}{\makecell[c]{Rata-\\rata}} & \multicolumn{1}{c|}{Terbaik} \\
 \hline
 \rowcolor{highlightpink}E8  & 54.59 & 62.50 & 57.84 & 66.49 & 60.00 & 60.28 & 66.49 \\
 \hline
@@ -744,6 +777,7 @@ E5  & 62.16 & 63.59 & 62.16 & 70.27 & 61.08 & 63.85 & 70.27 \\
 \rowcolor{highlightgreen}E9 & 65.41 & 66.30 & 64.32 & 70.81 & 65.95 & 66.56 & 70.81 \\
 \hline
 \end{tabular}
+}
 \end{table}
 
 Tabel~\ref{tab:4.s3_fold} menunjukkan tren peningkatan yang konsisten seiring bertambahnya jumlah epoch pada \textit{stage} 2. Konfigurasi E8 (10 epoch) menghasilkan rata-rata akurasi 60.28\%, meningkat menjadi 63.85\% pada E5 (50 epoch), dan mencapai 66.56\% pada E9 (100 epoch). Peningkatan sebesar 6.28 poin persentase dari E8 ke E9 mengindikasikan bahwa model masih berada dalam fase peningkatan aktif dan belum mencapai titik kejenuhan dalam rentang epoch yang diuji. Yang menarik adalah Fold 4 secara konsisten menghasilkan nilai tertinggi di semua konfigurasi (66.49\%, 70.27\%, dan 70.81\%), mengindikasikan bahwa distribusi data validasi pada fold ini lebih mudah dikenali dibandingkan fold lainnya. Perbedaan antar fold yang cukup besar pada E8 (54.59\%--66.49\%) menyempit pada E9 (64.32\%--70.81\%), menunjukkan bahwa epoch yang lebih banyak tidak hanya meningkatkan rata-rata akurasi tetapi juga menghasilkan performa yang lebih konsisten antar fold.\par
@@ -753,7 +787,7 @@ Gambar~\ref{fig:4.lc_e8} dan Gambar~\ref{fig:4.lc_e9} menampilkan kurva pelatiha
 
 \begin{figure}[H]
 \centering
-\fbox{\includegraphics[width=0.95\textwidth]{figure/lc_vits_ssv2_twostage_10ep.png}}
+\includegraphics[width=0.95\textwidth]{figure/lc_vits_ssv2_twostage_10ep.png}
 \caption{Kurva pelatihan rata-rata eksperimen E8 (\textit{Stage} 2 = 10 epoch)}
 \label{fig:4.lc_e8}
 \end{figure}
@@ -763,7 +797,7 @@ Kurva E8 pada Gambar~\ref{fig:4.lc_e8} memperlihatkan bahwa model masih dalam fa
 
 \begin{figure}[H]
 \centering
-\fbox{\includegraphics[width=0.95\textwidth]{figure/lc_vits_ssv2_twostage_stage2_100ep.png}}
+\includegraphics[width=0.95\textwidth]{figure/lc_vits_ssv2_twostage_stage2_100ep.png}
 \caption{Kurva pelatihan rata-rata eksperimen E9 (\textit{Stage} 2 = 100 epoch)}
 \label{fig:4.lc_e9}
 \end{figure}
@@ -776,15 +810,13 @@ Tabel~\ref{tab:4.s3_perkelas} menyajikan perbandingan laporan klasifikasi per ke
 \centering
 \caption{Laporan klasifikasi per kelas (gabungan semua fold): E8, E5, dan E9}
 \label{tab:4.s3_perkelas}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
 \begin{tabular}{|l|rrr|rrr|rrr|}
 \hline
-\multirow{2}{*}{Kelas} &
-  \multicolumn{3}{c|}{E8 (10 epoch)} &
-  \multicolumn{3}{c|}{E5 (50 epoch)} &
-  \multicolumn{3}{c|}{E9 (100 epoch)} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Kelas}}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E8 (10 epoch)}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E5 (50 epoch)}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E9 (100 epoch)}} \\
 \cline{2-10}
- & \multicolumn{1}{c|}{P} & \multicolumn{1}{c|}{R} & \multicolumn{1}{c|}{F1} & \multicolumn{1}{c|}{P} & \multicolumn{1}{c|}{R} & \multicolumn{1}{c|}{F1} & \multicolumn{1}{c|}{P} & \multicolumn{1}{c|}{R} & \multicolumn{1}{c|}{F1} \\
+ & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} \\
 \hline
 Aku     & 0.52 & 0.64 & 0.58 & 0.66 & 0.70 & 0.68 & 0.74 & 0.72 & 0.73 \\
 Bapak   & 0.65 & 0.62 & 0.64 & 0.81 & 0.52 & 0.64 & 0.90 & 0.50 & 0.64 \\
@@ -800,6 +832,7 @@ Suka    & 0.42 & 0.16 & 0.23 & 0.58 & 0.21 & 0.31 & 0.67 & 0.43 & 0.53 \\
 \textit{Macro} Avg & 0.58 & 0.56 & 0.54 & 0.65 & 0.61 & 0.60 & 0.71 & 0.68 & 0.67 \\
 \hline
 \end{tabular}
+}
 \end{table}
 
 Tabel~\ref{tab:4.s3_perkelas} memperlihatkan bahwa peningkatan epoch secara konsisten memperbaiki metrik di hampir seluruh kelas. Kelas yang paling signifikan meningkat dari E8 ke E9 adalah \textit{Suka} (F1: 0.23 $\rightarrow$ 0.53), \textit{Pulang} (0.43 $\rightarrow$ 0.60), dan \textit{Kamu} (0.49 $\rightarrow$ 0.69), ketiga kelas ini merupakan kelas yang relatif sulit pada eksperimen-eksperimen sebelumnya, dan hasilnya menunjukkan bahwa epoch yang lebih banyak memungkinkan model untuk mempelajari pola diskriminatif yang lebih halus dari gestur-gestur tersebut. Kelas \textit{Bawa} mempertahankan \textit{recall} sempurna (1.00) di seluruh konfigurasi, mengonfirmasi bahwa gestur ini memiliki karakteristik visual yang sangat kuat sehingga mudah dipelajari bahkan dengan durasi pelatihan yang singkat. Kelas \textit{Bapak} menunjukkan pola yang menarik, presisinya terus meningkat (0.65 $\rightarrow$ 0.90) namun \textit{recall}-nya menurun (0.62 $\rightarrow$ 0.50) seiring bertambahnya epoch, mengindikasikan bahwa model menjadi semakin selektif dalam memprediksi kelas ini, hanya memprediksi ``Bapak'' pada kasus yang sangat jelas sehingga beberapa sampel yang ambigu diabaikan. Nilai \textit{Macro} F1 yang meningkat secara konsisten (0.54 $\rightarrow$ 0.60 $\rightarrow$ 0.67) menegaskan bahwa peningkatan epoch bermanfaat secara merata di seluruh kelas, bukan hanya pada kelas tertentu.\par
@@ -808,7 +841,7 @@ Gambar~\ref{fig:4.cm_e9} menampilkan \textit{confusion matrix} gabungan seluruh 
 
 \begin{figure}[H]
 \centering
-\fbox{\includegraphics[width=0.95\textwidth]{figure/cm_vits_ssv2_twostage_stage2_100ep_new_font.png}}
+\includegraphics[width=0.95\textwidth]{figure/cm_vits_ssv2_twostage_stage2_100ep_new_font.png}
 \caption{\textit{Confusion matrix} gabungan semua fold eksperimen E9 (\textit{Stage} 2 = 100 epoch)}
 \label{fig:4.cm_e9}
 \end{figure}
@@ -825,42 +858,46 @@ Bagian ini menganalisis pengaruh strategi \textit{sampling} frame terhadap perfo
 \centering
 \caption{Konfigurasi eksperimen perbandingan strategi \textit{sampling}}
 \label{tab:4.s4_config}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|l|c|c|}
+\begin{tabular}{|l|p{2.8cm}|p{2.8cm}|}
 \hline
-\multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{c|}{\textbf{E5}} & \multicolumn{1}{c|}{\textbf{E10}} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{c|}{\textbf{E5}} & \multicolumn{1}{c|}{\textbf{E10}} \\
 \hline
 Strategi \textit{Sampling} & \textit{Uniform} & \textit{Dense} \\
 \hline
-\textit{Epoch Stage} 1 & \multicolumn{2}{c|}{5} \\
+\textit{Epoch Stage} 1 & \multicolumn{1}{r|}{5} & \multicolumn{1}{r|}{5} \\
 \hline
-\textit{Epoch Stage} 2 & \multicolumn{2}{c|}{50} \\
+\textit{Epoch Stage} 2 & \multicolumn{1}{r|}{50} & \multicolumn{1}{r|}{50} \\
 \hline
-Jumlah \textit{Frame} & \multicolumn{2}{c|}{16} \\
+Jumlah \textit{Frame} & \multicolumn{1}{r|}{16} & \multicolumn{1}{r|}{16} \\
 \hline
-\textit{Batch Size} & \multicolumn{2}{c|}{16} \\
+\textit{Batch Size} & \multicolumn{1}{r|}{16} & \multicolumn{1}{r|}{16} \\
 \hline
-\textit{Learning Rate} & \multicolumn{2}{c|}{$10^{-3}$} \\
+\textit{Learning Rate} & \multicolumn{1}{r|}{$10^{-3}$} & \multicolumn{1}{r|}{$10^{-3}$} \\
 \hline
-\textit{Hyperparameter} Lain & \multicolumn{2}{c|}{Sama dengan Tabel~\ref{tab:4.umum_config}} \\
+\textit{Hyperparameter} Lain & \multicolumn{2}{l|}{Sama dengan Tabel~\ref{tab:4.umum_config}} \\
 \hline
 \end{tabular}
+}
 \end{table}
 
 \begin{table}[H]
 \centering
 \caption{Nilai \textit{Best Val Acc@1} (\%) per fold dan ringkasan hasil eksperimen E5 dan E10}
 \label{tab:4.s4_fold}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|c|r|r|r|r|r|r|r|}
+\begin{tabular}{|l|r|r|r|r|r|r|r|}
 \hline
-Kode & \multicolumn{1}{c|}{Fold 1} & \multicolumn{1}{c|}{Fold 2} & \multicolumn{1}{c|}{Fold 3} & \multicolumn{1}{c|}{Fold 4} & \multicolumn{1}{c|}{Fold 5} & \multicolumn{1}{c|}{\makecell[c]{Rata-\\rata}} & \multicolumn{1}{c|}{Terbaik} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{Kode} & \multicolumn{1}{c|}{Fold 1} & \multicolumn{1}{c|}{Fold 2} & \multicolumn{1}{c|}{Fold 3} & \multicolumn{1}{c|}{Fold 4} & \multicolumn{1}{c|}{Fold 5} & \multicolumn{1}{c|}{\makecell[c]{Rata-\\rata}} & \multicolumn{1}{c|}{Terbaik} \\
 \hline
 \rowcolor{highlightgreen}E5  & 62.16 & 63.59 & 62.16 & 70.27 & 61.08 & 63.85 & 70.27 \\
 \hline
 \rowcolor{highlightpink}E10 & 54.59 & 61.96 & 55.14 & 57.30 & 51.35 & 56.07 & 61.96 \\
 \hline
 \end{tabular}
+}
 \end{table}
 
 Tabel~\ref{tab:4.s4_fold} menunjukkan bahwa penggunaan \textit{dense sampling} pada E10 menyebabkan penurunan performa dibandingkan \textit{uniform sampling} pada E5 di seluruh fold tanpa pengecualian. Rata-rata akurasi menurun sebesar 7.78 poin persentase dari 63.85\% pada E5 menjadi 56.07\% pada E10. Penurunan terbesar terjadi pada Fold 4 (70.27\% menjadi 57.30\%), sedangkan penurunan terkecil terjadi pada Fold 2 (63.59\% menjadi 61.96\%). Konsistensi penurunan performa pada seluruh fold menunjukkan bahwa strategi \textit{dense sampling} kurang sesuai dengan karakteristik temporal gestur SIBI dibandingkan \textit{uniform sampling}. Nilai terbaik juga mengalami penurunan cukup besar dari 70.27\% pada E5 menjadi 61.96\% pada E10, memperlihatkan bahwa performa maksimum model ikut terdampak ketika menggunakan \textit{dense sampling}.\par
@@ -869,7 +906,7 @@ Gambar~\ref{fig:4.lc_e10} menampilkan kurva pelatihan rata-rata untuk eksperimen
 
 \begin{figure}[H]
 \centering
-\fbox{\includegraphics[width=0.95\textwidth]{figure/lc_vits_ssv2_dense.png}}
+\includegraphics[width=0.95\textwidth]{figure/lc_vits_ssv2_dense.png}
 \caption{Kurva pelatihan rata-rata eksperimen E10 (\textit{Dense Sampling})}
 \label{fig:4.lc_e10}
 \end{figure}
@@ -882,14 +919,13 @@ Tabel~\ref{tab:4.s4_perkelas} menyajikan perbandingan laporan klasifikasi per ke
 \centering
 \caption{Laporan klasifikasi per kelas (gabungan semua fold): E5 dan E10}
 \label{tab:4.s4_perkelas}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|l|rrr|rrr|}
+\begin{tabular}{|l|>{\centering\arraybackslash}p{0.9cm}|>{\centering\arraybackslash}p{0.9cm}|>{\centering\arraybackslash}p{0.9cm}|>{\centering\arraybackslash}p{0.9cm}|>{\centering\arraybackslash}p{0.9cm}|>{\centering\arraybackslash}p{0.9cm}|}
 \hline
-\multirow{2}{*}{Kelas} &
-  \multicolumn{3}{c|}{E5 (\textit{Uniform Sampling})} &
-  \multicolumn{3}{c|}{E10 (\textit{Dense Sampling})} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Kelas}}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E5 (\textit{Uniform Sampling})}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E10 (\textit{Dense Sampling})}} \\
 \cline{2-7}
- & \multicolumn{1}{c|}{P} & \multicolumn{1}{c|}{R} & \multicolumn{1}{c|}{F1} & \multicolumn{1}{c|}{P} & \multicolumn{1}{c|}{R} & \multicolumn{1}{c|}{F1} \\
+ & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} \\
 \hline
 Aku     & 0.66 & 0.70 & 0.68 & 0.78 & 0.50 & 0.61 \\
 Bapak   & 0.81 & 0.52 & 0.64 & 0.51 & 0.33 & 0.40 \\
@@ -905,6 +941,7 @@ Suka    & 0.58 & 0.21 & 0.31 & 0.38 & 0.08 & 0.14 \\
 \textit{Macro} Avg & 0.65 & 0.61 & 0.60 & 0.62 & 0.59 & 0.56 \\
 \hline
 \end{tabular}
+}
 \end{table}
 
 Perbandingan per kelas pada Tabel~\ref{tab:4.s4_perkelas} menunjukkan bahwa penggunaan \textit{dense sampling} pada E10 menyebabkan penurunan performa pada beberapa kelas dibandingkan E5. Penurunan F1-\textit{score} paling besar terjadi pada kelas \textit{Bapak}, \textit{Suka}, dan \textit{Pulang} (masing-masing 0.64$\rightarrow$0.40, 0.31$\rightarrow$0.14, dan 0.49$\rightarrow$0.39), mengindikasikan bahwa strategi \textit{dense sampling} kurang mampu menangkap pola temporal gestur yang tersebar sepanjang durasi video. Penurunan ini menunjukkan bahwa sebagian informasi penting kemungkinan tidak terambil ketika frame difokuskan hanya pada segmen tertentu secara rapat. Kelas \textit{Kamu} justru mengalami peningkatan F1 pada E10 (0.60$\rightarrow$0.70), yang mengindikasikan bahwa ciri pembeda gestur tersebut lebih terkonsentrasi pada segmen pendek sehingga lebih mudah ditangkap oleh \textit{dense sampling}. Kelas \textit{Bawa} dan \textit{Guru} juga menunjukkan performa yang relatif serupa atau sedikit lebih baik pada E10. Namun secara keseluruhan, nilai \textit{Macro} F1 tetap mengalami penurunan dari 0.60 pada E5 menjadi 0.56 pada E10, mengonfirmasi bahwa \textit{uniform sampling} memberikan performa yang lebih stabil dan merata di seluruh kelas.\par
@@ -913,7 +950,7 @@ Gambar~\ref{fig:4.cm_e10} menampilkan \textit{confusion matrix} gabungan seluruh
 
 \begin{figure}[H]
 \centering
-\fbox{\includegraphics[width=0.95\textwidth]{figure/cm_vits_ssv2_dense_new_font.png}}
+\includegraphics[width=0.95\textwidth]{figure/cm_vits_ssv2_dense_new_font.png}
 \caption{\textit{Confusion matrix} gabungan semua fold eksperimen E10 (\textit{Dense Sampling})}
 \label{fig:4.cm_e10}
 \end{figure}
@@ -932,44 +969,48 @@ Bagian ini menganalisis dampak penggunaan teknik augmentasi \textit{mixup}, \tex
 \centering
 \caption{Konfigurasi eksperimen pengaruh augmentasi: E5 dan E11}
 \label{tab:4.s5aug_config}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|l|c|c|}
+\begin{tabular}{|l|l|l|}
 \hline
-\multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{c|}{\textbf{E5}} & \multicolumn{1}{c|}{\textbf{E11}} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{c|}{\textbf{E5}} & \multicolumn{1}{c|}{\textbf{E11}} \\
 \hline
-\textit{Backbone} & \multicolumn{2}{c|}{ViT-Small} \\
+\textit{Backbone} & ViT-Small & ViT-Small \\
 \hline
-Dataset \textit{Pre-train} & \multicolumn{2}{c|}{SSV2} \\
+Dataset \textit{Pre-train} & SSV2 & SSV2 \\
 \hline
-Strategi \textit{Sampling} & \multicolumn{2}{c|}{\textit{Uniform}} \\
+Strategi \textit{Sampling} & \textit{Uniform} & \textit{Uniform} \\
 \hline
 \makecell[l]{Augmentasi\\(\textit{Mixup, CutMix, Reprob})} & Aktif & Dinonaktifkan \\
 \hline
-\textit{Epoch} (\textit{Stage} 1 / \textit{Stage} 2) & \multicolumn{2}{c|}{5 / 50} \\
+\textit{Epoch Stage} 1 / \textit{Stage} 2 & \multicolumn{1}{r|}{5 / 50} & \multicolumn{1}{r|}{5 / 50} \\
 \hline
-\textit{Batch Size} & \multicolumn{2}{c|}{16} \\
+\textit{Batch Size} & \multicolumn{1}{r|}{16} & \multicolumn{1}{r|}{16} \\
 \hline
-\textit{Learning Rate} & \multicolumn{2}{c|}{$10^{-3}$} \\
+\textit{Learning Rate} & \multicolumn{1}{r|}{$10^{-3}$} & \multicolumn{1}{r|}{$10^{-3}$} \\
 \hline
-\textit{Hyperparameter} Lain & \multicolumn{2}{c|}{Sama dengan Tabel~\ref{tab:4.umum_config}} \\
+\textit{Hyperparameter} Lain & \multicolumn{2}{l|}{Sama dengan Tabel~\ref{tab:4.umum_config}} \\
 \hline
 \end{tabular}
+}
 \end{table}
 
 \begin{table}[H]
 \centering
 \caption{Nilai \textit{Best Val Acc@1} (\%) per fold dan ringkasan hasil eksperimen E5 dan E11}
 \label{tab:4.s5aug_fold}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|c|r|r|r|r|r|r|r|}
+\begin{tabular}{|l|r|r|r|r|r|r|r|}
 \hline
-Kode & \multicolumn{1}{c|}{Fold 1} & \multicolumn{1}{c|}{Fold 2} & \multicolumn{1}{c|}{Fold 3} & \multicolumn{1}{c|}{Fold 4} & \multicolumn{1}{c|}{Fold 5} & \multicolumn{1}{c|}{\makecell[c]{Rata-\\rata}} & \multicolumn{1}{c|}{Terbaik} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{Kode} & \multicolumn{1}{c|}{Fold 1} & \multicolumn{1}{c|}{Fold 2} & \multicolumn{1}{c|}{Fold 3} & \multicolumn{1}{c|}{Fold 4} & \multicolumn{1}{c|}{Fold 5} & \multicolumn{1}{c|}{\makecell[c]{Rata-\\rata}} & \multicolumn{1}{c|}{Terbaik} \\
 \hline
 \rowcolor{highlightpink}E5  & 62.16 & 63.59 & 62.16 & 70.27 & 61.08 & 63.85 & 70.27 \\
 \hline
 \rowcolor{highlightgreen}E11 & 94.05 & 94.57 & 92.43 & 95.68 & 92.97 & 93.94 & 95.68 \\
 \hline
 \end{tabular}
+}
 \end{table}
 
 Tabel~\ref{tab:4.s5aug_fold} menunjukkan peningkatan performa yang sangat besar ketika augmentasi dinonaktifkan: E11 mencapai rata-rata akurasi 93.94\%, meningkat 30.09 poin persentase dibandingkan E5 (63.85\%). Keunggulan E11 bersifat konsisten di seluruh fold tanpa pengecualian, dengan nilai terendah E11 (92.43\% pada Fold 3) masih jauh melampaui nilai tertinggi E5 (70.27\% pada Fold 4). Stabilitas ini mengindikasikan bahwa perbedaan performa bukan disebabkan oleh variasi distribusi data antar fold, melainkan mencerminkan dampak struktural dari aktivasi augmentasi terhadap proses pembelajaran.\par
@@ -978,7 +1019,7 @@ Gambar~\ref{fig:4.lc_e11} menampilkan kurva pelatihan rata-rata eksperimen E11.\
 
 \begin{figure}[H]
 \centering
-\fbox{\includegraphics[width=0.95\textwidth]{figure/lc_vits_ssv2_uniform_nomixup.png}}
+\includegraphics[width=0.95\textwidth]{figure/lc_vits_ssv2_uniform_nomixup.png}
 \caption{Kurva pelatihan rata-rata eksperimen E11 (tanpa augmentasi \textit{mixup}/\textit{CutMix}/\textit{reprob})}
 \label{fig:4.lc_e11}
 \end{figure}
@@ -992,13 +1033,13 @@ Gambar~\ref{fig:4.aug_mixup}, Gambar~\ref{fig:4.aug_cutmix}, dan Gambar~\ref{fig
 \centering
 \begin{subfigure}[t]{0.47\textwidth}
   \centering
-  \fbox{\includegraphics[width=\linewidth]{figure/aug_mixup_asli.png}}
+  \includegraphics[width=\linewidth]{figure/aug_mixup_asli.png}
   \caption{Asli: gestur \textit{Aku}}
 \end{subfigure}
 \hfill
 \begin{subfigure}[t]{0.47\textwidth}
   \centering
-  \fbox{\includegraphics[width=\linewidth]{figure/aug_mixup_hasil.png}}
+  \includegraphics[width=\linewidth]{figure/aug_mixup_hasil.png}
   \caption{\textit{Mixup} ($\lambda{=}0.5$): perpaduan piksel \textit{Aku} + \textit{Bapak}}
 \end{subfigure}
 
@@ -1010,13 +1051,13 @@ Gambar~\ref{fig:4.aug_mixup}, Gambar~\ref{fig:4.aug_cutmix}, dan Gambar~\ref{fig
 \centering
 \begin{subfigure}[t]{0.47\textwidth}
   \centering
-  \fbox{\includegraphics[width=\linewidth]{figure/aug_cutmix_asli.png}}
+  \includegraphics[width=\linewidth]{figure/aug_cutmix_asli.png}
   \caption{Asli: gestur \textit{Aku}}
 \end{subfigure}
 \hfill
 \begin{subfigure}[t]{0.47\textwidth}
   \centering
-  \fbox{\includegraphics[width=\linewidth]{figure/aug_cutmix_hasil.png}}
+  \includegraphics[width=\linewidth]{figure/aug_cutmix_hasil.png}
   \caption{\textit{CutMix} ($\lambda{=}0.5$): region dari \textit{Bapak} ditempel ke \textit{Aku}}
 \end{subfigure}
 
@@ -1028,13 +1069,13 @@ Gambar~\ref{fig:4.aug_mixup}, Gambar~\ref{fig:4.aug_cutmix}, dan Gambar~\ref{fig
 \centering
 \begin{subfigure}[t]{0.47\textwidth}
   \centering
-  \fbox{\includegraphics[width=\linewidth]{figure/aug_erase_asli.png}}
+  \includegraphics[width=\linewidth]{figure/aug_erase_asli.png}
   \caption{Asli: gestur \textit{Aku}}
 \end{subfigure}
 \hfill
 \begin{subfigure}[t]{0.47\textwidth}
   \centering
-  \fbox{\includegraphics[width=\linewidth]{figure/aug_erase_hasil.png}}
+  \includegraphics[width=\linewidth]{figure/aug_erase_hasil.png}
   \caption{\textit{Random Erasing}: area tangan digantikan \textit{noise} piksel acak}
 \end{subfigure}
 
@@ -1057,36 +1098,39 @@ Empat model yang dibandingkan adalah (1) E11, VideoMAE ViT-Small dengan bobot SS
 \centering
 \caption{Konfigurasi eksperimen perbandingan lintas arsitektur: E11, E12, ViViT, dan I3D}
 \label{tab:4.s6_config}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|l|r|r|r|r|}
+\begin{tabular}{|l|l|l|l|l|}
 \hline
-\multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{c|}{\textbf{E11}} & \multicolumn{1}{c|}{\textbf{E12}} & \multicolumn{1}{c|}{\textbf{ViViT}} & \multicolumn{1}{c|}{\textbf{I3D}} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{c|}{\textbf{E11}} & \multicolumn{1}{c|}{\textbf{E12}} & \multicolumn{1}{c|}{\textbf{ViViT}} & \multicolumn{1}{c|}{\textbf{I3D}} \\
 \hline
-\makecell[l]{Arsitektur\\Model} & \makecell[c]{VideoMAE\\ViT-Small} & \makecell[c]{VideoMAE\\ViT-Base} & ViViT-B/16x2 & \makecell[c]{I3D (Inflated\\3D ConvNet)} \\
+\makecell[l]{Arsitektur\\Model} & \makecell[l]{VideoMAE\\ViT-Small} & \makecell[l]{VideoMAE\\ViT-Base} & \multicolumn{1}{l|}{ViViT-B/16x2} & \makecell[l]{I3D (Inflated\\3D ConvNet)} \\
 \hline
-\makecell[l]{Dataset\\\textit{Pre-train}} & SSV2 & Kinetics-400 & Kinetics-400 & ImageNet \\
+\makecell[l]{Dataset\\\textit{Pre-train}} & \multicolumn{1}{l|}{SSV2} & \multicolumn{1}{l|}{Kinetics-400} & \multicolumn{1}{l|}{Kinetics-400} & \multicolumn{1}{l|}{ImageNet} \\
 \hline
-\makecell[l]{Strategi\\\textit{Sampling}} & \makecell[c]{\textit{Uniform}\\(SSV2 loader)} & \makecell[c]{\textit{Dense}\\(Kin. loader)} & Seragam & \makecell[c]{Seluruh video\\(RGB)} \\
+\makecell[l]{Strategi\\\textit{Sampling}} & \makecell[l]{\textit{Uniform}\\(SSV2 loader)} & \makecell[l]{\textit{Dense}\\(Kin. loader)} & \multicolumn{1}{l|}{Seragam} & \makecell[l]{Seluruh video\\(RGB)} \\
 \hline
-\makecell[l]{\textit{Epoch}\\Total} & 55 (5 + 50) & 55 (5 + 50) & 55 & 55 \\
+\makecell[l]{\textit{Epoch}\\Total} & \multicolumn{1}{r|}{55 (5 + 50)} & \multicolumn{1}{r|}{55 (5 + 50)} & \multicolumn{1}{r|}{55} & \multicolumn{1}{r|}{55} \\
 \hline
-\makecell[l]{Jumlah\\\textit{Frame}} & 16 & 16 & 32 & 64 \\
+\makecell[l]{Jumlah\\\textit{Frame}} & \multicolumn{1}{r|}{16} & \multicolumn{1}{r|}{16} & \multicolumn{1}{r|}{32} & \multicolumn{1}{r|}{64} \\
 \hline
-\makecell[l]{\textit{Learning}\\Rate} & \multicolumn{4}{c|}{$10^{-3}$} \\
+\makecell[l]{\textit{Learning}\\Rate} & \multicolumn{1}{r|}{$10^{-3}$} & \multicolumn{1}{r|}{$10^{-3}$} & \multicolumn{1}{r|}{$10^{-3}$} & \multicolumn{1}{r|}{$10^{-3}$} \\
 \hline
 \makecell[l]{\textit{Hyperparameter}\\Lain} & \multicolumn{4}{c|}{Sama dengan Tabel~\ref{tab:4.umum_config}} \\
 \hline
 \end{tabular}
+}
 \end{table}
 
 \begin{table}[H]
 \centering
 \caption{Nilai \textit{Best Val Acc@1} (\%) per fold dan ringkasan hasil perbandingan lintas arsitektur}
 \label{tab:4.s6_fold}
+{\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|c|r|r|r|r|r|r|r|}
+\begin{tabular}{|l|r|r|r|r|r|r|r|}
 \hline
-Kode & \multicolumn{1}{c|}{Fold 1} & \multicolumn{1}{c|}{Fold 2} & \multicolumn{1}{c|}{Fold 3} & \multicolumn{1}{c|}{Fold 4} & \multicolumn{1}{c|}{Fold 5} & \multicolumn{1}{c|}{\makecell[c]{Rata-\\rata}} & \multicolumn{1}{c|}{Terbaik} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{Kode} & \multicolumn{1}{c|}{Fold 1} & \multicolumn{1}{c|}{Fold 2} & \multicolumn{1}{c|}{Fold 3} & \multicolumn{1}{c|}{Fold 4} & \multicolumn{1}{c|}{Fold 5} & \multicolumn{1}{c|}{\makecell[c]{Rata-\\rata}} & \multicolumn{1}{c|}{Terbaik} \\
 \hline
 \rowcolor{highlightpink}E11   & 94.05 & 94.57 & 92.43 & 95.68 & 92.97 & 93.94 & 95.68 \\
 \hline
@@ -1097,6 +1141,7 @@ ViViT & 95.14 & 96.20 & 95.68 & 95.14 & 91.89 & 94.81 & 96.20 \\
 I3D   & 98.38 & 96.74 & 96.22 & 97.30 & 95.68 & 96.86 & 98.38 \\
 \hline
 \end{tabular}
+}
 \end{table}
 
 Tabel~\ref{tab:4.s6_fold} menunjukkan bahwa E12 (VideoMAE ViT-Base + K400) mencapai performa terbaik dengan rata-rata akurasi 97.18\%, diikuti I3D (96.86\%), ViViT (94.81\%), dan E11 (93.94\%). Selisih antar keempat model berkisar 0.32--3.24 poin persentase, mengindikasikan bahwa seluruh model berada dalam rentang performa yang kompetitif. Keunggulan E12 atas I3D yang hanya 0.32 poin persentase sangat signifikan: VideoMAE berbasis \textit{Transformer} dengan konfigurasi yang tepat mampu menyamai bahkan sedikit melampaui arsitektur 3D CNN yang secara historis unggul pada dataset kecil. Variabilitas antar fold pada E12 (95.11\%--98.92\%) sedikit lebih besar dibandingkan I3D (95.68\%--98.38\%), namun rata-rata E12 tetap unggul di semua fold kecuali Fold 2 di mana ViViT (96.20\%) mengungguli E12 (95.11\%). I3D menunjukkan konsistensi yang sangat tinggi antar fold (95.68\%--98.38\%), yang mencerminkan kemantapan \textit{local inductive bias} arsitektur CNN pada dataset berskala kecil.\par
@@ -1106,7 +1151,7 @@ Gambar~\ref{fig:4.lc_e12}, Gambar~\ref{fig:4.lc_vivit}, dan Gambar~\ref{fig:4.lc
 
 \begin{figure}[H]
 \centering
-\fbox{\includegraphics[width=0.95\textwidth]{figure/lc_vitb_k400_dense_nomixup.png}}
+\includegraphics[width=0.95\textwidth]{figure/lc_vitb_k400_dense_nomixup.png}
 \caption{Kurva pelatihan rata-rata eksperimen E12 (VideoMAE ViT-Base + K400)}
 \label{fig:4.lc_e12}
 \end{figure}
@@ -1116,7 +1161,7 @@ Kurva pelatihan E12 pada Gambar~\ref{fig:4.lc_e12} memperlihatkan konvergensi ya
 
 \begin{figure}[H]
 \centering
-\fbox{\includegraphics[width=0.95\textwidth]{figure/lc_vivit.png}}
+\includegraphics[width=0.95\textwidth]{figure/lc_vivit.png}
 \caption{Kurva pelatihan rata-rata model ViViT-B/16x2 (5-Fold)}
 \label{fig:4.lc_vivit}
 \end{figure}
@@ -1126,7 +1171,7 @@ Kurva pelatihan ViViT pada Gambar~\ref{fig:4.lc_vivit} menunjukkan pola yang ber
 
 \begin{figure}[H]
 \centering
-\fbox{\includegraphics[width=0.95\textwidth]{figure/lc_i3d.png}}
+\includegraphics[width=0.95\textwidth]{figure/lc_i3d.png}
 \caption{Kurva pelatihan rata-rata model I3D \textit{baseline} (5-Fold)}
 \label{fig:4.lc_i3d}
 \end{figure}
@@ -1142,7 +1187,7 @@ Tabel~\ref{tab:4.s6_perkelas_vivit} dan Tabel~\ref{tab:4.s6_perkelas_i3d} menyaj
 \footnotesize
 \begin{tabular}{|l|r|r|r|r|}
 \hline
-Kelas & \multicolumn{1}{c|}{Presisi} & \multicolumn{1}{c|}{\textit{Recall}} & \multicolumn{1}{c|}{F1-\textit{Score}} & \multicolumn{1}{c|}{\textit{Support}} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{Kelas} & \multicolumn{1}{c|}{Presisi} & \multicolumn{1}{c|}{\textit{Recall}} & \multicolumn{1}{c|}{F1-\textit{Score}} & \multicolumn{1}{c|}{\textit{Support}} \\
 \hline
 Aku     & 0.94 & 0.97 & 0.95 & 90 \\
 Bapak   & 0.94 & 0.93 & 0.94 & 90 \\
@@ -1167,7 +1212,7 @@ Suka    & 0.91 & 0.86 & 0.88 & 90 \\
 \footnotesize
 \begin{tabular}{|l|r|r|r|r|}
 \hline
-Kelas & \multicolumn{1}{c|}{Presisi} & \multicolumn{1}{c|}{\textit{Recall}} & \multicolumn{1}{c|}{F1-\textit{Score}} & \multicolumn{1}{c|}{\textit{Support}} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{Kelas} & \multicolumn{1}{c|}{Presisi} & \multicolumn{1}{c|}{\textit{Recall}} & \multicolumn{1}{c|}{F1-\textit{Score}} & \multicolumn{1}{c|}{\textit{Support}} \\
 \hline
 Aku     & 0.94 & 0.99 & 0.96 & 90 \\
 Bapak   & 1.00 & 0.98 & 0.99 & 90 \\
@@ -1191,7 +1236,7 @@ Gambar~\ref{fig:4.cm_e12}, Gambar~\ref{fig:4.cm_vivit}, dan Gambar~\ref{fig:4.cm
 
 \begin{figure}[H]
 \centering
-\fbox{\includegraphics[width=0.95\textwidth]{figure/cm_vitb_k400_dense_nomixup_new_font.png}}
+\includegraphics[width=0.95\textwidth]{figure/cm_vitb_k400_dense_nomixup_new_font.png}
 \caption{\textit{Confusion matrix} gabungan semua fold eksperimen E12 (VideoMAE ViT-Base + K400)}
 \label{fig:4.cm_e12}
 \end{figure}
@@ -1200,7 +1245,7 @@ Gambar~\ref{fig:4.cm_e12}, Gambar~\ref{fig:4.cm_vivit}, dan Gambar~\ref{fig:4.cm
 
 \begin{figure}[H]
 \centering
-\fbox{\includegraphics[width=0.95\textwidth]{figure/cm_vivit_new_font.png}}
+\includegraphics[width=0.95\textwidth]{figure/cm_vivit_new_font.png}
 \caption{\textit{Confusion matrix} gabungan semua fold model ViViT-B/16x2}
 \label{fig:4.cm_vivit}
 \end{figure}
@@ -1209,7 +1254,7 @@ Gambar~\ref{fig:4.cm_e12}, Gambar~\ref{fig:4.cm_vivit}, dan Gambar~\ref{fig:4.cm
 
 \begin{figure}[H]
 \centering
-\fbox{\includegraphics[width=0.95\textwidth]{figure/cm_i3d_new_font.png}}
+\includegraphics[width=0.95\textwidth]{figure/cm_i3d_new_font.png}
 \caption{\textit{Confusion matrix} gabungan semua fold model I3D \textit{baseline}}
 \label{fig:4.cm_i3d}
 \end{figure}
@@ -1237,9 +1282,9 @@ Setiap model memiliki pipeline prapemrosesan yang berbeda sesuai protokol pelati
 \caption{Konfigurasi prapemrosesan tiap model pada eksperimen inferensi}
 \label{tab:4.preproc_bench}
 \footnotesize
-\begin{tabular}{|l|c|c|c|}
+\begin{tabular}{|l|l|r|l|}
 \hline
-Model & \makecell[c]{Library\\Dekode Video} & Frame & Normalisasi \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Model}} & \multicolumn{1}{c|}{\makecell[c]{\textbf{Library}\\\textbf{Dekode Video}}} & \multicolumn{1}{c|}{\textbf{Frame}} & \multicolumn{1}{c|}{\textbf{Normalisasi}} \\
 \hline
 VideoMAE ViT-Small + SSV2 & decord & 16 & ImageNet ($\mu/\sigma$) \\
 \hline
@@ -1291,9 +1336,9 @@ Tabel~\ref{tab:4.inferensi} merangkum rata-rata waktu inferensi tiap model.
 \caption{Rata-rata waktu inferensi model pada GPU RTX 3050 Laptop}
 \label{tab:4.inferensi}
 \footnotesize
-\begin{tabular}{|l|c|c|c|}
+\begin{tabular}{|l|r|r|r|}
 \hline
-Model & Param. & \makecell[c]{Frame\\Input} & \makecell[c]{Rata-rata\\(ms)} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Model}} & \multicolumn{1}{c|}{\textbf{Param.}} & \multicolumn{1}{c|}{\makecell[c]{\textbf{Frame}\\\textbf{Input}}} & \multicolumn{1}{c|}{\makecell[c]{\textbf{Rata-rata}\\\textbf{(ms)}}} \\
 \hline
 VideoMAE ViT-Small + SSV2 (E11/E5) & 21.9\,jt &  16 &  66.36 \\
 \hline
@@ -1331,7 +1376,7 @@ Tabel~\ref{tab:4.rangkuman} merangkum hasil terbaik dari seluruh eksperimen untu
 \footnotesize
 \begin{tabularx}{\linewidth}{|l|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|>{\raggedleft\arraybackslash}p{2.3cm}|>{\raggedleft\arraybackslash}p{1.3cm}|}
 \hline
-\rowcolor{gray!20} \multicolumn{1}{|c|}{Kode} & \multicolumn{1}{c|}{\makecell[c]{Kelompok\\Eksperimen}} & \multicolumn{1}{c|}{Konfigurasi} & \multicolumn{1}{c|}{\makecell[c]{Rerata $\pm$ Std\\(\%)}} & \multicolumn{1}{c|}{\makecell[c]{Acc@1\\(\%)}} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Kode}} & \multicolumn{1}{>{\centering\arraybackslash}p{2.5cm}|}{\makecell[c]{\textbf{Kelompok}\\\textbf{Eksperimen}}} & \multicolumn{1}{>{\centering\arraybackslash}X|}{\textbf{Konfigurasi}} & \multicolumn{1}{>{\centering\arraybackslash}p{2.3cm}|}{\makecell[c]{\textbf{Rerata} $\pm$ \textbf{Std}\\\textbf{(\%)}}} & \multicolumn{1}{c|}{\makecell[c]{\textbf{Acc@1}\\\textbf{(\%)}}} \\
 \hline
 E3   & \textit{Backbone} \& \textit{Pre-train}       & ViT-Small + SSV2 (\textit{fine-tune})                  & $35.18 \pm 4.32$ & 42.39 \\
 \hline
@@ -1364,7 +1409,7 @@ Secara visual, kemiripan tersebut dapat dipahami dari contoh frame representatif
 
 \begin{figure}[H]
 \centering
-\makebox[\textwidth][c]{\begin{minipage}{1.1\textwidth}
+\makebox[\textwidth][c]{\fbox{\begin{minipage}{1.1\textwidth}
 \centering
 % Row 1: Mau
 \begin{subfigure}[b]{0.24\linewidth}
@@ -1416,7 +1461,7 @@ Secara visual, kemiripan tersebut dapat dipahami dari contoh frame representatif
   \includegraphics[width=\linewidth]{figure/sampel_blurred/Suka_090_sample4.png}
   \caption{Suka (Sampel 4)}
 \end{subfigure}
-\end{minipage}}
+\end{minipage}}}
 \captionsetup{justification=raggedright,singlelinecheck=false}
 \caption{Perbandingan visual sampel gerakan gestur Mau (baris atas) dan Suka (baris bawah)}
 \label{fig:4.mau_vs_suka}

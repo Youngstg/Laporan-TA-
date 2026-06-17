@@ -142,6 +142,7 @@ Unsur nonverbal atau nonmanual dalam bahasa isyarat berfungsi seperti intonasi d
 Berbeda dengan SIBI, Bahasa Isyarat Indonesia (BISINDO) merupakan bahasa alami (\textit{natural sign language}) yang berkembang secara organik di komunitas Tuli \cite{Ratriyana2022}. Struktur BISINDO tidak mengikuti tata bahasa Bahasa Indonesia, melainkan mengandalkan konteks visual, ekspresi wajah, dan gerakan tubuh untuk menyampaikan makna secara langsung. Oleh karena itu, BISINDO bersifat lebih ekspresif dan kontekstual, sedangkan SIBI lebih terstruktur dan formal. Perbedaan utama antara keduanya terletak pada orientasi fungsional: SIBI digunakan dalam konteks pendidikan dan komunikasi resmi, sementara BISINDO digunakan dalam interaksi sosial sehari-hari di komunitas Tuli \cite{Zulpicha2017}. Untuk memberikan gambaran yang lebih jelas mengenai perbedaan kedua sistem tersebut, Tabel~\ref{table:2.perbandingan} berikut memperlihatkan perbandingan antara BISINDO dan SIBI berdasarkan beberapa aspek linguistik dan penggunaannya.\par
 
 \begingroup
+\footnotesize
 \setlength{\tabcolsep}{8pt}
 \renewcommand{\arraystretch}{1.0}
 \begin{longtable}{|>{\raggedright\arraybackslash}p{0.17\textwidth}|>{\raggedright\arraybackslash}p{0.37\textwidth}|>{\raggedright\arraybackslash}p{0.31\textwidth}|}
@@ -159,7 +160,7 @@ Berbeda dengan SIBI, Bahasa Isyarat Indonesia (BISINDO) merupakan bahasa alami (
 	\hline
 	Tata bahasa & Mengikuti tata bahasa alami BISINDO yang tidak selalu sejalan dengan struktur kalimat bahasa Indonesia baku. & Menjaga urutan dan tata bahasa bahasa Indonesia karena dirancang sebagai alat bantu pembelajaran di sekolah inklusif/SLB. \\
 	\hline
-	Penggunaan & Digunakan luas oleh komunitas Tuli di berbagai daerah; variasi dialek muncul sesuai daerah. & Umumnya digunakan di lingkungan pendidikan formal dan instansi pemerintah sebagai standar komunikasi resmi. \\
+	Penggunaan & Digunakan luas oleh komunitas Tuli di berbagai daerah variasi dialek muncul sesuai daerah. & Umumnya digunakan di lingkungan pendidikan formal dan instansi pemerintah sebagai standar komunikasi resmi. \\
 	\hline
 	Pembelajaran & Dipelajari secara turun-temurun dalam komunitas melalui interaksi langsung dan komunitas Tuli. & Diajarkan melalui modul resmi, kamus isyarat, serta pelatihan guru karena bersifat sistematis dan terstandar. \\
 	\hline
@@ -210,6 +211,8 @@ Model klasifikasi merupakan komponen utama dalam sistem pembelajaran mesin yang 
 
 \subsubsection{Arsitektur Transformer} \label{II.Teori4.4}
 Transformer merupakan arsitektur jaringan saraf yang diperkenalkan oleh Vaswani et al. untuk mengatasi keterbatasan RNN dan LSTM dalam menangani dependensi jangka panjang \cite{Vaswani2023}. Berbeda dengan model sekuensial tradisional yang memproses data langkah demi langkah, Transformer bekerja secara paralel sehingga mempercepat pelatihan dan meningkatkan efisiensi untuk urutan panjang. Mekanisme utamanya adalah \textit{self-attention} yang memungkinkan model memahami hubungan antar-token tanpa memperhatikan jarak posisionalnya, sehingga memberikan konteks global terhadap keseluruhan urutan \cite{Vaswani2023}. Arsitektur ini telah diadaptasi pada berbagai domain seperti teks (GPT, BERT), citra (Vision Transformer/ViT) \cite{Dosovitskiy2021}, dan video (Video Vision Transformer/ViViT) \cite{Arnab2021}. Dalam sistem penerjemahan bahasa isyarat, Transformer ideal untuk mengintegrasikan pose tubuh, gerakan tangan, dan ekspresi wajah secara simultan \cite{Saputra2024}.
+
+Gambar \ref{fig:transformer-architecture} memperlihatkan alur lengkap Transformer yang terdiri dari encoder dan decoder. Diagram tersebut menunjukkan bagaimana input diproses melalui embedding, positional encoding, multi-head attention, serta feed-forward network. Encoder menghasilkan representasi kontekstual yang kemudian digunakan oleh decoder melalui mekanisme masked attention untuk menghasilkan keluaran terurut. Struktur ini menegaskan bagaimana Transformer memanfaatkan perhatian paralel untuk memahami hubungan global dalam suatu urutan.
 
 \begin{figure}[H]
     \centering
@@ -322,8 +325,6 @@ Transformer merupakan arsitektur jaringan saraf yang diperkenalkan oleh Vaswani 
     \caption{Alur kerja arsitektur Transformer yang terdiri dari Encoder dan Decoder}
     \label{fig:transformer-architecture}
 \end{figure}
-
-Gambar \ref{fig:transformer-architecture} memperlihatkan alur lengkap Transformer yang terdiri dari encoder dan decoder. Diagram tersebut menunjukkan bagaimana input diproses melalui embedding, positional encoding, multi-head attention, serta feed-forward network. Encoder menghasilkan representasi kontekstual yang kemudian digunakan oleh decoder melalui mekanisme masked attention untuk menghasilkan keluaran terurut. Struktur ini menegaskan bagaimana Transformer memanfaatkan perhatian paralel untuk memahami hubungan global dalam suatu urutan.
 
 \begin{enumerate}
 	\item \textit{Encoder}\\
@@ -574,6 +575,7 @@ Keempat komponen tersebut menjadi dasar untuk menghitung metrik akurasi, \textit
 
 	\noindent Keterangan:
 
+\begingroup
 	\footnotesize
 \begin{tabular}{@{}ll}
 	$K$ & : jumlah kelas dalam dataset, \\
@@ -581,6 +583,7 @@ Keempat komponen tersebut menjadi dasar untuk menghitung metrik akurasi, \textit
 	$TP_i$ & : \textit{True Positive} kelas ke-$i$, \\
 	$N$ & : total seluruh sampel pada data uji. \\
 	\end{tabular}
+	\endgroup
 
 	\vspace{0.5cm}
 	Dalam konteks pengenalan bahasa isyarat, akurasi menunjukkan seberapa sering sistem mampu mengenali gerakan tangan dengan benar di seluruh kelas isyarat. Namun, jika jumlah sampel antar-isyarat tidak seimbang, akurasi dapat menyesatkan karena model bisa terlihat baik hanya dengan sering memprediksi kelas mayoritas. Oleh karena itu, akurasi sebaiknya digunakan bersama metrik per-kelas seperti \textit{precision} dan \textit{recall} \cite{Raschka2020}.\par
@@ -600,12 +603,14 @@ Keempat komponen tersebut menjadi dasar untuk menghitung metrik akurasi, \textit
 
 	\noindent Keterangan:
 
+\begingroup
 	\footnotesize
 \begin{tabular}{@{}ll}
 	$\mathrm{TP}_i$ & : jumlah prediksi benar untuk kelas ke-$i$, \\
 	$\mathrm{FP}_i$ & : jumlah sampel bukan kelas $i$ yang salah diprediksi sebagai kelas $i$, \\
 	$K$ & : jumlah kelas dalam dataset. \\
 	\end{tabular}
+	\endgroup
 
 	\vspace{0.5cm}
 	\textit{Precision} per kelas berguna untuk mengetahui kelas mana yang paling sering mendapat prediksi salah dari kelas lain, sedangkan \textit{macro-precision} memberikan ringkasan tunggal yang adil antar kelas tanpa memperhitungkan dominasi kelas mayoritas \cite{Raschka2020}.\par
@@ -623,12 +628,14 @@ Keempat komponen tersebut menjadi dasar untuk menghitung metrik akurasi, \textit
 
 	\noindent Keterangan:
 
+\begingroup
 	\footnotesize
 \begin{tabular}{@{}ll}
 	$\mathrm{TP}_i$ & : jumlah sampel kelas ke-$i$ yang benar terdeteksi, \\
 	$\mathrm{FN}_i$ & : jumlah sampel kelas ke-$i$ yang salah diprediksi sebagai kelas lain, \\
 	$K$ & : jumlah kelas dalam dataset. \\
 	\end{tabular}
+	\endgroup
 
 	\vspace{0.5cm}
 	\textit{Recall} yang rendah pada suatu kelas menandakan bahwa model sering melewatkan isyarat tersebut, sehingga dapat menjadi petunjuk kelas mana yang perlu ditambah data latih atau mendapat augmentasi khusus \cite{Raschka2020}.\par
@@ -646,12 +653,14 @@ Keempat komponen tersebut menjadi dasar untuk menghitung metrik akurasi, \textit
 
 	\noindent Keterangan:
 
+\begingroup
 	\footnotesize
 \begin{tabular}{@{}ll}
 	$\mathrm{Precision}_i$ & : tingkat ketepatan prediksi untuk kelas ke-$i$, \\
 	$\mathrm{Recall}_i$ & : tingkat keberhasilan model mendeteksi kelas ke-$i$, \\
 	$K$ & : jumlah kelas dalam dataset. \\
 	\end{tabular}
+	\endgroup
 
 	\vspace{0.5cm}
 	Sebagai rata-rata harmonik, F1-score memberikan penalti besar terhadap perbedaan ekstrem antara \textit{precision} dan \textit{recall}. Dalam pengenalan bahasa isyarat, nilai F1 yang tinggi pada semua kelas menunjukkan bahwa model mampu mengenali beragam isyarat secara konsisten tanpa bias terhadap kelas tertentu. Oleh karena itu, \textit{macro F1-score} sering dijadikan indikator utama kinerja sistem klasifikasi multiclass bahasa isyarat \cite{Raschka2020}.\par
@@ -670,12 +679,14 @@ Keempat komponen tersebut menjadi dasar untuk menghitung metrik akurasi, \textit
 
 	\noindent Keterangan:
 
+\begingroup
 	\footnotesize
 \begin{tabular}{@{}ll}
 	$\mathrm{TN}_i$ & : jumlah sampel bukan kelas $i$ yang benar diklasifikasikan sebagai bukan kelas $i$, \\
 	$\mathrm{FP}_i$ & : jumlah sampel bukan kelas $i$ yang salah diklasifikasikan sebagai kelas $i$, \\
 	$K$ & : jumlah kelas dalam dataset. \\
 	\end{tabular}
+	\endgroup
 
 	\vspace{0.5cm}
 	Dalam konteks penerjemahan bahasa isyarat, \textit{specificity} yang tinggi per kelas membantu mengurangi kesalahan interpretasi dari isyarat lain yang memiliki bentuk tangan serupa. Metrik ini sering digunakan bersamaan dengan \textit{recall} untuk memberikan gambaran menyeluruh mengenai kemampuan sistem mengenali kelas yang benar sekaligus menolak kelas yang tidak relevan \cite{Raschka2020}.\par
