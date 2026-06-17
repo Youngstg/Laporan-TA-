@@ -544,9 +544,9 @@ Tabel~\ref{tab:4.s1_perkelas} menyajikan laporan klasifikasi per kelas gabungan 
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{|l|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|}
 \hline
-\rowcolor{gray!15} \multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Kelas}}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E1 (ViT-S + K400)}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E2 (ViT-B + K400)}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E3 (ViT-S + SSV2)}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E4 (ViT-B + SSV2)}} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Kelas}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E1 (ViT-S + K400)}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E2 (ViT-B + K400)}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E3 (ViT-S + SSV2)}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E4 (ViT-B + SSV2)}} \\
 \cline{2-13}
- & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} \\
+\rowcolor{gray!15}  & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} \\
 \hline
 Aku     & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.38 & 0.06 & 0.10 & 0.00 & 0.00 & 0.00 \\
 Bapak   & 0.27 & 0.28 & 0.27 & 0.20 & 0.77 & 0.32 & 0.30 & 0.57 & 0.39 & 0.27 & 0.58 & 0.37 \\
@@ -736,7 +736,7 @@ Bagian ini menganalisis pengaruh durasi pelatihan pada \textit{stage} 2 terhadap
 \label{tab:4.s3_config}
 {\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|l|l|l|l|}
+\begin{tabular}{|l|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
 \hline
 \rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{c|}{\textbf{E8}} & \multicolumn{1}{c|}{\textbf{E5}} & \multicolumn{1}{c|}{\textbf{E9}} \\
 \hline
@@ -812,11 +812,11 @@ Tabel~\ref{tab:4.s3_perkelas} menyajikan perbandingan laporan klasifikasi per ke
 \label{tab:4.s3_perkelas}
 {\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|l|rrr|rrr|rrr|}
+\begin{tabular}{|l|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|>{\centering\arraybackslash}p{0.6cm}|}
 \hline
-\rowcolor{gray!15} \multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Kelas}}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E8 (10 epoch)}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E5 (50 epoch)}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E9 (100 epoch)}} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Kelas}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E8 (10 epoch)}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E5 (50 epoch)}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E9 (100 epoch)}} \\
 \cline{2-10}
- & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} \\
+\rowcolor{gray!15}  & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} \\
 \hline
 Aku     & 0.52 & 0.64 & 0.58 & 0.66 & 0.70 & 0.68 & 0.74 & 0.72 & 0.73 \\
 Bapak   & 0.65 & 0.62 & 0.64 & 0.81 & 0.52 & 0.64 & 0.90 & 0.50 & 0.64 \\
@@ -923,9 +923,9 @@ Tabel~\ref{tab:4.s4_perkelas} menyajikan perbandingan laporan klasifikasi per ke
 \footnotesize
 \begin{tabular}{|l|>{\centering\arraybackslash}p{0.9cm}|>{\centering\arraybackslash}p{0.9cm}|>{\centering\arraybackslash}p{0.9cm}|>{\centering\arraybackslash}p{0.9cm}|>{\centering\arraybackslash}p{0.9cm}|>{\centering\arraybackslash}p{0.9cm}|}
 \hline
-\rowcolor{gray!15} \multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Kelas}}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E5 (\textit{Uniform Sampling})}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E10 (\textit{Dense Sampling})}} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Kelas}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E5 (\textit{Uniform Sampling})}} & \multicolumn{3}{c|}{\cellcolor{gray!15}\textbf{E10 (\textit{Dense Sampling})}} \\
 \cline{2-7}
- & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} \\
+\rowcolor{gray!15}  & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$R$} & \multicolumn{1}{c|}{$F_1$} \\
 \hline
 Aku     & 0.66 & 0.70 & 0.68 & 0.78 & 0.50 & 0.61 \\
 Bapak   & 0.81 & 0.52 & 0.64 & 0.51 & 0.33 & 0.40 \\
