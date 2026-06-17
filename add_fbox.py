@@ -1,33 +1,63 @@
 import re
 
 with open('chapters/chapter-4.tex', 'r', encoding='utf-8') as f:
-    text = f.read()
+    content = f.read()
 
-# Find \includegraphics that are NOT preceded by \fbox{
-# Lookbehind is hard for variable length, so we match \fbox{\includegraphics...} or just \includegraphics...
-def repl(match):
-    full = match.group(0)
-    if 'fbox' in full:
-        return full
-    else:
-        # It's an \includegraphics without \fbox
-        return r'\fbox{' + full + '}'
+# 1. Wrap lc_ and cm_ images
+def repl_lc_cm(m):
+    img_cmd = m.group(0)
+    return r'{\setlength{\fboxsep}{0pt}\fbox{' + img_cmd + r'}}'
 
-# Pattern: match optional \fbox{ then \includegraphics[...]\{...\} then optional }
-pattern = r'(?:\\fbox\{)?\\includegraphics\[.*?\]\{.*?\}(?:\})?'
+pattern_lc_cm = r'\\includegraphics\[[^\]]*\]\{figure/(?:lc_|cm_)[^\}]+\}'
+content = re.sub(pattern_lc_cm, repl_lc_cm, content)
 
-# Wait, the above pattern might match \fbox{\includegraphics...} and the trailing }
-# Let's do it simpler. Let's just find \includegraphics[...]\{...\}
-# and if the preceding 6 chars are \fbox{ we ignore it.
-def repl2(match):
-    start = match.start()
-    if start >= 6 and text[start-6:start] == '\\fbox{':
-        return match.group(0)
-    return '\\fbox{' + match.group(0) + '}'
+# 2. Fix the broken nested fboxes in aug_orig
+broken_fboxes = r"""\fbox{\begin{minipage}{0.97\linewidth}
+\centering
+\fbox{\begin{minipage}{0.97\linewidth}
+\centering
+\fbox{\begin{minipage}{0.97\linewidth}
+\centering
+\begin{subfigure}[b]{0.22\textwidth}"""
 
-new_text = re.sub(r'\\includegraphics(?:\[.*?\])?\{.*?\}', repl2, text)
+fixed_fboxes = r"""\makebox[\linewidth][c]{\fbox{\begin{minipage}{0.97\linewidth}
+\centering
+\begin{subfigure}[b]{0.22\textwidth}"""
+
+content = content.replace(broken_fboxes, fixed_fboxes)
+
+broken_end = r"""\end{minipage}}
+\end{minipage}}
+\end{minipage}}
+\end{minipage}}
+\hfill
+  \begin{subfigure}"""
+
+fixed_end = r"""  \end{subfigure}
+  \hfill
+  \begin{subfigure}"""
+
+content = content.replace(broken_end, fixed_end)
+
+end_of_aug = r"""    \label{fig:aug_down}
+  \end{subfigure}
+  \caption{Contoh"""
+
+fixed_end_aug = r"""    \label{fig:aug_down}
+  \end{subfigure}
+\end{minipage}}}
+  \caption{Contoh"""
+
+content = content.replace(end_of_aug, fixed_end_aug)
+
+# 3. Add frames to the mixup/cutmix/reprob figures
+def wrap_subfigures(m):
+    return r"\makebox[\linewidth][c]{\fbox{\begin{minipage}{0.97\linewidth}" + "\n" + m.group(0) + "\n" + r"\end{minipage}}}"
+
+for prefix in ['mixup', 'cutmix', 'erase']:
+    pat = r"\\begin\{subfigure\}.*?figure/aug_" + prefix + r"_asli.*?\\end\{subfigure\}\s*\\hfill\s*\\begin\{subfigure\}.*?figure/aug_" + prefix + r"_hasil.*?\\end\{subfigure\}"
+    content = re.sub(pat, wrap_subfigures, content, flags=re.DOTALL)
 
 with open('chapters/chapter-4.tex', 'w', encoding='utf-8') as f:
-    f.write(new_text)
-
-print('Added fbox to includegraphics successfully.')
+    f.write(content)
+print("Done")

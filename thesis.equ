@@ -3,10 +3,24 @@
 \contentsline {myequations}{\numberline {Rumus~2.3} Rumus perhitungan \textit {recall} per kelas dan \textit {macro-average recall} }{48}{equation.2.3}%
 \contentsline {myequations}{\numberline {Rumus~2.4} Rumus perhitungan F1-score per kelas dan \textit {macro-average F1-score} }{48}{equation.2.4}%
 \contentsline {myequations}{\numberline {Rumus~2.5} Rumus perhitungan \textit {specificity} per kelas dan \textit {macro-average specificity} }{49}{equation.2.5}%
-\contentsline {myequations}{\numberline {Rumus~3.0} Dimensi tensor klip video masukan}{69}{subsubsection.3.4.1.1}%
-\contentsline {myequations}{\numberline {Rumus~3.0} Layer normalization akhir encoder}{70}{subsubsection.3.4.1.1}%
-\contentsline {myequations}{\numberline {Rumus~3.0} Mean pooling token output encoder}{71}{subsection.3.4.2}%
-\contentsline {myequations}{\numberline {Rumus~3.0} Pemetaan linear classification head}{71}{subsection.3.4.2}%
-\contentsline {myequations}{\numberline {Rumus~3.0} Pemilihan kelas prediksi dengan argmax}{73}{subsection.3.4.2}%
-\contentsline {myequations}{\numberline {Rumus~3.0} \textit {Loss function} cross-entropy}{73}{subsubsection.3.4.3.1}%
-\contentsline {myequations}{\numberline {Rumus~3.0} Rumus pembaruan parameter AdamW}{75}{subsubsection.3.4.3.2}%
+\contentsline {myequations}{\numberline {Rumus~3.1} Dimensi tensor klip video masukan}{69}{equation.3.1}%
+\contentsline {myequations}{\numberline {Rumus~3.2} Jumlah total nilai piksel dalam satu klip video}{69}{equation.3.2}%
+\contentsline {myequations}{\numberline {Rumus~3.3} Normalisasi nilai piksel per kanal}{69}{equation.3.3}%
+\contentsline {myequations}{\numberline {Rumus~3.4} Jumlah token spasio-temporal pada klip video}{70}{equation.3.4}%
+\contentsline {myequations}{\numberline {Rumus~3.5} Dimensi vektor hasil flattening cube}{71}{equation.3.5}%
+\contentsline {myequations}{\numberline {Rumus~3.6} Representasi vektor flattening cube}{71}{equation.3.6}%
+\contentsline {myequations}{\numberline {Rumus~3.7} Proyeksi linear patch embedding}{72}{equation.3.7}%
+\contentsline {myequations}{\numberline {Rumus~3.8} Penambahan positional embedding pada token}{74}{equation.3.8}%
+\contentsline {myequations}{\numberline {Rumus~3.9} Matriks token awal encoder}{75}{equation.3.9}%
+\contentsline {myequations}{\numberline {Rumus~3.10} Layer normalization pada token}{76}{equation.3.10}%
+\contentsline {myequations}{\numberline {Rumus~3.11} Transformasi Query, Key, dan Value}{79}{equation.3.11}%
+\contentsline {myequations}{\numberline {Rumus~3.12} Perhitungan matriks skor mentah attention}{80}{equation.3.12}%
+\contentsline {myequations}{\numberline {Rumus~3.13} Perhitungan bobot attention dengan softmax}{81}{equation.3.13}%
+\contentsline {myequations}{\numberline {Rumus~3.14} Fungsi Feed-Forward Network pada encoder}{83}{equation.3.14}%
+\contentsline {myequations}{\numberline {Rumus~3.15} Fungsi aktivasi GELU}{83}{equation.3.15}%
+\contentsline {myequations}{\numberline {Rumus~3.16} Layer normalization akhir encoder}{85}{equation.3.16}%
+\contentsline {myequations}{\numberline {Rumus~3.17} Mean pooling token output encoder}{85}{equation.3.17}%
+\contentsline {myequations}{\numberline {Rumus~3.18} Pemetaan linear classification head}{86}{equation.3.18}%
+\contentsline {myequations}{\numberline {Rumus~3.19} Pemilihan kelas prediksi dengan argmax}{88}{equation.3.19}%
+\contentsline {myequations}{\numberline {Rumus~3.20} \textit {Loss function} cross-entropy}{88}{equation.3.20}%
+\contentsline {myequations}{\numberline {Rumus~3.21} Rumus pembaruan parameter AdamW}{89}{equation.3.21}%
