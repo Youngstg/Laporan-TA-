@@ -726,9 +726,9 @@ Bagian ini menganalisis pengaruh durasi pelatihan pada \textit{stage} 2 terhadap
 \label{tab:4.s3_config}
 {\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|l|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
+\begin{tabular}{|l|>{\raggedright\arraybackslash}p{1.9cm}|>{\raggedright\arraybackslash}p{1.9cm}|>{\raggedright\arraybackslash}p{1.9cm}|}
 \hline
-\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{c|}{\textbf{E8}} & \multicolumn{1}{c|}{\textbf{E5}} & \multicolumn{1}{c|}{\textbf{E9}} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{>{\centering\arraybackslash}p{1.9cm}|}{\textbf{E8}} & \multicolumn{1}{>{\centering\arraybackslash}p{1.9cm}|}{\textbf{E5}} & \multicolumn{1}{>{\centering\arraybackslash}p{1.9cm}|}{\textbf{E9}} \\
 \hline
 Strategi Pelatihan & \multicolumn{3}{l|}{\textit{Two-Stage Pre-train}} \\
 \hline
@@ -850,9 +850,9 @@ Bagian ini menganalisis pengaruh strategi \textit{sampling} frame terhadap perfo
 \label{tab:4.s4_config}
 {\setlength{\tabcolsep}{3pt}
 \footnotesize
-\begin{tabular}{|l|p{2.8cm}|p{2.8cm}|}
+\begin{tabular}{|l|>{\raggedright\arraybackslash}p{1.9cm}|>{\raggedright\arraybackslash}p{1.9cm}|}
 \hline
-\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{c|}{\textbf{E5}} & \multicolumn{1}{c|}{\textbf{E10}} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Parameter}} & \multicolumn{1}{>{\centering\arraybackslash}p{1.9cm}|}{\textbf{E5}} & \multicolumn{1}{>{\centering\arraybackslash}p{1.9cm}|}{\textbf{E10}} \\
 \hline
 Strategi \textit{Sampling} & \textit{Uniform} & \textit{Dense} \\
 \hline
@@ -1372,7 +1372,7 @@ Tabel~\ref{tab:4.rangkuman} merangkum hasil terbaik dari seluruh eksperimen untu
 \footnotesize
 \begin{tabularx}{\linewidth}{|l|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}X|>{\raggedleft\arraybackslash}p{2.3cm}|>{\raggedleft\arraybackslash}p{1.3cm}|}
 \hline
-\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Kode}} & \multicolumn{1}{>{\centering\arraybackslash}p{2.5cm}|}{\makecell[c]{\textbf{Kelompok}\\\textbf{Eksperimen}}} & \multicolumn{1}{>{\centering\arraybackslash}X|}{\textbf{Konfigurasi}} & \multicolumn{1}{>{\centering\arraybackslash}p{2.3cm}|}{\makecell[c]{\textbf{Rerata} $\pm$ \textbf{Std}\\\textbf{(\%)}}} & \multicolumn{1}{c|}{\makecell[c]{\textbf{Acc@1}\\\textbf{(\%)}}} \\
+\rowcolor{gray!15} \multicolumn{1}{|c|}{\textbf{Kode}} & \multicolumn{1}{>{\centering\arraybackslash}p{2.5cm}|}{\makecell[c]{\textbf{Kelompok}\\\textbf{Eksperimen}}} & \multicolumn{1}{>{\centering\arraybackslash}X|}{\textbf{Konfigurasi}} & \multicolumn{1}{>{\centering\arraybackslash}p{2.3cm}|}{\makecell[c]{\textbf{Rerata} $\pm$ \textbf{Std}\\\textbf{(\%)}}} & \multicolumn{1}{>{\centering\arraybackslash}p{1.3cm}|}{\makecell[c]{\textbf{Acc@1}\\\textbf{(\%)}}} \\
 \hline
 E3   & \textit{Backbone} \& \textit{Pre-train}       & ViT-Small + SSV2 (\textit{fine-tune})                  & $35.18 \pm 4.32$ & 42.39 \\
 \hline

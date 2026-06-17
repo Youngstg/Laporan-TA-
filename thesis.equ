@@ -13,7 +13,7 @@
 \contentsline {myequations}{\numberline {Rumus~3.8} Penambahan positional embedding pada token}{74}{equation.3.8}%
 \contentsline {myequations}{\numberline {Rumus~3.9} Matriks token awal encoder}{75}{equation.3.9}%
 \contentsline {myequations}{\numberline {Rumus~3.10} Layer normalization pada token}{76}{equation.3.10}%
-\contentsline {myequations}{\numberline {Rumus~3.11} Transformasi Query, Key, dan Value}{79}{equation.3.11}%
+\contentsline {myequations}{\numberline {Rumus~3.11} Transformasi Query, Key, dan Value}{78}{equation.3.11}%
 \contentsline {myequations}{\numberline {Rumus~3.12} Perhitungan matriks skor mentah attention}{80}{equation.3.12}%
 \contentsline {myequations}{\numberline {Rumus~3.13} Perhitungan bobot attention dengan softmax}{81}{equation.3.13}%
 \contentsline {myequations}{\numberline {Rumus~3.14} Fungsi Feed-Forward Network pada encoder}{83}{equation.3.14}%

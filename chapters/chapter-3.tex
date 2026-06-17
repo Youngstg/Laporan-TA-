@@ -376,10 +376,10 @@ Penelitian ini menggunakan beberapa perangkat yang mendukung proses perekaman da
   1. Sistem Operasi Windows 11 Home Single Language (64-bit). \newline 2. GPU NVIDIA GeForce RTX 3050 (4 GB VRAM). \newline 3. RAM 16 GB DDR4. \\
   \hline
   2 & Runpod &
-  1. GPU NVIDIA GeForce RTX 4090 (24 GB VRAM). \newline 2. Digunakan untuk seluruh eksperimen pelatihan model. \\
+  1. GPU NVIDIA GeForce RTX 4090 (24 GB VRAM). \\
   \hline
     3 & Hugging Face &
-  1. Digunakan untuk \textit{deployment} model antarmuka web pengenalan bahasa isyarat. \\
+  1. vCPU: 2 core \newline 2. RAM: 16 GB. \newline 3. Penyimpanan: 50GB \\
   \hline
   4 & iPhone 11 &
   1. Kamera belakang ganda 12 MP. \newline 2. Kamera wide 12 MP dengan aperture f/1.8. \newline 3. Penyimpanan 128 GB. \\
@@ -739,9 +739,8 @@ panjang vektor menjadi:
 \end{tikzpicture}
 }%
 }
-\caption{Proses \textit{flatten} cube ke-$i$. Frame~1
-         (\colorbox{frame1color}{\strut F1}) dibaca terlebih dahulu,
-         diikuti Frame~2 (\colorbox{frame2color}{\strut F2}),
+\caption{Proses \textit{flatten} cube ke-$i$. Frame~1 dibaca terlebih dahulu,
+         diikuti Frame~2,
          menghasilkan vektor $\mathbf{x}_i^{\text{flat}} \in \mathbb{R}^{18}$.}
 \label{fig:flatten}
 \end{figure}
@@ -1437,35 +1436,51 @@ Misalkan 2 baris pertama $\mathbf{W}_1$ (ukuran $8\times4$ contoh) adalah:
 \noindent
 GELU diaplikasikan elemen per elemen. Menggunakan aproksimasi:
 
-\begin{multline*}
-  \mathrm{GELU}(x) \approx \\
-  0.5x\!\left(1 + \tanh\!\left(\sqrt{\tfrac{2}{\pi}}\,
-  \bigl(x + 0{,}044715\,x^3\bigr)\right)\right)
-\end{multline*}
+\begin{equation*}
+  \mathrm{GELU}(x) \approx 0.5x
+  \left(
+    1 + \tanh\!\left(
+      \sqrt{\frac{2}{\pi}}
+      \left(x + 0.044715\,x^3\right)
+    \right)
+  \right)
+\end{equation*}
  
 \vspace{0.5cm}
-\begin{align*}
-  \text{Untuk } h_1 = 0.921: \notag \\
+
+\noindent Untuk $h_1 = 0.921$:\par
+\begin{equation*}
+\begin{aligned}
   0.044715 \times (0.921)^3
-  &= 0.044715 \times 0.782 = 0.035 \notag \\
+    &= 0.044715 \times 0.782 = 0.035 \\
   \sqrt{2/\pi} \times (0.921 + 0.035)
-  &= 0.7979 \times 0.956 = 0.763 \notag \\
-  \tanh(0.763) &= 0.644 \notag \\
+    &= 0.7979 \times 0.956 = 0.763 \\
+  \tanh(0.763)
+    &= 0.644 \\
   \mathrm{GELU}(0.921)
-  &= 0.5 \times 0.921 \times (1 + 0.644)
-   = 0.5 \times 0.921 \times 1.644
-   = \mathbf{0.757} \\[10pt]
-  \text{Untuk } h_2 = -0.429: \notag \\
+    &= 0.5 \times 0.921 \times (1 + 0.644) \\
+    &= 0.5 \times 0.921 \times 1.644 \\
+    &= \mathbf{0.757}
+\end{aligned}
+\end{equation*}
+
+\vspace{0.5cm}
+
+\noindent Untuk $h_2 = -0.429$:\par
+\begin{equation*}
+\begin{aligned}
   0.044715 \times (-0.429)^3
-  &= 0.044715 \times (-0.079) = -0.004 \notag \\
-  \sqrt{2/\pi} \times (-0.429 + (-0.004))
-  &= 0.7979 \times (-0.433) = -0.346 \notag \\
-  \tanh(-0.346) &= -0.333 \notag \\
+    &= 0.044715 \times (-0.079) = -0.004 \\
+  \sqrt{2/\pi} \times (-0.429 - 0.004)
+    &= 0.7979 \times (-0.433) = -0.346 \\
+  \tanh(-0.346)
+    &= -0.333 \\
   \mathrm{GELU}(-0.429)
-  &= 0.5 \times (-0.429) \times (1 + (-0.333))
-   = 0.5 \times (-0.429) \times 0.667
-   = \mathbf{-0.143}
-\end{align*}
+    &= 0.5 \times (-0.429) \times (1 - 0.333) \\
+    &= 0.5 \times (-0.429) \times 0.667 \\
+    &= \mathbf{-0.143}
+\end{aligned}
+\end{equation*}
 \vspace{0.5cm}
  
 \noindent
