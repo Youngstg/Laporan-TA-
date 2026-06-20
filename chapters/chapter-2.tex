@@ -212,7 +212,7 @@ Model klasifikasi merupakan komponen utama dalam sistem pembelajaran mesin yang 
 \subsubsection{Arsitektur Transformer} \label{II.Teori4.4}
 Transformer merupakan arsitektur jaringan saraf yang diperkenalkan oleh Vaswani et al. untuk mengatasi keterbatasan RNN dan LSTM dalam menangani dependensi jangka panjang \cite{Vaswani2023}. Berbeda dengan model sekuensial tradisional yang memproses data langkah demi langkah, Transformer bekerja secara paralel sehingga mempercepat pelatihan dan meningkatkan efisiensi untuk urutan panjang. Mekanisme utamanya adalah \textit{self-attention} yang memungkinkan model memahami hubungan antar-token tanpa memperhatikan jarak posisionalnya, sehingga memberikan konteks global terhadap keseluruhan urutan \cite{Vaswani2023}. Arsitektur ini telah diadaptasi pada berbagai domain seperti teks (GPT, BERT), citra (Vision Transformer/ViT) \cite{Dosovitskiy2021}, dan video (Video Vision Transformer/ViViT) \cite{Arnab2021}. Dalam sistem penerjemahan bahasa isyarat, Transformer ideal untuk mengintegrasikan pose tubuh, gerakan tangan, dan ekspresi wajah secara simultan \cite{Saputra2024}.
 
-Gambar \ref{fig:transformer-architecture} memperlihatkan alur lengkap Transformer yang terdiri dari encoder dan decoder. Diagram tersebut menunjukkan bagaimana input diproses melalui embedding, positional encoding, multi-head attention, serta feed-forward network. Encoder menghasilkan representasi kontekstual yang kemudian digunakan oleh decoder melalui mekanisme masked attention untuk menghasilkan keluaran terurut. Struktur ini menegaskan bagaimana Transformer memanfaatkan perhatian paralel untuk memahami hubungan global dalam suatu urutan.
+Gambar \ref{fig:transformer-architecture} memperlihatkan alur lengkap Transformer yang terdiri dari lima bagian utama. Bagian (1) menunjukkan urutan masukan yang terlebih dahulu dipetakan ke \textit{embedding} dan digabungkan dengan \textit{positional encoding}. Bagian (2) adalah encoder yang menyusun representasi kontekstual melalui \textit{multi-head attention}, \textit{feed-forward network}, \textit{residual connection}, dan \textit{layer normalization}. Bagian (3) menunjukkan masukan decoder yang telah digeser (\textit{shifted right}) lalu diberi \textit{embedding} dan \textit{positional encoding}. Bagian (4) adalah decoder yang memadukan \textit{masked self-attention} dengan perhatian silang terhadap keluaran encoder. Bagian (5) merupakan lapisan linier dan \textit{softmax} yang menghasilkan probabilitas keluaran. Penomoran ini digunakan untuk menegaskan urutan aliran data dari masukan hingga prediksi akhir.\par
 
 \begin{figure}[H]
     \centering
@@ -260,6 +260,7 @@ Gambar \ref{fig:transformer-architecture} memperlihatkan alur lengkap Transforme
       smallbox/.style = {rectangle, rounded corners=2pt, draw=black, fill=white,
         minimum width=1.5cm, minimum height=0.75cm, align=center, font=\small},
       plus/.style = {circle, draw=black, fill=white, minimum size=0.36cm, inner sep=0pt, font=\small},
+      num/.style = {circle, draw=black, fill=yellow!35, minimum size=0.52cm, inner sep=0pt, font=\bfseries\scriptsize},
       arr/.style = {-{Stealth[length=4pt]}, line width=0.6pt, black}
     ]
       % Encoder side
@@ -320,6 +321,13 @@ Gambar \ref{fig:transformer-architecture} memperlihatkan alur lengkap Transforme
 
       % Encoder-decoder connection
       \draw[arr] (enc_add2.east) -- (dec_cross.west);
+
+      % Number markers
+      \node[num] at (0.2,10.8) {1};
+      \node[num] at (4.0,8.2) {2};
+      \node[num] at (6.3,9.8) {3};
+      \node[num] at (11.9,6.8) {4};
+      \node[num] at (11.7,-1.4) {5};
     \end{tikzpicture}%
     }}
     \caption{Alur kerja arsitektur Transformer yang terdiri dari Encoder dan Decoder}
@@ -461,19 +469,30 @@ Meskipun I3D efektif, beberapa keterbatasan menjadi motivasi perkembangan model 
 \subsubsection{Konsep Dasar ViViT} \label{II.ViViT.1}
 ViViT memperluas arsitektur \textit{Vision Transformer} (ViT) \cite{Dosovitskiy2021} ke domain video dengan memperkenalkan \textit{tubelet embedding}: video dibagi menjadi kubus kecil (\textit{tubelets}) berukuran $t \times h \times w$ yang merentang sekaligus dalam dimensi waktu dan ruang, kemudian setiap kubus dipetakan ke vektor token melalui proyeksi linier \cite{Arnab2021}. Pendekatan ini berbeda dari ViT pada citra yang hanya membagi satu frame menjadi patch 2D, karena setiap token ViViT sudah membawa informasi gerak dari $t$ frame sekaligus, sehingga model dapat mempelajari pola spasio-temporal sejak tahap \textit{embedding} tanpa perlu modul konvolusi tambahan \cite{Arnab2021}.\par
 
-Karena jumlah token yang dihasilkan dari video dapat sangat besar, Arnab dkk.\ mengusulkan beberapa varian model untuk menyeimbangkan akurasi dan efisiensi komputasi \cite{Arnab2021}. Varian Model~1 (\textit{spatio-temporal}) menerapkan \textit{self-attention} secara penuh pada seluruh token ruang--waktu sehingga paling ekspresif namun memerlukan memori kuadratik terhadap jumlah token. Varian Model~2 (\textit{factorised encoder}) menggunakan dua encoder terpisah: satu untuk relasi spasial antar-patch dalam satu frame, lalu satu lagi untuk relasi temporal antar-frame pada posisi spasial yang sama, sehingga kompleksitas komputasi berkurang secara signifikan \cite{Arnab2021}. Dalam penelitian ini digunakan konfigurasi ViViT-B/16x2, yaitu \textit{backbone} ViT-Base dengan ukuran patch 16 piksel dan panjang \textit{tubelet} 2 frame yang telah di-\textit{pretrain} pada Kinetics-400 \cite{Arnab2021}.\par
+Karena jumlah token video dapat sangat besar, Arnab dkk.\ tidak hanya mengusulkan satu rancangan ViViT, tetapi beberapa varian untuk menyeimbangkan kemampuan representasi dan efisiensi komputasi \cite{Arnab2021}. Oleh sebab itu, Gambar~\ref{fig:vivit-architecture} lebih tepat dibaca sebagai perbandingan empat versi encoder ViViT yang sama-sama berangkat dari token spasio-temporal hasil \textit{tubelet embedding}, tetapi berbeda dalam cara memodelkan hubungan ruang dan waktu. Penomoran pada gambar digunakan untuk membedakan keempat varian tersebut secara jelas.\par
 
 \subsubsection{Arsitektur ViViT} \label{II.ViViT.2}
-Secara struktural, ViViT mewarisi blok \textit{encoder} Transformer standar yang terdiri dari lapisan \textit{Multi-Head Self-Attention} (MHSA) dan \textit{Feed-Forward Network} (FFN) dengan koneksi residual dan normalisasi lapisan \cite{Vaswani2023,Arnab2021}. Masukan berupa klip video berukuran $(T, H, W, C)$ yang dipecah menjadi token melalui \textit{tubelet embedding}, diikuti penambahan \textit{positional embedding} untuk mempertahankan informasi urutan ruang dan waktu. Token kelas (\texttt{[CLS]}) ditambahkan di awal barisan dan representasinya pada keluaran encoder digunakan sebagai fitur akhir yang diteruskan ke kepala klasifikasi linier \cite{Arnab2021}. Skema umum arsitektur ViViT ditunjukkan pada Gambar~\ref{fig:vivit-architecture}.\par
+Secara umum, seluruh varian ViViT tetap mempertahankan komponen dasar Transformer, yaitu token video hasil \textit{tubelet embedding}, \textit{positional embedding}, blok \textit{self-attention}, \textit{feed-forward network}, serta kepala klasifikasi pada keluaran akhir \cite{Vaswani2023,Arnab2021}. Perbedaan utamanya terletak pada lokasi dan cara faktorisasi operasi perhatian ruang--waktu. Skema keempat varian tersebut ditunjukkan pada Gambar~\ref{fig:vivit-architecture}.\par
 
 \begin{figure}[H]
 	\centering
-	\fbox{\includegraphics[width=0.75\textwidth]{figure/Vivit.png}}
+	\fbox{%
+		\begin{tikzpicture}
+			\node[anchor=south west, inner sep=0] (img) at (0,0)
+			{\includegraphics[width=0.75\textwidth]{figure/Vivit.png}};
+			\begin{scope}[x={(img.south east)}, y={(img.north west)}]
+				\node[circle, draw=black, fill=yellow!35, minimum size=0.48cm, inner sep=0pt, font=\bfseries\scriptsize] at (0.38,1) {1};
+				\node[circle, draw=black, fill=yellow!35, minimum size=0.48cm, inner sep=0pt, font=\bfseries\scriptsize] at (0.61,1) {2};
+				\node[circle, draw=black, fill=yellow!35, minimum size=0.48cm, inner sep=0pt, font=\bfseries\scriptsize] at (0.79,1) {3};
+				\node[circle, draw=black, fill=yellow!35, minimum size=0.48cm, inner sep=0pt, font=\bfseries\scriptsize] at (0.95,1) {4};
+			\end{scope}
+		\end{tikzpicture}%
+	}
 	\caption{Arsitektur ViViT \cite{Arnab2021}.}
 	\label{fig:vivit-architecture}
 \end{figure}
 
-Bobot pra-latih ViViT diinisialisasi dari \textit{checkpoint} ViT yang dilatih pada ImageNet, kemudian dilanjutkan dengan pra-latih \textit{supervised} pada dataset video berskala besar seperti Kinetics-400 \cite{Arnab2021}. Strategi ini berbeda dari VideoMAE yang mengandalkan pra-latih \textit{self-supervised} tanpa label, menjadikan ViViT representasi dari paradigma \textit{supervised video pre-training} berbasis Transformer. Dengan demikian, ketiga model dalam penelitian ini mencakup tiga paradigma yang berbeda secara metodologi: 3D CNN \textit{supervised} (I3D), Transformer \textit{supervised} (ViViT), dan Transformer \textit{self-supervised} (VideoMAE) \cite{Arnab2021,Tong2022VideoMAE}.\par
+Pada gambar tersebut, varian (1) adalah \textit{Transformer Encoder} standar yang memproses seluruh token video secara bersama dalam satu rangkaian blok perhatian ruang--waktu. Varian (2) adalah \textit{Factorised Encoder}, yaitu versi yang menyusun beberapa blok spasial terlebih dahulu, kemudian melanjutkannya dengan blok temporal, sehingga pemodelan relasi antar-patch dan antar-frame dilakukan secara bertahap. Varian (3) adalah \textit{Factorised Self-Attention}, di mana perhatian spasial dan temporal dipisahkan di dalam satu lapisan agar biaya komputasi lebih ringan. Varian (4) adalah \textit{Factorised Dot-Product Attention}, yaitu perhatian spasial dan temporal dihitung terpisah lalu digabungkan kembali melalui proses \textit{fuse}. Dari keempat susunan ini, varian (2) paling relevan untuk memperjelas ide dasar ViViT karena menunjukkan secara eksplisit bahwa hubungan spasial dimodelkan lebih dahulu, lalu hubungan temporal dipelajari sesudahnya. Dalam penelitian ini digunakan konfigurasi ViViT-B/16x2, yaitu \textit{backbone} ViT-Base dengan ukuran patch 16 piksel dan panjang \textit{tubelet} 2 frame yang telah di-\textit{pretrain} pada Kinetics-400 \cite{Arnab2021}. Bobot pra-latih tersebut diinisialisasi dari \textit{checkpoint} ViT berbasis ImageNet, kemudian dilanjutkan dengan pra-latih \textit{supervised} pada dataset video berskala besar \cite{Arnab2021}. Strategi ini berbeda dari VideoMAE yang mengandalkan pra-latih \textit{self-supervised} tanpa label, sehingga ViViT tetap merepresentasikan paradigma \textit{supervised video transformer} dalam penelitian ini \cite{Arnab2021,Tong2022VideoMAE}.\par
 
 \subsection{Model VideoMAE} \label{II.teori2.4}
 Video Masked Autoencoder (VideoMAE) adalah kerangka \textit{self-supervised} untuk video yang belajar merekonstruksi piksel patch yang dimask dari cuplikan video tanpa label. Inti idenya adalah \textit{tube masking} dengan rasio sangat tinggi, misalnya 90 persen, sehingga encoder hanya melihat sebagian kecil token dan dipaksa mempelajari struktur spasio-temporal yang benar-benar informatif \cite{Tong2022VideoMAE}. Arsitektur menggunakan \textit{encoder--decoder} asimetris berbasis ViT 3D, di mana encoder berkapasitas tinggi beroperasi pada token yang tampak, sedangkan decoder ringan merekonstruksi piksel pada lokasi yang disembunyikan \cite{Tong2022VideoMAE}. Versi lanjutan, VideoMAE~V2, memperkenalkan \textit{dual masking} untuk mengefisienkan komputasi dengan juga memasker sebagian input decoder menggunakan \textit{running-cell} sehingga beban memori dan FLOPs turun tanpa mengorbankan akurasi \cite{Wang2023VideoMAEv2}. Pendekatan ini terbukti data-efisien dan dapat diskalakan ke model berukuran miliar parameter pada beragam tugas hilir video \cite{Wang2023VideoMAEv2}.
@@ -486,24 +505,39 @@ Arsitektur VideoMAE terdiri dari tiga komponen utama, yaitu \textit{cube embeddi
 
 \begin{figure}[h]
 	\centering
-	\fbox{\includegraphics[width=0.75\textwidth]{figure/AlurVideoMAE.png}}
+	\fbox{%
+		\begin{tikzpicture}
+			\node[anchor=south west, inner sep=0] (img) at (0,0)
+			{\includegraphics[width=0.75\textwidth]{figure/AlurVideoMAE.png}};
+			\begin{scope}[x={(img.south east)}, y={(img.north west)}]
+				\node[circle, draw=black, fill=yellow!35, minimum size=0.5cm, inner sep=0pt, font=\bfseries\scriptsize] at (0.08,0.82) {1};
+				\node[circle, draw=black, fill=yellow!35, minimum size=0.5cm, inner sep=0pt, font=\bfseries\scriptsize] at (0.27,0.82) {2};
+				\node[circle, draw=black, fill=yellow!35, minimum size=0.5cm, inner sep=0pt, font=\bfseries\scriptsize] at (0.42,0.82) {3};
+				\node[circle, draw=black, fill=yellow!35, minimum size=0.5cm, inner sep=0pt, font=\bfseries\scriptsize] at (0.55,0.72) {4};
+				\node[circle, draw=black, fill=yellow!35, minimum size=0.5cm, inner sep=0pt, font=\bfseries\scriptsize] at (0.72,0.86) {5};
+			\end{scope}
+		\end{tikzpicture}%
+	}
 	\caption{Arsitektur VideoMAE \cite{Tong2022VideoMAE}.}
 	\label{fig:videomae-architecture}
 \end{figure}
 
-Gambar~\ref{fig:videomae-architecture} memperlihatkan aliran token dari kubus video menuju encoder yang hanya memproses token tidak termask, kemudian decoder yang menggabungkan fitur encoder dengan token \texttt{[MASK]} untuk merekonstruksi piksel yang hilang. Penjelasan rinci masing-masing komponen diuraikan berikut.
+Gambar~\ref{fig:videomae-architecture} memperlihatkan alur VideoMAE dalam lima tahap utama, mulai dari pembentukan token spasio-temporal, proses \textit{tube masking}, pemilihan token yang tetap terlihat, pengodean oleh encoder ViT 3D, hingga rekonstruksi kembali klip target oleh decoder. Penomoran pada gambar digunakan agar setiap tahap dapat diikuti secara berurutan dari kiri ke kanan.\par
 \begin{enumerate}
 \item Token spasio-temporal\\
-Setiap klip dibagi menjadi kubus berukuran tetap yang dipetakan ke vektor token melalui \textit{cube embedding}. Proses ini menyatukan informasi ruang dan waktu menjadi barisan token yang dapat diproses oleh Transformer \cite{Tong2022VideoMAE}. Penambahan \textit{positional embedding} menjaga urutan temporal dan lokasi spasial selama atensi bersama \cite{Tong2022VideoMAE}. Representasi ini menjadi landasan untuk masking ekstrem dan rekonstruksi piksel \cite{Tong2022VideoMAE}.
+Pada tahap (1), setiap klip dibagi menjadi kubus berukuran tetap yang kemudian dipetakan ke vektor token melalui \textit{cube embedding}. Proses ini menyatukan informasi ruang dan waktu menjadi barisan token yang dapat diproses oleh Transformer \cite{Tong2022VideoMAE}. Penambahan \textit{positional embedding} menjaga urutan temporal dan lokasi spasial selama atensi bersama \cite{Tong2022VideoMAE}. Representasi token inilah yang menjadi dasar seluruh tahap berikutnya.
+
+\item \textit{Tube masking}\\
+Pada tahap (2), sebagian besar token disembunyikan dengan pola masker yang konsisten sepanjang dimensi waktu. Strategi ini mencegah \textit{information leakage} antarkader sekaligus memaksa model belajar dari konteks parsial yang tetap informatif \cite{Tong2022VideoMAE}. Rasio masking yang sangat tinggi membuat VideoMAE efisien karena hanya sebagian kecil token yang benar-benar diteruskan ke encoder.
+
+\item Token yang tetap terlihat\\
+Pada tahap (3), token yang tidak termask menjadi masukan utama bagi encoder. Pemilihan token terlihat inilah yang membuat VideoMAE tetap mempertahankan konteks penting sambil memangkas panjang urutan yang harus diproses \cite{Tong2022VideoMAE}. Dengan demikian, informasi yang diteruskan ke encoder sudah merupakan subset token yang paling relevan untuk pembelajaran representasi.
 
 \item Encoder ViT 3D\\
-Encoder adalah ViT dengan \textit{joint space--time attention} yang hanya menerima token tidak termask. Karena panjang urutan encoder setara 10 persen dari token awal, biaya komputasi turun drastis tanpa kehilangan konteks global \cite{Tong2022VideoMAE}. Atensi multi-kepala memungkinkan pemodelan relasi antarframe dan antarpiksel yang jauh secara efisien \cite{Tong2022VideoMAE}. Hasil encoder berupa representasi laten yang kaya untuk berbagai tugas hilir \cite{Tong2022VideoMAE}.
+Pada tahap (4), encoder menggunakan \textit{joint space--time attention} untuk memodelkan hubungan spasial dan temporal pada token yang terlihat. Karena panjang urutan encoder hanya sekitar 10 persen dari token awal, biaya komputasi turun drastis tanpa kehilangan konteks global \cite{Tong2022VideoMAE}. Hasil encoder berupa representasi laten yang kaya dan menjadi dasar proses rekonstruksi maupun \textit{fine-tuning} untuk tugas hilir.
 
 \item Decoder ringan dan rekonstruksi\\
-Decoder menerima gabungan fitur encoder dan token [MASK] lalu merekonstruksi piksel pada lokasi yang hilang. Fungsi kerugian yang digunakan adalah \textit{mean squared error} pada piksel termask yang dinormalisasi, sehingga gradien fokus pada area yang tidak terlihat encoder \cite{Tong2022VideoMAE}. Pada VideoMAE~V2, sebagian token untuk decoder juga dipilih selektif dengan \textit{running-cell masking} sehingga rekonstruksi tetap representatif tetapi lebih hemat memori \cite{Wang2023VideoMAEv2}. Strategi ini menyeimbangkan ketepatan dan efisiensi saat pra-latih skala besar \cite{Wang2023VideoMAEv2}.
-
-\item Dual masking pada V2\\
-Skema \textit{dual masking} menghasilkan dua peta masker berbeda untuk encoder dan decoder dengan rasio yang dapat diatur. Encoder tetap memakai \textit{tube masking} rasio sangat tinggi untuk mencegah kebocoran informasi temporal, sedangkan decoder memakai \textit{running-cell masking} untuk meliputi potongan video yang beragam \cite{Wang2023VideoMAEv2}. Hasilnya, panjang urutan decoder turun dan efisiensi meningkat tanpa menurunkan akurasi \cite{Wang2023VideoMAEv2}. Uji ablation menunjukkan rasio masker decoder 50 persen memberi titik tengah yang baik antara akurasi dan biaya \cite{Wang2023VideoMAEv2}.
+Pada tahap (5), decoder menerima gabungan fitur encoder dan token \texttt{[MASK]} untuk merekonstruksi piksel pada lokasi yang hilang hingga membentuk kembali klip target. Fungsi kerugian yang digunakan adalah \textit{mean squared error} pada piksel termask yang dinormalisasi, sehingga gradien difokuskan pada area yang tidak terlihat encoder \cite{Tong2022VideoMAE}. Pada VideoMAE~V2, sebagian token decoder dapat dipilih lebih lanjut melalui \textit{running-cell masking} agar rekonstruksi tetap representatif namun lebih hemat memori \cite{Wang2023VideoMAEv2}.
 \end{enumerate}
 
 \subsubsection{Tahapan Pelatihan} \label{II.teori2.4.3}
@@ -567,7 +601,7 @@ Keempat komponen tersebut menjadi dasar untuk menghitung metrik akurasi, \textit
 	Akurasi pada klasifikasi multiclass mengukur proporsi seluruh sampel yang diprediksi benar dibandingkan dengan total data uji \cite{Raschka2020}. Nilai ini diperoleh dengan menjumlahkan seluruh elemen diagonal utama confusion matrix lalu membaginya dengan total sampel. Akurasi memberi gambaran umum kinerja model secara keseluruhan, tetapi tidak membedakan jenis kesalahan antar-kelas sehingga kurang informatif ketika distribusi kelas tidak seimbang.\\
 	\vspace{0.5cm}
 	\begin{equationcaptioned}[eq:2.accuracy]{
-		Accuracy = \frac{\sum_{i=1}^{K} n_{ii}}{N} = \frac{\sum_{i=1}^{K} TP_i}{N}
+		\mathrm{Accuracy} = \frac{\sum_{i=1}^{K} n_{ii}}{N} = \frac{\sum_{i=1}^{K} TP_i}{N}
 	}{
 		Rumus perhitungan akurasi pada klasifikasi multiclass
 	}\end{equationcaptioned}

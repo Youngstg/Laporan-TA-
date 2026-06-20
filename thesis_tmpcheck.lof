@@ -1,0 +1,52 @@
+\babel@toc {bahasa}{}\relax 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Proyeksi WHO 2019–2050 populasi dengan gangguan pendengaran}}{1}{figure.caption.20}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Contoh gerakan Sistem Isyarat Bahasa Indonesia (SIBI) dari dataset penelitian}}{21}{figure.caption.21}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Alur kerja arsitektur Transformer yang terdiri dari Encoder dan Decoder}}{29}{figure.caption.22}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Diagram arsitektur umum I3D berbasis blok konvolusi, \textit {pooling}, dan modul \textit {3D Inception}.}}{37}{figure.caption.23}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Arsitektur ViViT \blx@tocontentsinit {0}\cite {Arnab2021}.}}{40}{figure.caption.24}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Arsitektur VideoMAE \blx@tocontentsinit {0}\cite {Tong2022VideoMAE}.}}{42}{figure.caption.25}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Ilustrasi Stratified Cross-Validation}}{52}{figure.caption.27}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Alur Penelitian}}{54}{figure.caption.28}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Skema Pengumpulan Data}}{58}{figure.caption.29}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Flowchart tahapan pra-pemrosesan video}}{60}{figure.caption.30}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Flowchart tahapan pelatihan dan optimisasi model}}{62}{figure.caption.31}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Pipeline pemrosesan VideoMAE dari video masukan hingga prediksi kelas. Dimensi tensor ditampilkan di atas/bawah setiap tahap.}}{70}{figure.caption.34}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Contoh \textit {spatio-temporal cube} berisi 2 frame berukuran $3\times 3$ piksel (disederhanakan dari $2\times 16\times 16$).}}{73}{figure.caption.35}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Proses \textit {flatten} cube ke-$i$. Frame~1 dibaca terlebih dahulu, diikuti Frame~2, menghasilkan vektor $\mathbf {x}_i^{\text {flat}} \in \mathbb {R}^{18}$.}}{74}{figure.caption.36}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Proyeksi linear (\textit {patch embedding}): vektor flat $\mathbf {x}_i^{\text {flat}}\in \mathbb {R}^{1536}$ dikalikan $\mathbf {W}_E\in \mathbb {R}^{384\times 1536}$ menghasilkan $\mathbf {e}_i\in \mathbb {R}^{384}$.}}{76}{figure.caption.37}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Penambahan \textit {positional embedding} $\mathbf {p}_i$ secara \textit {additive} ke token embedding $\mathbf {e}_i$ menghasilkan token awal $\mathbf {z}_i^{(0)} \in \mathbb {R}^{384}$.}}{77}{figure.caption.38}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Satu \textit {Transformer block} pada encoder ViT-S. Block ini diulang $L=12$ kali secara berurutan.}}{79}{figure.caption.40}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Alur \textit {Multi-Head Self-Attention}: $\mathbf {Q}$, $\mathbf {K}$, $\mathbf {V}$ dibagi ke $h=6$ kepala berdimensi $d_h=64$, hasilnya digabung dan diproyeksikan kembali ke $\mathbb {R}^{384}$.}}{81}{figure.caption.41}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Alur klasifikasi: seluruh $N=1568$ token di-\textit {mean pool} menjadi $\hat {\mathbf {z}}\in \mathbb {R}^{384}$, dipetakan ke probabilitas kelas melalui linear dan softmax.}}{90}{figure.caption.42}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Contoh \textit {frame} hasil augmentasi pada klip ``Aku'' (video ke-90, \textit {frame} ke-39)}}{98}{figure.caption.44}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Kurva pelatihan rata-rata eksperimen E3 (ViT-Small + SSV2)}}{109}{figure.caption.50}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces \textit {Confusion matrix} gabungan semua fold eksperimen E3 (ViT-Small + SSV2)}}{111}{figure.caption.52}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Kurva pelatihan rata-rata eksperimen E5 (\textit {Two-Stage Pre-train})}}{114}{figure.caption.55}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Kurva pelatihan rata-rata eksperimen E6 (\textit {Two-Stage Scratch})}}{115}{figure.caption.56}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Kurva pelatihan rata-rata eksperimen E7 (\textit {Single-Stage Scratch})}}{116}{figure.caption.57}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces \textit {Confusion matrix} gabungan semua fold eksperimen E5 (\textit {Two-Stage Pre-train})}}{118}{figure.caption.59}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Kurva pelatihan rata-rata eksperimen E8 (\textit {Stage} 2 = 10 epoch)}}{121}{figure.caption.62}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Kurva pelatihan rata-rata eksperimen E9 (\textit {Stage} 2 = 100 epoch)}}{122}{figure.caption.63}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces \textit {Confusion matrix} gabungan semua fold eksperimen E9 (\textit {Stage} 2 = 100 epoch)}}{124}{figure.caption.65}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Kurva pelatihan rata-rata eksperimen E10 (\textit {Dense Sampling})}}{126}{figure.caption.68}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces \textit {Confusion matrix} gabungan semua fold eksperimen E10 (\textit {Dense Sampling})}}{128}{figure.caption.70}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Kurva pelatihan rata-rata eksperimen E11 (tanpa augmentasi \textit {mixup}/\textit {CutMix}/\textit {reprob})}}{131}{figure.caption.73}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Ilustrasi efek augmentasi \textit {Mixup} pada frame gestur SIBI}}{131}{figure.caption.74}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Ilustrasi efek augmentasi \textit {CutMix} pada frame gestur SIBI}}{132}{figure.caption.75}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Ilustrasi efek augmentasi \textit {Random Erasing} pada frame gestur SIBI}}{132}{figure.caption.76}%
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Kurva pelatihan rata-rata eksperimen E12 (VideoMAE ViT-Base + K400)}}{135}{figure.caption.79}%
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Kurva pelatihan rata-rata model ViViT-B/16x2 (5-Fold)}}{136}{figure.caption.80}%
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Kurva pelatihan rata-rata model I3D \textit {baseline} (5-Fold)}}{136}{figure.caption.81}%
+\contentsline {figure}{\numberline {4.20}{\ignorespaces \textit {Confusion matrix} gabungan semua fold eksperimen E12 (VideoMAE ViT-Base + K400)}}{139}{figure.caption.84}%
+\contentsline {figure}{\numberline {4.21}{\ignorespaces \textit {Confusion matrix} gabungan semua fold model ViViT-B/16x2}}{140}{figure.caption.85}%
+\contentsline {figure}{\numberline {4.22}{\ignorespaces \textit {Confusion matrix} gabungan semua fold model I3D \textit {baseline}}}{141}{figure.caption.86}%
+\contentsline {figure}{\numberline {4.23}{\ignorespaces Perbandingan visual sampel gerakan gestur Mau (baris atas) dan Suka (baris bawah)}}{149}{figure.caption.90}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {D.1}{\ignorespaces Dokumen Wawancara.}}{157}{figure.caption.97}%
+\contentsline {figure}{\numberline {D.2}{\ignorespaces Kunjungan peneliti ke SLB PKK Lampung.}}{157}{figure.caption.98}%
+\contentsline {figure}{\numberline {E.1}{\ignorespaces Surat persetujuan data penelitian.}}{158}{figure.caption.99}%
+\contentsline {figure}{\numberline {F.1}{\ignorespaces Surat validasi data penelitian.}}{159}{figure.caption.100}%
